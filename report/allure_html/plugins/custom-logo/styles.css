@@ -1,0 +1,13 @@
+.side-nav__brand {
+  background: url('logo.png') no-repeat left center !important;
+  margin-left: 10px;
+  height: 40px;
+  background-size: contain !important;
+}
+.side-nav__brand span{
+	display: none;
+}
+.side-nav__brand:after{
+	content: "Chinasec";
+	margin-left: 10px;
+}

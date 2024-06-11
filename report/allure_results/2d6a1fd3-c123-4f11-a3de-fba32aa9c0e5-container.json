@@ -1,0 +1,1 @@
+{"uuid": "f687d70c-99d0-4e15-81b1-a52431ccab8a", "befores": [{"name": "pytestbdd_stepdef_when_输入新增syslog规则信息：\n{syslog_rules_info}", "status": "passed", "start": 1718085198657, "stop": 1718085198657}], "start": 1718085198657, "stop": 1718085208610}

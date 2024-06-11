@@ -1,0 +1,1 @@
+{"uuid": "3b5aed2a-2ae8-48ed-9b0d-30af9bedc34a", "befores": [{"name": "pytestbdd_stepdef_when_依次点击提交按钮，弹出提示框，显示提示信息：{pro_msg}\n{email_para_table}", "status": "passed", "start": 1718085115699, "stop": 1718085115699}], "start": 1718085115699, "stop": 1718085136794}

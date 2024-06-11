@@ -1,0 +1,24 @@
+
+元素定位超时：Timeout 30000ms exceeded.
+详细报错信息如下：
+Traceback (most recent call last):
+  File "E:\Wondersoft_WebUITest\pages\common_page.py", line 90, in assert_dialog_msg
+    dialog_location = self.wait_for_selector('[role="dialog"][aria-label="提示"]')
+  File "E:\Wondersoft_WebUITest\utils\ui_utils\base_page.py", line 49, in wait_for_selector
+    return self.page.wait_for_selector(selector, strict=True)
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\sync_api\_generated.py", line 7789, in wait_for_selector
+    self._sync(
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\_impl\_sync_base.py", line 113, in _sync
+    return task.result()
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\_impl\_page.py", line 373, in wait_for_selector
+    return await self._main_frame.wait_for_selector(**locals_to_params(locals()))
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\_impl\_frame.py", line 323, in wait_for_selector
+    await self._channel.send("waitForSelector", locals_to_params(locals()))
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\_impl\_connection.py", line 59, in send
+    return await self._connection.wrap_api_call(
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\_impl\_connection.py", line 509, in wrap_api_call
+    return await cb()
+  File "E:\Wondersoft_WebUITest\venv\lib\site-packages\playwright\_impl\_connection.py", line 97, in inner_send
+    result = next(iter(done)).result()
+playwright._impl._errors.TimeoutError: Timeout 30000ms exceeded.
+

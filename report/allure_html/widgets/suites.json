@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"8373e677b7fa036f6ea56d08c284aeda","name":"test_cases.step_defs.bms","statistic":{"failed":1,"broken":9,"skipped":0,"passed":56,"unknown":0,"total":66}},{"uid":"e4b615188e883495a107a67123d35cc2","name":"test_cases.step_defs","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}

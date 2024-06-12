@@ -33,7 +33,7 @@ class RunConfig:
     mode = "headless"
 
     # 当达到最大失败数，停止执行
-    max_fail = "20"
+    max_fail = "15"
 
     # 失败重跑次数
     rerun = 0

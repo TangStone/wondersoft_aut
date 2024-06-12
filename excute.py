@@ -102,18 +102,3 @@ if __name__ == '__main__':
                         help="是否生成allure html report，支持如下类型：yes, no")
     args = parser.parse_args()
     run(**vars(args))
-
-"""
-说明：
-1、用例创建原则，测试文件名必须以“test”开头，测试函数必须以“test”开头。
-2、运行方式：
-  > python run.py  默认在test环境使用有头模式浏览器运行测试用例, 生成allure html report
-  > python run.py -m demo 在test环境使用有头模式浏览器运行打了标记demo用例， 生成allure html report
-  > python run.py -env live 在live环境运行测试用例
-  > python run.py -env=test 在test环境运行测试用例
-  > python run.py -browser webkit 使用webkit浏览器运行测试用例
-  > python run.py -browser chromium webkit 使用chromium和webkit浏览器运行测试用例
-  > python run.py -report=yes   生成allure html report
-  > python run.py -mode=headed   使用有头模式运行
-  > python run.py -env test -m 'projects or login' -report no -mode headless  在test环境，使用无头模式浏览器运行标记了project或者login的用例，并且生成allure html report
-"""

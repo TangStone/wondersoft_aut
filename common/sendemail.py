@@ -8,7 +8,7 @@
 @description: 发送邮件
 """
 import smtplib, shutil
-import logging
+from utils.log_utils.logger_handle import api_logger
 from common import handleallure
 from common.basefunc import config_dict
 from email.mime.multipart import MIMEMultipart
@@ -28,7 +28,7 @@ class SendEmail:
         self.email_config = config_dict['email']   # 邮箱配置信息
 
     def send_main(self):
-        logging.info('-·-·-·-·-·-·-·-·-·-发送结果邮件 START-·-·-·-·-·-·-·-·-·-')
+        api_logger.info('-·-·-·-·-·-·-·-·-·-发送结果邮件 START-·-·-·-·-·-·-·-·-·-')
 
         sendAddress = self.email_config['sender']
         password = self.email_config['senderPwd']
@@ -70,4 +70,4 @@ class SendEmail:
         server.sendmail(sendAddress, [x for x in self.email_config['receiver'].split(';') if x], msg.as_string())  # 发送邮件
         server.quit()
 
-        logging.info('-·-·-·-·-·-·-·-·-·-发送结果邮件 END-·-·-·-·-·-·-·-·-·-')
+        api_logger.info('-·-·-·-·-·-·-·-·-·-发送结果邮件 END-·-·-·-·-·-·-·-·-·-')

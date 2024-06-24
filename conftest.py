@@ -12,7 +12,7 @@ from typing import Dict
 # 第三方库导入
 import allure
 import pytest
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 from playwright.sync_api import BrowserType
 from _pytest.runner import runtestprotocol
 # 本地模块导入
@@ -116,7 +116,7 @@ def pytest_bdd_before_step(request, feature, scenario, step, step_func):
                f"BEFORE: {step_name}\n\n" \
                f"AFTER: {new_step_name}\n" \
              + "=" * 80
-    logger.debug(before)
+    ui_logger.debug(before)
 
 
 def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):
@@ -136,7 +136,7 @@ def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func
     scenario_name = getattr(scenario, 'name', None)
     step_name = getattr(step, "name", None)
 
-    logger.error("\n" + "=" * 80
+    ui_logger.error("\n" + "=" * 80
                  + "\n-------------测试步骤出错了--------------------\n"
                    f"Feature: {feature_name}\n"
                    f"Scenario: {scenario_name}\n"

@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -30,14 +30,14 @@ class ReportCycleConfigPage(BasePage):
         :param report_cycle_config: 新增报告信息
         :return:
         """
-        logger.info("………………………………新增报告start………………………………")
+        ui_logger.info("………………………………新增报告start………………………………")
         try:
-            logger.debug(f"新增报告信息：{report_cycle_config}")
+            ui_logger.debug(f"新增报告信息：{report_cycle_config}")
             # 判断是否存在同名报告
             report_name = report_cycle_config['报告名称']
             self.search_report({"报告名称": report_name})  # 根据报告名称查询报告
             report_list = self.table_all_row_td(2)    # 获取查询的所有报告名称
-            logger.debug(f"报告查询列表：{report_list}")
+            ui_logger.debug(f"报告查询列表：{report_list}")
             if report_name in report_list:  # 存在同名报告，删除报告
                 self.delete_report(report_name)
             common_page.CommonPage(self.page).click_button("新增")  # 点击【新增】按钮
@@ -46,16 +46,16 @@ class ReportCycleConfigPage(BasePage):
             common_page.CommonPage(self.page).assert_prompt_information("新增成功")  # 弹出提示框，显示提示信息：新增成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………新增报告end………………………………")
+        ui_logger.info("………………………………新增报告end………………………………")
 
     @allure.step("删除报告：{report_name}")
     def delete_report(self, report_name):
-        logger.info("………………………………删除报告start………………………………")
+        ui_logger.info("………………………………删除报告start………………………………")
         try:
-            logger.info(f"删除报告：{report_name}")
+            ui_logger.info(f"删除报告：{report_name}")
             self.search_report({"报告名称": report_name})    # 根据报告名称查询报告
             report_list = self.table_all_row_td(2)  # 获取查询的所有报告名称
-            logger.debug(f"报告查询列表：{report_list}")
+            ui_logger.debug(f"报告查询列表：{report_list}")
             if report_name not in report_list:   # 报告不存在，新增报告
                 report_base_info = {'报告名称': report_name, '报告类型': '快速报告', '报告格式': 'word',
                                     '报告模板': '终端全盘扫描',
@@ -68,11 +68,11 @@ class ReportCycleConfigPage(BasePage):
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除报告end………………………………")
+        ui_logger.info("………………………………删除报告end………………………………")
 
     @allure.step("根据查询条件查询报告，查询条件：{query_conditions}")
     def search_report(self, query_conditions):
-        logger.info("………………………………报告查询start………………………………")
+        ui_logger.info("………………………………报告查询start………………………………")
         try:
             cond_type_dict = {
                 "报告名称": "input",
@@ -88,7 +88,7 @@ class ReportCycleConfigPage(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………报告查询end………………………………")
+        ui_logger.info("………………………………报告查询end………………………………")
 
     @allure.step("输入新增报告信息：{report_cycle_config}")
     def input_report_cycle_config_info(self, report_cycle_config):

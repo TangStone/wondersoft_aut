@@ -8,7 +8,8 @@
 @description: 运行配置信息
 """
 # ------------------------------------ 基础配置信息 ----------------------------------------------------#
-LOG_LEVEL = "DEBUG"  # 可选值：TRACE DEBUG INFO SUCCESS WARNING ERROR  CRITICAL
+UI_LOG_LEVEL = "DEBUG"  # 可选值：TRACE DEBUG INFO SUCCESS WARNING ERROR  CRITICAL
+API_LOG_LEVEL = "INFO"  # 可选值：TRACE DEBUG INFO SUCCESS WARNING ERROR  CRITICAL
 """
 支持的日志级别：
     TRACE: 最低级别的日志级别，用于详细追踪程序的执行。

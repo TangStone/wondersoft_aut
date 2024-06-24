@@ -9,7 +9,7 @@
 """
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 

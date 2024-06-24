@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.base_utils.exception_handle import ExceptionHandle
 from utils.ui_utils.base_page import BasePage
@@ -24,7 +24,7 @@ class UserGroupPage(BasePage):
     """
     @allure.step("根据查询条件查询用户列表，查询条件{query_conditions}")
     def search_users(self, query_conditions: dict):
-        logger.info("………………………………用户列表查询start………………………………")
+        ui_logger.info("………………………………用户列表查询start………………………………")
         try:
             cond_type_dict = {
                 "账号": "input",  # 输入框
@@ -44,29 +44,29 @@ class UserGroupPage(BasePage):
             self.page.wait_for_load_state()
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………用户列表查询end………………………………")
+        ui_logger.info("………………………………用户列表查询end………………………………")
 
     @allure.step("删除用户：{username}")
     def delete_user(self, username):
-        logger.info("………………………………删除用户start………………………………")
+        ui_logger.info("………………………………删除用户start………………………………")
         try:
-            logger.info(f"删除用户：{username}")
+            ui_logger.info(f"删除用户：{username}")
             self.search_users({"账号": username})
             user_list = self.table_all_row_td(2)  # 获取查询的所有用户
-            logger.debug(f"用户查询列表：{user_list}")
+            ui_logger.debug(f"用户查询列表：{user_list}")
             self.button_operate_with_line(username, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除用户end………………………………")
+        ui_logger.info("………………………………删除用户end………………………………")
 
     @allure.step("删除机构：{organ}")
     def delete_group(self, organ):
-        logger.info("………………………………删除用户组start………………………………")
+        ui_logger.info("………………………………删除用户组start………………………………")
         try:
-            logger.info(f"删除组织机构：{organ}")
+            ui_logger.info(f"删除组织机构：{organ}")
             group_name, group_location = self.tree_node_location(organ)   # 根据所属机构定位到最底层机构模块
             group_location.locator(
                 "xpath=/div[@class='el-tree-node__content']//span[@class='custom-tree-button']/span[3]").click()  # 在最底层机构模块点击【删除】按钮
@@ -75,7 +75,7 @@ class UserGroupPage(BasePage):
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除用户组end………………………………")
+        ui_logger.info("………………………………删除用户组end………………………………")
 
     @allure.step("组织机构：{parent_group_name}下新增组织机构：{group_name}")
     def group_add(self, parent_group_name: str, group_name: str):

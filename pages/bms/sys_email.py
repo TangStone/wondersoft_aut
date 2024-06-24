@@ -10,7 +10,7 @@
 # 标准库导入
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from pages.common_page import CommonPage
 from utils.ui_utils.base_page import BasePage
@@ -71,7 +71,7 @@ class SysEmailPage(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"处理参数：{para}，参数输入类型：{para_conf_type}， 参数值：{para_value}")
+        ui_logger.info(f"处理参数：{para}，参数输入类型：{para_conf_type}， 参数值：{para_value}")
 
         if para_conf_type == "input":  # input输入框
             self.email_para_input(para_value, para, location)
@@ -86,7 +86,7 @@ class SysEmailPage(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的输入框中输入：{input_value}")
+        ui_logger.info(f"在参数：【{para_name}】的输入框中输入：{input_value}")
         # 定位到input输入框
         input_location = location.locator("xpath=/td[2]//input")
         # 清空输入框
@@ -102,7 +102,7 @@ class SysEmailPage(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的下拉框中选择：{select_value}")
+        ui_logger.info(f"在参数：【{para_name}】的下拉框中选择：{select_value}")
         # 定位到下拉输入框
         input_location = location.locator("xpath=/td[2]//input")
         # 点击下拉输入框
@@ -117,7 +117,7 @@ class SysEmailPage(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"提交参数修改：【{para_name}】")
+        ui_logger.info(f"提交参数修改：【{para_name}】")
         # 定位到提交按钮，点击提交按钮
         self.click_by_role_text("button", "提交", location)
 

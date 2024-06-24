@@ -10,7 +10,7 @@
 # 标准库导入
 import os
 # 第三方库导入
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 
 
 def eval_data(data):
@@ -23,7 +23,7 @@ def eval_data(data):
         else:
             return eval(data)
     except Exception as e:
-        logger.trace(f"{data} --> 该数据不能被eval\n报错：{e}")
+        ui_logger.trace(f"{data} --> 该数据不能被eval\n报错：{e}")
         return data
 
 

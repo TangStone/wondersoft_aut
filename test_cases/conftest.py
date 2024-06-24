@@ -13,7 +13,7 @@ import json
 from pytest_bdd import given, when, then, parsers
 from playwright.sync_api import Page
 import pytest
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from config.global_vars import GLOBAL_VARS
 from pages.common_page import CommonPage
@@ -41,7 +41,7 @@ def host():
     获取host
     :return:
     """
-    logger.info("获取host:{}".format(GLOBAL_VARS.get("host")))
+    ui_logger.info("获取host:{}".format(GLOBAL_VARS.get("host")))
     return GLOBAL_VARS.get("host")
 
 

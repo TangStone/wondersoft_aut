@@ -7,7 +7,7 @@
 @time: 2023-06-04 20:10
 @description: 关联用例
 """
-import logging
+from utils.log_utils.logger_handle import api_logger
 
 import allure, jsonpath
 

@@ -7,11 +7,11 @@
 @time: 2023-06-08 15:59
 @description: 处理参数传递
 """
-import re, jsonpath, logging
+import jsonpath
 
 from config import *
 from common import handleyaml
-from common.basefunc import config_dict
+
 
 
 def handle_extarct(extract, recv_data):

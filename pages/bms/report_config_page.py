@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class ReportConfigPage(BasePage):
     """
     @allure.step("根据查询条件查询报告模板列表，查询条件{query_conditions}")
     def search_report_config(self, query_conditions: dict):
-        logger.info("………………………………报告模板列表查询start………………………………")
+        ui_logger.info("………………………………报告模板列表查询start………………………………")
         try:
             cond_type_dict = {
                 "模板名称": "input",  # 输入框
@@ -39,23 +39,23 @@ class ReportConfigPage(BasePage):
             self.page.wait_for_load_state()
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………报告模板列表查询end………………………………")
+        ui_logger.info("………………………………报告模板列表查询end………………………………")
 
     @allure.step("删除报告模板：{report_config_name}")
     def delete_report_config(self, report_config_name):
-        logger.info("………………………………删除报告模板start………………………………")
+        ui_logger.info("………………………………删除报告模板start………………………………")
         try:
-            logger.info(f"删除报告模板：{report_config_name}")
+            ui_logger.info(f"删除报告模板：{report_config_name}")
             self.search_report_config({"模板名称": report_config_name})
             report_config_list = self.table_all_row_td(2)  # 获取查询的所有报告模板
-            logger.debug(f"报告模板查询列表：{report_config_list}")
+            ui_logger.debug(f"报告模板查询列表：{report_config_list}")
             self.button_operate_with_line(report_config_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除报告模板end………………………………")
+        ui_logger.info("………………………………删除报告模板end………………………………")
 
     @allure.step("输入新增报告模板信息：{report_config_info}")
     def input_report_config_info(self, report_config_info):
@@ -79,22 +79,22 @@ class ReportConfigPage(BasePage):
                     # 节点链路列表
                     node_link_list = [i.strip() for i in report_link.split("->")]
                     # 定位到整个树
-                    logger.info("定位到报表树")
+                    ui_logger.info("定位到报表树")
                     node_location = location.locator("xpath=//*[@role='tree']")
                     # 根据节点链路列表，逐级定位，获取最后一级
                     for n in range(len(node_link_list)):
                         # 定位到节点模块
-                        logger.info(f"定位到模块【{node_link_list[n]}】")
+                        ui_logger.info(f"定位到模块【{node_link_list[n]}】")
                         node_location = node_location.locator(
                             "xpath=/div/div[@class='el-tree-node__content']/span[text()='" + node_link_list[
                                 n] + "']/../..")
                         # 去除元素的aria-disabled属性
-                        logger.info("去除节点的aria-disabled属性")
+                        ui_logger.info("去除节点的aria-disabled属性")
                         node_location.evaluate("(node_location) => { node_location.removeAttribute('aria-disabled'); }")
-                        # logger.info(node_location.evaluate('(node_location) => node_location.outerHTML'))
+                        # ui_logger.info(node_location.evaluate('(node_location) => node_location.outerHTML'))
                         # 判断节点是否展开，若没有展开，展开节点
                         if node_location.get_attribute("aria-expanded") is None:
-                            logger.info(f"展开节点【{node_link_list[n]}】")
+                            ui_logger.info(f"展开节点【{node_link_list[n]}】")
                             node_location.locator(
                                 "xpath=/div[@class='el-tree-node__content']/span[contains(@class,'el-tree-node__expand-icon')]").click()
                         # 不是最底层节点，获取子节点模块

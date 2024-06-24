@@ -12,17 +12,16 @@ import os
 import argparse
 # 第三方库导入
 import pytest, time
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from config import *
 from common import basefunc
 from common import sendemail
-from common import loggerapi
-from config.run_config import LOG_LEVEL, RunConfig
+from config.run_config import UI_LOG_LEVEL, RunConfig
 from config.path_config import LOG_DIR, ALLURE_RESULTS_DIR, ALLURE_HTML_DIR
 from config.env_config import ENV_VARS, BASE_VARS
 from config.global_vars import GLOBAL_VARS
-from utils.log_utils.log_handle import capture_logs
+from utils.log_utils import log_handle
 from utils.report_utils.allure_handle import generate_allure_report
 
 
@@ -33,14 +32,11 @@ def run(**kwargs):
     :return:
     """
     try:
-        # 捕获日志
-        capture_logs(level=LOG_LEVEL, filename=os.path.join(LOG_DIR, "service.log"))
         # 开启日志记录(默认logs目录)
-        loggerapi.MyLogs().setup_logging(ROOT_DIR)
-        logger.debug(f"\nrun方法的入参：{kwargs}\n")
+        ui_logger.debug(f"\nrun方法的入参：{kwargs}\n")
         # 获取传入的环境参数
         env_key = kwargs.get("env", "") or None
-        logger.info(
+        ui_logger.info(
             f"------------------------------------{ENV_VARS[env_key]['project_name']} web自动化测试 START------------------------------------")
 
         marks = kwargs.get("m", "") or None
@@ -75,13 +71,13 @@ def run(**kwargs):
         if marks:
             arg_list.append(f"-m {marks}")
 
-        logger.debug(f"\npytest运行参数：{arg_list}\n")
+        ui_logger.debug(f"\npytest运行参数：{arg_list}\n")
         # ----------------通过传入参数配置pytest参数end----------------
 
         # 添加全局变量
         GLOBAL_VARS.update(ENV_VARS[env_key])
         GLOBAL_VARS.update(BASE_VARS)
-        # logger.info(f"全局变量：{GLOBAL_VARS}")
+        # ui_logger.info(f"全局变量：{GLOBAL_VARS}")
 
         # 执行用例前置处理操作
         basefunc.pre_process()
@@ -99,7 +95,7 @@ def run(**kwargs):
             times = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
             sendemail.SendEmail("report_" + times).send_main()
 
-        logger.info(
+        ui_logger.info(
             f"------------------------------------{ENV_VARS[env_key]['project_name']} web自动化测试 END------------------------------------")
     except Exception as e:
         raise e

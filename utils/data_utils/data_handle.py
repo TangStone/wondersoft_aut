@@ -11,7 +11,7 @@
 import re, uuid, copy, json
 # 第三方库导入
 from string import Template
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.base_utils.basefuc import eval_data
 
@@ -58,7 +58,7 @@ class DataHandle:
         """
         for key, funcs in funcs.items():  # 遍历方法字典调用并替换
             func = funcs[1]
-            # logger.debug("invoke func : ", func)
+            # ui_logger.debug("invoke func : ", func)
             try:
                 if "." in func:
                     obj = self.deal_func_res(obj, key, eval(func))
@@ -68,7 +68,7 @@ class DataHandle:
                     func_args_str = ''.join(func_parts[1:])[:-1]
                     obj = self.deal_func_res(obj, key, eval(func))
             except:
-                logger.warning("Warn: --------函数：%s 无法调用成功, 请检查是否存在该函数-------" % func)
+                ui_logger.warning("Warn: --------函数：%s 无法调用成功, 请检查是否存在该函数-------" % func)
                 obj = obj.replace(key, funcs[0])
 
         return obj
@@ -82,7 +82,7 @@ class DataHandle:
             msg = (f"\nobj --> {obj}\n"
                    f"函数返回值 --> {res}\n"
                    f"函数返回值类型 --> {type(res)}\n")
-            logger.warning(f"\nWarn: --------处理函数方法后，尝试eval({obj})失败，可能原始的字符串并不是python表达式-------{msg}")
+            ui_logger.warning(f"\nWarn: --------处理函数方法后，尝试eval({obj})失败，可能原始的字符串并不是python表达式-------{msg}")
         return obj
 
     def data_handle(self, obj, source=None):
@@ -97,7 +97,7 @@ class DataHandle:
         keys = {}
 
         source = {} if not source or not isinstance(source, dict) else source
-        logger.trace(f"source={source}")
+        ui_logger.trace(f"source={source}")
 
         # 如果进来的是字符串，先将各种类型的表达式处理完
         if isinstance(obj, str):

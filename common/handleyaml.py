@@ -7,7 +7,8 @@
 @time: 2023-06-21 16:00
 @description: yaml文件处理
 """
-import yaml, logging, sys, traceback
+import yaml, sys, traceback
+from utils.log_utils.logger_handle import api_logger
 from collections import OrderedDict
 from common import exceptions
 from common import handledict
@@ -34,7 +35,7 @@ class YamlHandle:
             #异常处理
             ex_type, ex_val, ex_stack = sys.exc_info()
             error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
-            logging.error("读取yaml文件【%s】异常：%s", self.path, error_info)
+            api_logger.error("读取yaml文件【%s】异常：%s", self.path, error_info)
             raise
 
     def write_yaml(self):
@@ -80,24 +81,24 @@ def standard_yaml(casedata):
                 # 判断postProcessors下是否有：extract
                 postProcessors_key = casedata['postProcessors'].keys()
                 if "assert" in postProcessors_key:
-                    logging.info("Yaml测试用例基础架构检查通过")
+                    api_logger.info("Yaml测试用例基础架构检查通过")
                 else:
                     flag = False
                     msg = '用例编写有误，postProcessors下必须包含：assert'
-                    logging.error("用例编写有误，postProcessors下必须包含：assert")
+                    api_logger.error("用例编写有误，postProcessors下必须包含：assert")
             else:
                 flag = False
                 msg = '用例编写有误，request下必须包含：method，address，headers'
-                logging.error("用例编写有误，request下必须包含：method，address，headers")
+                api_logger.error("用例编写有误，request下必须包含：method，address，headers")
         else:
             flag = False
             msg = '用例编写有误，一级关键字必须包含：name，base_url，request，postProcessors'
-            logging.error("用例编写有误，一级关键字必须包含：name，base_url，request，postProcessors")
+            api_logger.error("用例编写有误，一级关键字必须包含：name，base_url，request，postProcessors")
     except:
         ex_type, ex_val, ex_stack = sys.exc_info()
         error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
         flag = False
         msg = '规范Yaml测试用例异常：' + error_info
-        logging.error("规范Yaml测试用例异常：%s", error_info)
+        api_logger.error("规范Yaml测试用例异常：%s", error_info)
     return flag, msg
 

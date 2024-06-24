@@ -7,7 +7,8 @@
 @time: 2023-06-04 18:07
 @description: 处理用例数据
 """
-import collections, logging
+import collections
+from utils.log_utils.logger_handle import api_logger
 import copy
 
 from config import *
@@ -113,7 +114,7 @@ class ReadCase:
         :param file_pathlist: yaml文件路径列表
         :return:
         """
-        logging.info(file_pathlist)
+        api_logger.info(file_pathlist)
         case_list = []
         if file_pathlist:
             for file_path in file_pathlist:

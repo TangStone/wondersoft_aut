@@ -12,7 +12,7 @@ import json
 # 第三方库导入
 from pytest_bdd import scenarios, given, when, then, parsers
 from playwright.sync_api import Page
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 from sttable import parse_str_table
 import pytest
 # 本地模块导入

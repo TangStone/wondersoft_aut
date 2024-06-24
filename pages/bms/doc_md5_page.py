@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class DocMd5Page(BasePage):
     """
     @allure.step("根据查询条件查询md5，查询条件：{query_conditions}")
     def search_docmd5(self, query_conditions):
-        logger.info("………………………………文件MD5查询start………………………………")
+        ui_logger.info("………………………………文件MD5查询start………………………………")
         try:
             cond_type_dict = {
                 "名称": "input"
@@ -36,23 +36,23 @@ class DocMd5Page(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………文件MD5查询end………………………………")
+        ui_logger.info("………………………………文件MD5查询end………………………………")
 
     @allure.step("删除数据字典：{docmd5_name}")
     def delete_docmd5(self, docmd5_name):
-        logger.info("………………………………删除文件MD5start………………………………")
+        ui_logger.info("………………………………删除文件MD5start………………………………")
         try:
-            logger.info(f"删除文件MD5：{docmd5_name}")
+            ui_logger.info(f"删除文件MD5：{docmd5_name}")
             self.search_docmd5({"规则名称": docmd5_name})
             docmd5_list = self.table_all_row_td(2)  # 获取查询的所有文件MD5
-            logger.debug(f"文件MD5查询列表：{docmd5_list}")
+            ui_logger.debug(f"文件MD5查询列表：{docmd5_list}")
             self.button_operate_with_line(docmd5_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="操作"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "操作")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除文件MD5end………………………………")
+        ui_logger.info("………………………………删除文件MD5end………………………………")
 
     @allure.step("输入MD5规则导入信息：{doc_md5_info}")
     def input_doc_md5_info(self, doc_md5_info):
@@ -91,7 +91,7 @@ class DocMd5Page(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"处理参数：{para}，参数输入类型：{para_conf_type}， 参数值：{para_value}")
+        ui_logger.info(f"处理参数：{para}，参数输入类型：{para_conf_type}， 参数值：{para_value}")
 
         if para_conf_type == "input":  # input输入框
             self.md5_para_input(para_value, para, location)
@@ -107,7 +107,7 @@ class DocMd5Page(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的点选模块选择：{check_value}")
+        ui_logger.info(f"在参数：【{para_name}】的点选模块选择：{check_value}")
         # 选择参数
         location.locator('//div[@role="radiogroup"]//span[text()="' + check_value + '"]/..').check()
 
@@ -120,7 +120,7 @@ class DocMd5Page(BasePage):
         :param location: 定位器，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的输入框中输入：{input_value}")
+        ui_logger.info(f"在参数：【{para_name}】的输入框中输入：{input_value}")
         # 定位到input输入框
         input_location = location.locator("xpath=//input")
         # 清空输入框

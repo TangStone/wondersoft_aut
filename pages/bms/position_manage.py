@@ -11,7 +11,7 @@
 import os
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from config.path_config import FILES_DIR
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -25,7 +25,7 @@ class PositionManagePage(BasePage):
     """
     @allure.step("根据查询条件查询职位列表，查询条件{query_conditions}")
     def search_positions(self, query_conditions: dict):
-        logger.info("………………………………职位列表查询start………………………………")
+        ui_logger.info("………………………………职位列表查询start………………………………")
         try:
             cond_type_dict = {
                 "职位": "input",  # 输入框
@@ -38,23 +38,23 @@ class PositionManagePage(BasePage):
             self.page.wait_for_load_state()
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………职位列表查询end………………………………")
+        ui_logger.info("………………………………职位列表查询end………………………………")
 
     @allure.step("删除职位：{position_name}")
     def delete_position(self, position_name):
-        logger.info("………………………………删除职位start………………………………")
+        ui_logger.info("………………………………删除职位start………………………………")
         try:
-            logger.info(f"删除职位：{position_name}")
+            ui_logger.info(f"删除职位：{position_name}")
             self.search_positions({"职位": position_name})
             position_list = self.table_all_row_td(1)  # 获取查询的所有职位
-            logger.debug(f"用户查询列表：{position_list}")
+            ui_logger.debug(f"用户查询列表：{position_list}")
             self.button_operate_with_line(position_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除职位end………………………………")
+        ui_logger.info("………………………………删除职位end………………………………")
 
     @allure.step("导入职位文件：{position_file}")
     def import_position(self, position_file):

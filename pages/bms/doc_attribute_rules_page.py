@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class DocAttributeRulesPage(BasePage):
     """
     @allure.step("根据查询条件查询文件属性规则，查询条件：{query_conditions}")
     def search_doc_attribute_rules(self, query_conditions):
-        logger.info("………………………………文件属性规则查询start………………………………")
+        ui_logger.info("………………………………文件属性规则查询start………………………………")
         try:
             cond_type_dict = {
                 "规则名称": "input",
@@ -37,23 +37,23 @@ class DocAttributeRulesPage(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………文件属性规则查询end………………………………")
+        ui_logger.info("………………………………文件属性规则查询end………………………………")
 
     @allure.step("删除文件属性规则：{doc_attribute_rule_name}")
     def delete_doc_attribute_rules(self, doc_attribute_rule_name):
-        logger.info("………………………………删除文件属性规则start………………………………")
+        ui_logger.info("………………………………删除文件属性规则start………………………………")
         try:
-            logger.info(f"删除文件属性规则：{doc_attribute_rule_name}")
+            ui_logger.info(f"删除文件属性规则：{doc_attribute_rule_name}")
             self.search_doc_attribute_rules({"规则名称": doc_attribute_rule_name})
             doc_attribute_rule_list = self.table_all_row_td(2)  # 获取查询的所有文件属性规则
-            logger.debug(f"文件属性规则查询列表：{doc_attribute_rule_list}")
+            ui_logger.debug(f"文件属性规则查询列表：{doc_attribute_rule_list}")
             self.button_operate_with_line(doc_attribute_rule_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除文件属性规则end………………………………")
+        ui_logger.info("………………………………删除文件属性规则end………………………………")
 
     @allure.step("输入新增属性规则信息：{attribute_rule_info}")
     def input_attribute_rule_info(self, attribute_rule_info):

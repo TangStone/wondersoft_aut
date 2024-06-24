@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class DlpDocRulesPage(BasePage):
     """
     @allure.step("根据查询条件查询关键字/正则，查询条件：{query_conditions}")
     def search_dlp_doc_rules(self, query_conditions):
-        logger.info("………………………………关键字/正则查询start………………………………")
+        ui_logger.info("………………………………关键字/正则查询start………………………………")
         try:
             cond_type_dict = {
                 "规则名称": "input",
@@ -40,23 +40,23 @@ class DlpDocRulesPage(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………关键字/正则查询end………………………………")
+        ui_logger.info("………………………………关键字/正则查询end………………………………")
 
     @allure.step("删除关键字/正则规则：{dlp_doc_rules_name}")
     def delete_dlp_doc_rules(self, dlp_doc_rules_name):
-        logger.info("………………………………删除关键字/正则规则start………………………………")
+        ui_logger.info("………………………………删除关键字/正则规则start………………………………")
         try:
-            logger.info(f"删除关键字/正则：{dlp_doc_rules_name}")
+            ui_logger.info(f"删除关键字/正则：{dlp_doc_rules_name}")
             self.search_dlp_doc_rules({"规则名称": dlp_doc_rules_name})
             dlp_doc_rules_list = self.table_all_row_td(2)  # 获取查询的所有关键字/正则规则配置
-            logger.debug(f"关键字/正则规则查询列表：{dlp_doc_rules_list}")
+            ui_logger.debug(f"关键字/正则规则查询列表：{dlp_doc_rules_list}")
             self.button_operate_with_line(dlp_doc_rules_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除关键字/正则规则end………………………………")
+        ui_logger.info("………………………………删除关键字/正则规则end………………………………")
 
     @allure.step("输入新增规则信息：{dlp_doc_rules_info}")
     def input_dlp_doc_rules_info(self, dlp_doc_rules_info):
@@ -91,7 +91,7 @@ class DlpDocRulesPage(BasePage):
             # 根据参数名称获取参数值
             para_value = location.locator(".item span", has_text=re.compile("^" + para + ".*：$")).locator(
                 "../span[2]").inner_text()
-            logger.info(f"参数【{para}】，期望值：{expect_para_value}，实际值：{para_value}")
+            ui_logger.info(f"参数【{para}】，期望值：{expect_para_value}，实际值：{para_value}")
             if para_value != expect_para_value:
                 flag = False
                 break

@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 
@@ -32,8 +32,8 @@ class UseSyncManagerPage(BasePage):
         # # 定位到需要进行操作的行
         # selem = self.page.get_by_role("cell", name=system_name, exact=True).locator("../..")
         # # selem = self.page.get_by_role("cell", name=system_name, exact=True).locator('../..//button[@title="' + operate + '"]')
-        # logger.info("f==========")
-        # logger.info(selem.inner_html())
+        # ui_logger.info("f==========")
+        # ui_logger.info(selem.inner_html())
         # # 定位到对应的操作按钮，点击按钮
         # selem.locator('//*[@title="' + operate + '"]').click()
 

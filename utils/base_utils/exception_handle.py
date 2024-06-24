@@ -11,7 +11,7 @@ import re
 # 标准库导入
 import traceback
 # 第三方库导入
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 import allure
 
 
@@ -51,7 +51,7 @@ class ExceptionHandle:
 详细报错信息如下：
 {trac}
 """
-        logger.error(trac)
+        ui_logger.error(trac)
         # 添加异常信息
         if ex_type == 'assert':    #校验时出现的异常
             allure.attach(name="测试用例校验失败：", body=attach_body)

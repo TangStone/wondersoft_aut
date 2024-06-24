@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class DocFingerPage(BasePage):
     """
     @allure.step("根据查询条件查询文件指纹，查询条件：{query_conditions}")
     def search_doc_finger(self, query_conditions):
-        logger.info("………………………………文件指纹查询start………………………………")
+        ui_logger.info("………………………………文件指纹查询start………………………………")
         try:
             cond_type_dict = {
                 "指纹库名称": "input",
@@ -38,23 +38,23 @@ class DocFingerPage(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………文件指纹查询end………………………………")
+        ui_logger.info("………………………………文件指纹查询end………………………………")
 
     @allure.step("删除文件指纹：{doc_finger_name}")
     def delete_doc_finger(self, doc_finger_name):
-        logger.info("………………………………删除文件指纹start………………………………")
+        ui_logger.info("………………………………删除文件指纹start………………………………")
         try:
-            logger.info(f"删除文件指纹：{doc_finger_name}")
+            ui_logger.info(f"删除文件指纹：{doc_finger_name}")
             self.search_doc_finger({"指纹库名称": doc_finger_name})
             doc_finger_list = self.table_all_row_td(2)  # 获取查询的所有文件MD5
-            logger.debug(f"文件指纹查询列表：{doc_finger_list}")
+            ui_logger.debug(f"文件指纹查询列表：{doc_finger_list}")
             self.button_operate_with_line(doc_finger_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功！")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除文件指纹end………………………………")
+        ui_logger.info("………………………………删除文件指纹end………………………………")
 
     @allure.step("输入新增指纹库信息：{doc_finger_info}")
     def input_doc_finger_info(self, doc_finger_info):

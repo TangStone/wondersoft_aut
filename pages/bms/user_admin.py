@@ -11,7 +11,7 @@
 import os
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from config.path_config import FILES_DIR
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -25,7 +25,7 @@ class UserAdminPage(BasePage):
     """
     @allure.step("根据查询条件查询管理员列表，查询条件{query_conditions}")
     def search_user_admin(self, query_conditions: dict):
-        logger.info("………………………………管理员列表查询start………………………………")
+        ui_logger.info("………………………………管理员列表查询start………………………………")
         try:
             cond_type_dict = {
                 "登录名": "input",  # 输入框
@@ -39,23 +39,23 @@ class UserAdminPage(BasePage):
             self.page.wait_for_load_state()
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………管理员列表查询end………………………………")
+        ui_logger.info("………………………………管理员列表查询end………………………………")
 
     @allure.step("删除管理员：{user_admin_name}")
     def delete_user_admin(self, user_admin_name):
-        logger.info("………………………………删除管理员start………………………………")
+        ui_logger.info("………………………………删除管理员start………………………………")
         try:
-            logger.info(f"删除管理员：{user_admin_name}")
+            ui_logger.info(f"删除管理员：{user_admin_name}")
             self.search_user_admin({"登录名": user_admin_name})
             user_admin_list = self.table_all_row_td(1)  # 获取查询的所有管理员
-            logger.debug(f"管理员查询列表：{user_admin_list}")
+            ui_logger.debug(f"管理员查询列表：{user_admin_list}")
             self.button_operate_with_line(user_admin_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除管理员end………………………………")
+        ui_logger.info("………………………………删除管理员end………………………………")
 
     @allure.step("导入管理员文件：{user_admin_file}")
     def import_user_admin(self, user_admin_file):

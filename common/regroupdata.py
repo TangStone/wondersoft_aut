@@ -8,7 +8,8 @@
 @description: 参数替换
 """
 import json
-import re, sys, logging, datetime, uuid, random, string, jsonpath
+import re, sys, datetime, uuid, random, string, jsonpath
+from utils.log_utils.logger_handle import api_logger
 from faker import Faker
 from functools import reduce
 
@@ -35,10 +36,10 @@ class RegroupData:
         self.temp_var_dict = temp_var_dict  # 临时变量字典
         self.env_var_dict = config_dict  # 环境变量字典
         self.update_dict = {}  # 更新字典
-        # logging.info("api_casedata:%s", self.api_casedata)
-        # logging.info("global_var_dict:%s", self.global_var_dict)
-        # logging.info("temp_var_dict:%s", self.temp_var_dict)
-        # logging.info("env_var_dict:%s", self.env_var_dict)
+        # api_logger.info("api_casedata:%s", self.api_casedata)
+        # api_logger.info("global_var_dict:%s", self.global_var_dict)
+        # api_logger.info("temp_var_dict:%s", self.temp_var_dict)
+        # api_logger.info("env_var_dict:%s", self.env_var_dict)
 
     def is_key_in_nested_dict(self, nested_dict, key):
         """
@@ -70,7 +71,7 @@ class RegroupData:
         :param param_path: 取值参数路径
         :return:
         """
-        logging.info(f"参数取值，参数路径：{param_path}")
+        api_logger.info(f"参数取值，参数路径：{param_path}")
         getvaluedict_list = [self.temp_var_dict, self.global_var_dict, self.env_var_dict,
                              self.api_casedata['request']['data']]
         value = None
@@ -97,7 +98,7 @@ class RegroupData:
                     if pa_list[1] == 'str':
                         value = str(value)
                 elif pa_list[0] == 'update':  # 更新字典中的值
-                    logging.info("pa_list[1]:%s", pa_list[1])
+                    api_logger.info("pa_list[1]:%s", pa_list[1])
                     update_dict = self.update_dict[pa_list[1]]
                     value = handledict.dict_update(value, update_dict)
                 else:

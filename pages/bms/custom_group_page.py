@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.base_utils.exception_handle import ExceptionHandle
 from utils.ui_utils.base_page import BasePage
@@ -24,7 +24,7 @@ class CustomGroupPage(BasePage):
     """
     @allure.step("根据查询条件查询自定义用户组，查询条件{query_conditions}")
     def search_custom_group(self, query_conditions: dict):
-        logger.info("………………………………自定义用户组查询start………………………………")
+        ui_logger.info("………………………………自定义用户组查询start………………………………")
         try:
             cond_type_dict = {
                 "用户组名称": "input",
@@ -37,23 +37,23 @@ class CustomGroupPage(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………自定义用户组查询end………………………………")
+        ui_logger.info("………………………………自定义用户组查询end………………………………")
 
     @allure.step("删除自定义用户组：{custom_group_name}")
     def delete_custom_group(self, custom_group_name):
-        logger.info("………………………………删除自定义用户组start………………………………")
+        ui_logger.info("………………………………删除自定义用户组start………………………………")
         try:
-            logger.info(f"删除自定义用户组：{custom_group_name}")
+            ui_logger.info(f"删除自定义用户组：{custom_group_name}")
             self.search_custom_group({"用户组名称": custom_group_name})
             custom_group_list = self.table_all_row_td(2)  # 获取查询的所有数据源配置
-            logger.debug(f"自定义用户组查询列表：{custom_group_list}")
+            ui_logger.debug(f"自定义用户组查询列表：{custom_group_list}")
             self.button_operate_with_line(custom_group_name, "删除")  # 点击操作模块的【删除】按钮
             # self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             # common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             # common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除自定义用户组end………………………………")
+        ui_logger.info("………………………………删除自定义用户组end………………………………")
 
     @allure.step("输入用户组名称：{group_name}，备注：{remark}")
     def input_group_name(self, group_name: str, remark: str):

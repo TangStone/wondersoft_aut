@@ -12,7 +12,7 @@ from typing import Union
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 from playwright.sync_api import expect
 # 本地模块导入
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -84,7 +84,7 @@ class CommonPage(BasePage):
         :param dialog_expect_msg: 预期提示信息
         :return:
         """
-        logger.info(f"校验是否弹出对话提示框，对话提示框提示信息为：{dialog_expect_msg}，提示信息为空表示不校验提示信息")
+        ui_logger.info(f"校验是否弹出对话提示框，对话提示框提示信息为：{dialog_expect_msg}，提示信息为空表示不校验提示信息")
         try:
             # 等待提示框出现
             dialog_location = self.wait_for_selector('[role="dialog"][aria-label="提示"]')
@@ -107,17 +107,17 @@ class CommonPage(BasePage):
         :param button:
         :return:
         """
-        logger.info(f"校验当前无网络请求")
+        ui_logger.info(f"校验当前无网络请求")
         try:
             password_request_received = True
 
             # 监听请求，如果请求url中包含“password”，则设置password_request_received为True
             def on_request(request):
-                logger.info(request.url)
+                ui_logger.info(request.url)
                 if "password" in request.url:
                     nonlocal password_request_received
                     password_request_received = False
-                    logger.info("Password request received. Stopping listening.")
+                    ui_logger.info("Password request received. Stopping listening.")
 
             self.page.on("request", on_request)
             self.click_by_role_text("button", button)
@@ -150,7 +150,7 @@ class CommonPage(BasePage):
         if page_name:
             location = self.get_label_locator(page_name)
         self.click_by_role_text("button", button, location)
-        # logger.info(f"____点击按钮：{button}")
+        # ui_logger.info(f"____点击按钮：{button}")
         # self.page.get_by_role("button", name=button).click()
 
     @allure.step("点击一级菜单：{men}")
@@ -159,7 +159,7 @@ class CommonPage(BasePage):
         点击一级菜单
         :param men: 一级菜单名称
         """
-        logger.info(f"____点击一级模块：{men}")
+        ui_logger.info(f"____点击一级模块：{men}")
         # self.page.get_by_text(men).click()
         # self.page.get_by_role("tab", name=men).click()
         self.page.locator(".portal-navbar").get_by_role("tab", name=men).click()
@@ -171,7 +171,7 @@ class CommonPage(BasePage):
         :param thi_men: 二级菜单名称
         :param sec_men: 三级菜单名称
         """
-        logger.info(f"____点击二级菜单：{sec_men}下的三级菜单：{thi_men}")
+        ui_logger.info(f"____点击二级菜单：{sec_men}下的三级菜单：{thi_men}")
         # 判断当前页面是否存在二级模块
         if not self.page.get_by_role("menuitem", name=sec_men).locator("i").nth(1).is_visible():
             self.page.locator(".hamburger-container > .iconfont").click()
@@ -186,7 +186,7 @@ class CommonPage(BasePage):
         切换标签页
         :param tab: 标签页名称
         """
-        logger.info(f"____切换标签页：{tab}")
+        ui_logger.info(f"____切换标签页：{tab}")
         self.page.get_by_role("tab", name=tab).click()
 
     @allure.step("____页面路径是 = {url}")
@@ -195,7 +195,7 @@ class CommonPage(BasePage):
         断言：检查页面是否存在指定的 URL；存在则通过，不存在则失败；
         :param url: 页面标题，接受一个字符串参数或正则表达式参数
         """
-        logger.info(f"____页面路径是 = {url}")
+        ui_logger.info(f"____页面路径是 = {url}")
         expect(self.page).to_have_url(url)
 
     @allure.step("断言 --> 显示提示信息：{message}")
@@ -206,7 +206,7 @@ class CommonPage(BasePage):
         :param message:
         :return:
         """
-        logger.info(f"____元素 - {locator} 包含 - {message}")
+        ui_logger.info(f"____元素 - {locator} 包含 - {message}")
         try:
             self.page.locator(locator).wait_for()
             expect(self.page.locator(locator)).to_have_text(message)
@@ -222,7 +222,7 @@ class CommonPage(BasePage):
         :param page_name:
         :return:
         """
-        logger.info(f"校验系统是否进入页面：{page_name}")
+        ui_logger.info(f"校验系统是否进入页面：{page_name}")
         try:
             # 获取当前页面标题
             currect_page_name = self.page.locator(".tags-view-item.active").inner_text()

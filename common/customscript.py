@@ -7,7 +7,7 @@
 @time: 2023-09-15 11:40
 @description: 执行自定义脚本
 """
-import logging
+from utils.log_utils.logger_handle import api_logger
 
 from common import handleyaml
 from config import *
@@ -18,7 +18,7 @@ def excute_custom_script(script_data):
     :param script_data: 自定义脚本相关数据
     :return:
     """
-    logging.info('-·-·-·-·-·-·-·-·-·-执行自定义脚本 START-·-·-·-·-·-·-·-·-·-')
+    api_logger.info('-·-·-·-·-·-·-·-·-·-执行自定义脚本 START-·-·-·-·-·-·-·-·-·-')
     # 调用模块
     module = ""    #调用模块
     module_list = script_data['script_path'].split('/')
@@ -47,6 +47,6 @@ from scripts.{module} import {method}
 {method}({param_str})
     """
 
-    logging.info('执行自定义脚本：' + run_code)
+    api_logger.info('执行自定义脚本：' + run_code)
     exec(run_code)
-    logging.info('-·-·-·-·-·-·-·-·-·-执行自定义脚本 END-·-·-·-·-·-·-·-·-·-')
+    api_logger.info('-·-·-·-·-·-·-·-·-·-执行自定义脚本 END-·-·-·-·-·-·-·-·-·-')

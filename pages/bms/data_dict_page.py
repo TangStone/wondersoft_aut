@@ -11,7 +11,7 @@
 import re
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class DataDictPage(BasePage):
     """
     @allure.step("根据查询条件查询数据字典，查询条件：{query_conditions}")
     def search_datadict(self, query_conditions):
-        logger.info("………………………………数据字典查询start………………………………")
+        ui_logger.info("………………………………数据字典查询start………………………………")
         try:
             cond_type_dict = {
                 "规则名称": "input",
@@ -38,23 +38,23 @@ class DataDictPage(BasePage):
             common_page.CommonPage(self.page).click_button("搜索")  # 点击【搜索】按钮
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………数据字典查询end………………………………")
+        ui_logger.info("………………………………数据字典查询end………………………………")
 
     @allure.step("删除数据字典：{datadict_name}")
     def delete_datadict(self, datadict_name):
-        logger.info("………………………………删除数据字典start………………………………")
+        ui_logger.info("………………………………删除数据字典start………………………………")
         try:
-            logger.info(f"删除数据字典：{datadict_name}")
+            ui_logger.info(f"删除数据字典：{datadict_name}")
             self.search_datadict({"规则名称": datadict_name})
             datadict_list = self.table_all_row_td(2)  # 获取查询的所有关键字/正则规则配置
-            logger.debug(f"数据字典查询列表：{datadict_list}")
+            ui_logger.debug(f"数据字典查询列表：{datadict_list}")
             self.button_operate_with_line(datadict_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除数据字典end………………………………")
+        ui_logger.info("………………………………删除数据字典end………………………………")
 
     @allure.step("输入新增数据字典信息：{data_dict_info}")
     def input_data_dict_info(self, data_dict_info):
@@ -101,7 +101,7 @@ class DataDictPage(BasePage):
             # 根据参数名称获取参数值
             para_value = location.locator(".item span", has_text=re.compile("^" + para + ".*：$")).locator(
                 "../span[2]").inner_text()
-            logger.info(f"参数【{para}】，期望值：{expect_para_value}，实际值：{para_value}")
+            ui_logger.info(f"参数【{para}】，期望值：{expect_para_value}，实际值：{para_value}")
             if para_value != expect_para_value:
                 flag = False
                 break

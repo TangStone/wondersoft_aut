@@ -7,7 +7,8 @@
 @time: 2023-06-09 16:08
 @description: 加密
 """
-import base64, logging, hashlib
+import base64, hashlib
+from utils.log_utils.logger_handle import api_logger
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
 

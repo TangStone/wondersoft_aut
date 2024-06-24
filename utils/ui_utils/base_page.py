@@ -10,7 +10,7 @@
 # 标准库导入
 import re, sys, os
 # 第三方库导入
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 from playwright.sync_api import Page, expect
 # 本地模块导入
 from config.path_config import FILES_DIR
@@ -37,7 +37,7 @@ class BasePage:
         :return:
         """
         self.page.goto(url)
-        logger.info(f"访问页面：{url}")
+        ui_logger.info(f"访问页面：{url}")
 
     def wait_for_selector(self, selector: str):
         """
@@ -45,7 +45,7 @@ class BasePage:
         :param selector: 元素选择器
         :return:
         """
-        logger.info(f"等待元素：{selector}")
+        ui_logger.info(f"等待元素：{selector}")
         return self.page.wait_for_selector(selector, strict=True)
 
     # ---------------- 查询相关操作 ----------------
@@ -54,7 +54,7 @@ class BasePage:
         展开高级查询条件
         :return:
         """
-        logger.info(f"若存在高级查询条件，展开高级查询条件")
+        ui_logger.info(f"若存在高级查询条件，展开高级查询条件")
         try:
             # self.page.wait_for_load_state()
             self.page.wait_for_selector("xpath=//form/div[last()]/div/button")
@@ -72,7 +72,7 @@ class BasePage:
         :param lable_name: lable名称
         :return: lable定位
         """
-        logger.info(f"定位到lable：{lable_name}")
+        ui_logger.info(f"定位到lable：{lable_name}")
         locator = self.page.get_by_label(lable_name)
         return locator
 
@@ -83,7 +83,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return: 定位
         """
-        logger.info(f"根据节点链路定位最底层节点：{node_link}")
+        ui_logger.info(f"根据节点链路定位最底层节点：{node_link}")
         try:
             if location is None:
                 location = self.page
@@ -118,7 +118,7 @@ class BasePage:
         :param location:
         :return: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         """
-        logger.info(f"处理参数：{para}，参数输入类型：{para_conf_type}， 参数值：{para_value}")
+        ui_logger.info(f"处理参数：{para}，参数输入类型：{para_conf_type}， 参数值：{para_value}")
         try:
             if location is None:
                 location = self.page
@@ -152,7 +152,7 @@ class BasePage:
         :param location:
         :return:
         """
-        logger.info(f"定位到参数【{para_name}】模块")
+        ui_logger.info(f"定位到参数【{para_name}】模块")
         try:
             if location is None:
                 location = self.page
@@ -170,7 +170,7 @@ class BasePage:
         在整个页面获取时间下拉框
         :return:
         """
-        logger.info(f"在整个页面定位时间下拉框")
+        ui_logger.info(f"在整个页面定位时间下拉框")
         try:
             flag = self.wait_for_selector(".el-time-panel")
             if flag:
@@ -186,7 +186,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"设置参数：【{para_name}】的时间为：{time_str}")
+        ui_logger.info(f"设置参数：【{para_name}】的时间为：{time_str}")
         try:
             if location is None:
                 location = self.page
@@ -211,7 +211,7 @@ class BasePage:
         在整个页面获取时间范围选择框
         :return:
         """
-        logger.info(f"在整个页面定位时间范围选择框")
+        ui_logger.info(f"在整个页面定位时间范围选择框")
         try:
             flag = self.wait_for_selector(".el-date-range-picker")
             if flag:
@@ -227,7 +227,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"设置参数：【{para_name}】的时间范围为：{date_range}")
+        ui_logger.info(f"设置参数：【{para_name}】的时间范围为：{date_range}")
         try:
             if location is None:
                 location = self.page
@@ -260,7 +260,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的输入框中输入：{input_value}")
+        ui_logger.info(f"在参数：【{para_name}】的输入框中输入：{input_value}")
         try:
             if location is None:
                 location = self.page
@@ -296,7 +296,7 @@ class BasePage:
         para_textarea_location.clear()
         # 输入值
         para_textarea_location.fill(textarea_value)
-        logger.info(f"在参数：【{para_name}】的文本框中输入：{textarea_value}")
+        ui_logger.info(f"在参数：【{para_name}】的文本框中输入：{textarea_value}")
 
     def input_by_placeholder(self, placeholder: str, value: str, location=None):
         """
@@ -306,7 +306,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"输入框：{placeholder}，输入值：{value}")
+        ui_logger.info(f"输入框：{placeholder}，输入值：{value}")
         if location is None:
             location = self.page
         elem = location.get_by_placeholder(placeholder)
@@ -322,7 +322,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的下拉框中选择：{select_value}")
+        ui_logger.info(f"在参数：【{para_name}】的下拉框中选择：{select_value}")
         try:
             if location is None:
                 location = self.page
@@ -359,7 +359,7 @@ class BasePage:
         在整个页面获取下拉框
         :return:
         """
-        logger.info(f"在整个页面定位下拉框")
+        ui_logger.info(f"在整个页面定位下拉框")
         try:
             self.page.wait_for_timeout(200)
             dropdown_locator = None
@@ -385,11 +385,11 @@ class BasePage:
         :param check_value: 需要选择的值，str or list
         :return:
         """
-        logger.info(f"在下拉框中勾选值：{check_value}")
+        ui_logger.info(f"在下拉框中勾选值：{check_value}")
         try:
             # 定位到下拉框
             dropdown_locator = self.dropdown_location()
-            # logger.info(dropdown_locator.inner_html())
+            # ui_logger.info(dropdown_locator.inner_html())
             # 在下拉框中勾选值
             if type(check_value) == str:
                 check_value = [check_value]
@@ -404,7 +404,7 @@ class BasePage:
         :param check_value: 需要选择的值，str or list
         :return:
         """
-        logger.info(f"在下拉框中勾选值：{check_value}")
+        ui_logger.info(f"在下拉框中勾选值：{check_value}")
         try:
             # 定位到下拉框
             dropdown_locator = self.dropdown_location()
@@ -433,7 +433,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"参数：【{para_name}】的勾选框是否选择：{ischecked}")
+        ui_logger.info(f"参数：【{para_name}】的勾选框是否选择：{ischecked}")
         try:
             if location is None:
                 location = self.page
@@ -457,7 +457,7 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"参数：【{para_name}】勾选值：{checked_value}")
+        ui_logger.info(f"参数：【{para_name}】勾选值：{checked_value}")
         try:
             if location is None:
                 location = self.page
@@ -482,13 +482,13 @@ class BasePage:
         :param location: 定位器，默认为None，从整个页面定位，当传入值时，在相对模块进行定位
         :return:
         """
-        logger.info(f"在参数：【{para_name}】的点选模块选择：{check_value}")
+        ui_logger.info(f"在参数：【{para_name}】的点选模块选择：{check_value}")
         if location is None:
             location = self.page
         # 根据参数名称定位到radiogroup
         para_radio_location = location.locator("form div label", has_text=re.compile("^" + para_name + ".*：$")).locator(
             '..//div[@role="radiogroup"]')
-        # logger.info(para_radio_location.inner_html())
+        # ui_logger.info(para_radio_location.inner_html())
         # 点选参数
         para_radio_location.locator('//span[text()="' + check_value + '"]/..').check()
         # para_radio_location.locator("//input[@value='" + check_value + "']/..").check()
@@ -500,7 +500,7 @@ class BasePage:
         :return:
         """
         self.page.get_by_role(role="radio", name=name).check()
-        logger.info(f"选择radio框：{name}")
+        ui_logger.info(f"选择radio框：{name}")
 
     # ---------------- 按钮相关操作 ----------------
     def click_button_repre_by_icon(self, title):
@@ -521,7 +521,7 @@ class BasePage:
         :return:
         """
         # self.page.get_by_role(role, name=name).click()
-        logger.info(f"点击{role}：{name}")
+        ui_logger.info(f"点击{role}：{name}")
         try:
             if location is None:
                 location = self.page
@@ -537,7 +537,7 @@ class BasePage:
         :param files:
         :return:
         """
-        logger.info(f"在元素：【{location}】中上传文件：{files}")
+        ui_logger.info(f"在元素：【{location}】中上传文件：{files}")
         try:
             # 定位到文件上传的input元素
             input_element = self.page.locator(location)
@@ -552,7 +552,7 @@ class BasePage:
         获取列表表头数据，返回列表
         :return:
         """
-        logger.info(f"获取列表表头")
+        ui_logger.info(f"获取列表表头")
         try:
             return self.page.locator(".el-table__header-wrapper th").all_inner_texts()
         except Exception as e:
@@ -563,17 +563,17 @@ class BasePage:
         获取列表中所有行的数据
         :return: list
         """
-        logger.info(f"获取列表全部数据")
+        ui_logger.info(f"获取列表全部数据")
         try:
             row_datas = []
             # 获取表头
             header_list = self.table_header()
-            logger.debug(f"header_list：{header_list}")
+            ui_logger.debug(f"header_list：{header_list}")
             # 获取表格数据
             all_row = self.page.locator(".el-table__body-wrapper .el-table__row ").all()
             for row in all_row:
                 row_datas.append(dict(zip(header_list, row.locator("xpath=/td").all_inner_texts())))
-            logger.debug(f"row_datas：{row_datas}")
+            ui_logger.debug(f"row_datas：{row_datas}")
             return row_datas
         except Exception as e:
             ExceptionHandle().handle_exception(e)
@@ -584,7 +584,7 @@ class BasePage:
         :param td_nu: 第几列
         :return: list
         """
-        logger.info(f"获取列表模块第{td_nu}列的所有值")
+        ui_logger.info(f"获取列表模块第{td_nu}列的所有值")
         try:
             # return self.page.locator(
             #     "//div[contains(@class,'el-table__body-wrapper')]//tr[@class='el-table__row']/td[1]").all_inner_texts()
@@ -601,7 +601,7 @@ class BasePage:
     #     :param line_uniq_iden: 行唯一标识
     #     :return:
     #     """
-    #     logger.info(f"根据第{td_nu}列唯一标识{line_uniq_iden}定位到具体的行")
+    #     ui_logger.info(f"根据第{td_nu}列唯一标识{line_uniq_iden}定位到具体的行")
     #     try:
     #         # 根据唯一标识定位到当前行
     #         # return self.page.locator('//tr[@class="el-table__row"]/td[1]//span[normalize-space(text())="' + line_uniq_iden + '"]/../../../..')
@@ -618,7 +618,7 @@ class BasePage:
         :param table_type: 表格类型，1: 所有页面的显示列表  2: 邮箱配置、系统参数配置等页面的参数列表
         :return:
         """
-        logger.info(f"在【{module}】模块根据行唯一标识{line_uniq_iden}定位到具体的行")
+        ui_logger.info(f"在【{module}】模块根据行唯一标识{line_uniq_iden}定位到具体的行")
         try:
             module_location = self.page.locator('//div[contains(@class,"' + module + '")]')  # 定位到具体的模块
             if table_type == 1:  # 标准数据列表
@@ -628,7 +628,7 @@ class BasePage:
                 td_location = module_location.locator(
                     '//tr[@class="el-table__row"]//span[normalize-space(text())="' + line_uniq_iden + '"]/../../../..')
             else:
-                logger.error(f'不支持该表格类型：{table_type}')
+                ui_logger.error(f'不支持该表格类型：{table_type}')
                 raise Exception('不支持该表格类型')
             return td_location
         except Exception as e:
@@ -640,7 +640,7 @@ class BasePage:
         :param line_uniq_iden: 行唯一标识
         :return:
         """
-        logger.info(f"根据行唯一标识{line_uniq_iden}勾选行")
+        ui_logger.info(f"根据行唯一标识{line_uniq_iden}勾选行")
         try:
             table_location = self.table_row(line_uniq_iden, "el-table__fixed")  # 定位到具体的行
             table_location.locator("xpath=//td[1]//label").check()
@@ -659,7 +659,7 @@ class BasePage:
             location = self.page
         location.locator(
             '//div[@class="el-table__fixed-right"]//span[normalize-space(text())="' + line_uniq_iden + '"]/../../..//button[@title="' + operate + '"]').click()
-        logger.info(f"选择数据行：{line_uniq_iden}，点击操作：{operate}")
+        ui_logger.info(f"选择数据行：{line_uniq_iden}，点击操作：{operate}")
 
     # ---------------- 断言相关操作 ----------------
     def have_text(self, locator: str, text: str):
@@ -669,7 +669,7 @@ class BasePage:
         :param text: 文本内容
         :return:
         """
-        logger.info(f"断言：元素：{locator} 具有文本：{text}")
+        ui_logger.info(f"断言：元素：{locator} 具有文本：{text}")
         expect(self.page.locator(locator)).to_have_text(text)
 
     def location_hover_have_text(self, text: str, location):
@@ -679,7 +679,7 @@ class BasePage:
         :param text: 预期提示信息
         :return:
         """
-        logger.info(f"鼠标悬浮在元素：{location}上，校验提示信息是否为：{text}")
+        ui_logger.info(f"鼠标悬浮在元素：{location}上，校验提示信息是否为：{text}")
         try:
             # 鼠标悬浮
             location.hover()
@@ -687,7 +687,7 @@ class BasePage:
             hover_location = self.page.locator("//div[@role='tooltip'][@aria-hidden='false']")
             # 鼠标悬浮显示信息
             hover_text = hover_location.inner_text()
-            logger.info(f"鼠标悬浮显示信息：{hover_text}")
+            ui_logger.info(f"鼠标悬浮显示信息：{hover_text}")
             assert hover_text == text
         except Exception as e:
             ExceptionHandle().handle_exception(e, "assert")

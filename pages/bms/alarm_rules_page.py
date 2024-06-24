@@ -10,7 +10,7 @@
 # 标准库导入
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.ui_utils.base_page import BasePage
 from utils.base_utils.exception_handle import ExceptionHandle
@@ -24,7 +24,7 @@ class AlarmRulesPage(BasePage):
 
     @allure.step("根据查询条件查询告警任务列表，查询条件{query_conditions}")
     def search_alarm_rules(self, query_conditions: dict):
-        logger.info("………………………………告警任务列表查询start………………………………")
+        ui_logger.info("………………………………告警任务列表查询start………………………………")
         try:
             cond_type_dict = {
                 "告警任务名称": "input",  # 输入框
@@ -39,23 +39,23 @@ class AlarmRulesPage(BasePage):
             self.page.wait_for_load_state()
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………告警任务列表查询end………………………………")
+        ui_logger.info("………………………………告警任务列表查询end………………………………")
 
     @allure.step("删除告警任务：{alarm_rule_name}")
     def delete_alarm_rule(self, alarm_rule_name):
-        logger.info("………………………………删除告警任务start………………………………")
+        ui_logger.info("………………………………删除告警任务start………………………………")
         try:
-            logger.info(f"删除告警任务：{alarm_rule_name}")
+            ui_logger.info(f"删除告警任务：{alarm_rule_name}")
             self.search_alarm_rules({"告警任务名称": alarm_rule_name})
             alarm_rules_list = self.table_all_row_td(2)  # 获取查询的所有告警任务
-            logger.debug(f"告警任务查询列表：{alarm_rules_list}")
+            ui_logger.debug(f"告警任务查询列表：{alarm_rules_list}")
             self.button_operate_with_line(alarm_rule_name, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除告警任务end………………………………")
+        ui_logger.info("………………………………删除告警任务end………………………………")
 
     @allure.step("校验--验证告警任务列表是否存在以下告警任务：{expect_alarm_rules}")
     def assert_alarm_rules(self, expect_alarm_rules):

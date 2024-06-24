@@ -10,7 +10,7 @@
 # 标准库导入
 # 第三方库导入
 import allure
-from loguru import logger
+from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from utils.base_utils.exception_handle import ExceptionHandle
 from utils.ui_utils.base_page import BasePage
@@ -23,7 +23,7 @@ class AccessStrategyPage(BasePage):
     """
     @allure.step("根据查询条件查询限制列表，查询条件{query_conditions}")
     def search_strategy(self, query_conditions: dict):
-        logger.info("………………………………限制策略查询start………………………………")
+        ui_logger.info("………………………………限制策略查询start………………………………")
         try:
             cond_type_dict = {
                 "IP地址": "input"  # 输入框
@@ -36,23 +36,23 @@ class AccessStrategyPage(BasePage):
             self.page.wait_for_load_state()
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………限制策略查询end………………………………")
+        ui_logger.info("………………………………限制策略查询end………………………………")
 
     @allure.step("删除限制：{strategy_range}")
     def delete_strategy(self, strategy_range):
-        logger.info("………………………………删除限制start………………………………")
+        ui_logger.info("………………………………删除限制start………………………………")
         try:
-            logger.info(f"删除限制：{strategy_range}")
+            ui_logger.info(f"删除限制：{strategy_range}")
             self.search_strategy({"IP地址": strategy_range})
             strategy_list = self.table_all_row_td(2)  # 获取查询的所有职位
-            logger.debug(f"限制列表：{strategy_list}")
+            ui_logger.debug(f"限制列表：{strategy_list}")
             self.button_operate_with_line(strategy_range, "删除")  # 点击操作模块的【删除】按钮
             self.wait_for_selector('[role="dialog"][aria-label="提示"]')  # 等待提示框出现
             common_page.CommonPage(self.page).click_button("确定", "提示")  # 点击【提示】页面的【确定】按钮
             common_page.CommonPage(self.page).assert_prompt_information("删除成功")  # 弹出提示框，显示提示信息：删除成功
         except Exception as e:
             ExceptionHandle().handle_exception(e)
-        logger.info("………………………………删除限制end………………………………")
+        ui_logger.info("………………………………删除限制end………………………………")
 
     @allure.step("新增限制范围：{strategy_info}")
     def add_strategy_info(self, strategy_info):

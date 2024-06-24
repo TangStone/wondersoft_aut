@@ -1,0 +1,44 @@
+# 接口ID
+docFinger_getDirectory:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 查找远程服务器文件路径
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/dlpparam/v1/docFinger/getDirectory
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-dlpparam/dlpFileFingerPrint
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    docFinger_getDirectory_01:
+      # 接口用例名称
+      name: 查找远程服务器文件路径-FTP协议
+      # 接口用例描述
+      description: 查找远程服务器文件路径-FTP协议
+      # 请求信息，包括data，file
+      request:
+        data:
+          protocolType: "2"
+          ipAddress: "192.168.154.8"
+          port: "21"
+          loginName: "test"
+          loginPassword: "123456"
+          path: "/"
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"statusCode": 0,"data":[{"directoryName":"自动化测试-误删"}]}

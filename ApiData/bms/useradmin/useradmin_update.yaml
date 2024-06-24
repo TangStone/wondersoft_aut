@@ -1,0 +1,46 @@
+# 接口ID
+useradmin_update:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 管理员修改
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: PUT
+      # 请求地址
+      address: /api/auth/v1/user/${sid}
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/adminConfig
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    useradmin_update_01:
+      # 接口用例名称
+      name: 修改自动化测试超级管理员为系统管理员
+      # 接口用例描述
+      description: 修改自动化测试超级管理员为系统管理员
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data: {"id": "${sid}","account": "${userName}","realName": "${displayName}","password": "${password}","roleId": "3","adminType": 1,"themeColor": 0,"display": 0,"isFirstLogin": 0,"isLocked": 0,"lastLoginTime": "2023-06-18 00:00:25","lastLoginIp": "192.168.154.30","isRemoved": 0,"createTime": "2023-06-17 23:30:25","creater": "B5A33586-15104954-9B752AE1-53333EC10","updateTime": "$GetTime(format=%Y-%m-%d %H:%M:%S)","updater": "B5A33586-15104954-9B752AE1-53333EC10","lastPwdModTime": "2023-06-17 23:53:43","pwdErrorNums": 0,"lastPwdWrongTime": "2023-06-17 23:56:30","groupIds": ["${groupId}"],"accountList": [],"groupControlList": [{"groupControl": "${groupId}"}]}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select roleId from `bms-general-aa`.t_sys_admin tsa where id = '${sid}'
+              result:
+                - path: $.roleId
+                  value: 3

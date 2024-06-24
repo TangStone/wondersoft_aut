@@ -1,0 +1,19 @@
+# 告警信息
+# 用例id
+listAlarmInfo:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 告警信息
+  # 用例名称
+  name: 查询告警信息
+  # 用例描述
+  description: 查询告警信息
+  # 测试步骤
+  steps:
+    # 系统配置查询
+    - api_path: /bms/alarminfo/alarminfo_list.yaml        #接口路径
+      api: alarminfo_list                           #接口id
+      data: alarminfo_list_01                       #接口数据

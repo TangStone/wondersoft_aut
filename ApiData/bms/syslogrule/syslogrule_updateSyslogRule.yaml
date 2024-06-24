@@ -1,0 +1,61 @@
+# 接口ID
+syslogrule_updateSyslogRule:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 修改syslog信息
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/syslog/updateSyslogRule
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/syslogManage
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    syslogrule_updateSyslogRule_01:
+      # 接口用例名称
+      name: 修改统一平台审计日志syslog规则
+      # 接口用例描述
+      description: 修改统一平台审计日志syslog规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: 自动化测试统一平台审计日志规则
+          sendType: "2"
+          protocol: "udp"
+          level: "7"
+          type: "8"
+          charCode: "GBK"
+          timeFormatter: "4"
+          logPrefix: "统一平台syslog修改"
+          customSeprChar: "++"
+          serverInfos: '[{"ip":"192.168.154.77","port":"514"}]'
+          syslogFields: '[{"metadataId":1000002,"fieldName":"adminName","indexPrefix":"system_admin_log_audit","platformId":"1","sortNum":1},{"metadataId":1000003,"fieldName":"sourceIp","indexPrefix":"system_admin_log_audit","platformId":"1","sortNum":2}]'
+          appCode: "system_admin_log_audit"
+          id: ${id}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'result': 0, 'resultDesc': '操作成功', 'entityKey': 0}
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select * from `bms-general-aa`.t_syslog_rule_info tsri where id = '${id}'
+              result:
+                - path: $.protocol
+                  value: udp
+                - path: $.logPrefix
+                  value: 统一平台syslog修改

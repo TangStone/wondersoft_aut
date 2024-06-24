@@ -1,0 +1,49 @@
+# 接口ID
+user_group_update:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 修改用户组
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: PUT
+      # 请求地址
+      address: /api/user/v1/group/${groupId}
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/group
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    user_group_update_01:
+      # 接口用例名称
+      name: 修改用户组名称成功
+      # 接口用例描述
+      description: 修改用户组名称成功
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          groupId: ${groupId}
+          groupName: 自动化测试根组修改
+          parentGroupId: ${parentGroupId}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select groupName from `bms-general-uba`.t_group_info tgi where id = '${groupId}'
+              result:
+                - path: $.groupName
+                  value: 自动化测试根组修改

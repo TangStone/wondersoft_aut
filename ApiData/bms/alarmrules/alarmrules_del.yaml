@@ -1,0 +1,47 @@
+# 接口ID
+alarmrules_del:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 删除告警规则
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: DELETE
+      # 请求地址
+      address: /api/auth/v1/monitor/monitorAlarmRules
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/sysManage/systemOperation/clusterList/index
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    alarmrules_del_01:
+      # 接口用例名称
+      name: 删除自动化测试告警规则
+      # 接口用例描述
+      description: 删除自动化测试告警规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data: $Eval(${id_list})
+#        data: [45]
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select count(1) as count from `bms-general-aa`.t_monitor_alarm_rule tmar where  alarmName like '自动化测试' and isEnable ='0' and isRemoved = '0'
+              result:
+                - path: $.count
+                  value: 0

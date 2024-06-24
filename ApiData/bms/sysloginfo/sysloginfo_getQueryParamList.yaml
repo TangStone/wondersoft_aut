@@ -1,0 +1,43 @@
+# 接口ID
+sysloginfo_getQueryParamList:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 管理员日志查询条件
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/sysLogInfo/getQueryParamList
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/systemAdminLog
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    sysloginfo_getQueryParamList_01:
+      # 接口用例名称
+      name: 管理员审计-获取查询条件
+      # 接口用例描述
+      description: 管理员审计-获取查询条件
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: [{"name": "时间", "list":[{"fieldName": "logTime"}]}]
+        # 提取变量
+        extract:
+          - name: reportParamValue     #变量名称
+            # jsonpath表达式
+            jsonpath: $.[2].list[0].reportParamValue
+          - name: operateType     #变量名称
+            # jsonpath表达式
+            jsonpath: $.[2].list[3].reportParamValue

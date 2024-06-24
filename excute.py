@@ -11,9 +11,13 @@
 import os
 import argparse
 # 第三方库导入
-import pytest
+import pytest, time
 from loguru import logger
 # 本地模块导入
+from config import *
+from common import basefunc
+from common import sendemail
+from common import loggerapi
 from config.run_config import LOG_LEVEL, RunConfig
 from config.path_config import LOG_DIR, ALLURE_RESULTS_DIR, ALLURE_HTML_DIR
 from config.env_config import ENV_VARS, BASE_VARS
@@ -31,6 +35,8 @@ def run(**kwargs):
     try:
         # 捕获日志
         capture_logs(level=LOG_LEVEL, filename=os.path.join(LOG_DIR, "service.log"))
+        # 开启日志记录(默认logs目录)
+        loggerapi.MyLogs().setup_logging(ROOT_DIR)
         logger.debug(f"\nrun方法的入参：{kwargs}\n")
         # 获取传入的环境参数
         env_key = kwargs.get("env", "") or None
@@ -77,12 +83,21 @@ def run(**kwargs):
         GLOBAL_VARS.update(BASE_VARS)
         # logger.info(f"全局变量：{GLOBAL_VARS}")
 
+        # 执行用例前置处理操作
+        basefunc.pre_process()
         # 执行测试用例
         pytest.main(args=arg_list)
+        # 执行用例后置处理操作
+        basefunc.post_process()
 
         # 生成测试报告
         if kwargs.get("report") == "yes":
             generate_allure_report(allure_results=ALLURE_RESULTS_DIR, allure_report=ALLURE_HTML_DIR)
+
+        # 发送邮件
+        if basefunc.config_dict["email"]["sendemail"]:
+            times = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
+            sendemail.SendEmail("report_" + times).send_main()
 
         logger.info(
             f"------------------------------------{ENV_VARS[env_key]['project_name']} web自动化测试 END------------------------------------")

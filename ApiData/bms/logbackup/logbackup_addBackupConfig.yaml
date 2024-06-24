@@ -1,0 +1,53 @@
+# 接口ID
+logbackup_addBackupConfig:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 添加备份配置
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/log/addBackupConfig
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/syslogBackUp
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    logbackup_addBackupConfig_01:
+      # 接口用例名称
+      name: 新增终端日志备份
+      # 接口用例描述
+      description: 新增终端日志备份
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          backupTaskName: 终端日志备份
+          nameDatabase: sas_v3_doc
+          description: 终端日志备份-自动化测试
+          retentionTime: 5
+          firstExecutionTime: $GetTime(format=%Y-%m-%d %H:%M:%S;cal=h+1)
+          intervalPeriod: 1
+          cycleUnit: "1"
+          retentionUnit: "1"
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql
+            sql: update `bms-general-aa`.data_backup_config set isRemoved ='1' where backup_task_name like '终端日志备份%' and isRemoved ='0'
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { 'statusCode': 0 ,"msg": "success"}

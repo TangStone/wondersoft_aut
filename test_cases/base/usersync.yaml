@@ -1,0 +1,35 @@
+# 用户同步
+# 用例id
+sync:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: LADP域立即同步
+  # 用例描述
+  description: 同步LADP数据源
+  # 测试步骤
+  steps:
+    # 新增LDAP数据源成功
+    - api_path: /bms/usersync/usersync_config_add.yaml        #接口路径
+      api: usersync_config_add                           #接口id
+      data: usersync_config_add_01                       #接口数据
+    # 数据源列表搜索-按数据源名称搜索
+    - api_path: /bms/usersync/usersync_configs.yaml        #接口路径
+      api: usersync_configs                           #接口id
+      data: usersync_configs_02                       #接口数据
+    # 新增同步配置成功
+    - api_path: /bms/usersync/usersync_syncConfig.yaml        #接口路径
+      api: usersync_syncConfig                           #接口id
+      data: usersync_syncConfig_add_01                       #接口数据
+    # 输入同步配置名称，点击搜索，查看同步配置列表
+    - api_path: /bms/usersync/usersync_syncConfig_list.yaml        #接口路径
+      api: usersync_syncConfig_list                           #接口id
+      data: usersync_syncConfig_list_02                       #接口数据
+    # LADP域立即同步
+    - api_path: /bms/usersync/usersync_sync.yaml        #接口路径
+      api: usersync_sync                           #接口id
+      data: usersync_sync_01                       #接口数据

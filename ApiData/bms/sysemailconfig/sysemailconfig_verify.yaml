@@ -1,0 +1,44 @@
+# 接口ID
+sysemailconfig_verify:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 系统邮箱验证
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/system/verifyMailData
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/systemEmailConfig
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    sysemailconfig_verify_01:
+      # 接口用例名称
+      name: 系统邮箱验证
+      # 接口用例描述
+      description: 系统邮箱验证
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          mail.host: "192.168.154.30"
+          mail.password: "123456"
+          mail.port: "25"
+          mail.securityLink: "false"
+          mail.username: "gj1@gaojie.com"
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"result":0}

@@ -1,0 +1,311 @@
+# 接口ID
+syslogrule_querySyslogRuleList:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 查看syslog规则集合
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/syslog/querySyslogRuleList
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/syslogManage
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_01:
+      # 接口用例名称
+      name: 查看syslog规则集合-无筛选条件
+      # 接口用例描述
+      description: 查看syslog规则集合-无筛选条件
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_02:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据规则名称筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据规则名称筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: 自动化测试统一平台审计日志规则
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.rows[0].id
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_03:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据syslog等级筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据syslog等级筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          level: 6
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_04:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据syslog类型筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据syslog类型筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          type: 0
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_05:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据字符编码筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据字符编码筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          charCode: UTF-8
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_06:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据自定义分隔符筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据自定义分隔符筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          customSeprChar: +
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_07:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据时间格式筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据时间格式筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          timeFormatter: 3
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_08:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据日志前缀筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据日志前缀筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          logPrefix: 统一平台syslog
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_09:
+      # 接口用例名称
+      name: 查看syslog规则集合-查询启用规则
+      # 接口用例描述
+      description: 查看syslog规则集合-查询启用规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          status: 1
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.rows[0].id
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_10:
+      # 接口用例名称
+      name: 查看syslog规则集合-查询停用规则
+      # 接口用例描述
+      description: 查看syslog规则集合-查询停用规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          status: 0
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.rows[0].id
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_11:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据协议类型筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据协议类型筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          protocol: tcp
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+    # 接口用例ID
+    syslogrule_querySyslogRuleList_12:
+      # 接口用例名称
+      name: 查看syslog规则集合-根据规则名称、状态筛选
+      # 接口用例描述
+      description: 查看syslog规则集合-根据规则名称、状态筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: 自动化测试统一平台审计日志规则
+          status: 0
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          jsonpath:
+            - path: $.rows[0].ruleName
+              value: 自动化测试统一平台审计日志规则
+              type: in
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.rows[0].id
+          - name: ruleName     #变量名称
+            # jsonpath表达式
+            jsonpath: $.rows[0].ruleName

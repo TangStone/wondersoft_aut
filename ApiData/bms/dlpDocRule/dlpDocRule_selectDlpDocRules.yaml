@@ -1,0 +1,387 @@
+# 接口ID
+dlpDocRule_selectDlpDocRules:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 文档规则列表查询
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/dlpparam/v1/dlpDocRule/selectDlpDocRules
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_01:
+      # 接口用例名称
+      name: 文档规则列表查询-无搜索条件
+      # 接口用例描述
+      description: 文档规则列表查询-无搜索条件
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[*].c_id
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_02:
+      # 接口用例名称
+      name: 文档规则列表查询-根据规则名称查询
+      # 接口用例描述
+      description: 输入规则名称搜索条件，查看文档规则列表
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          dlpName: '自动化测试'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试
+              type: in
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[*].c_id
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_03:
+      # 接口用例名称
+      name: 文档规则列表查询-根据规则类型查询
+      # 接口用例描述
+      description: 文档规则列表查询-根据规则类型查询
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          dlpType: '2'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试正则规则
+              type: in
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_04:
+      # 接口用例名称
+      name: 文档规则列表查询-根据规则名称、规则类型查询关键字规则
+      # 接口用例描述
+      description: 文档规则列表查询-根据规则名称、规则类型查询关键字规则
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          dlpName: '自动化测试'
+          dlpType: '1'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试关键字规则
+              type: in
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_id
+          - name: c_creater     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_creater
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_05:
+      # 接口用例名称
+      name: 文档规则列表查询-根据规则名称、规则类型查询正则表达式规则
+      # 接口用例描述
+      description: 文档规则列表查询-根据规则名称、规则类型查询正则表达式规则
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          dlpName: '自动化测试'
+          dlpType: '2'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试正则规则
+              type: in
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_id
+          - name: c_creater     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_creater
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_06:
+      # 接口用例名称
+      name: 文档规则列表查询-根据规则名称、规则类型查询模糊关键字规则
+      # 接口用例描述
+      description: 文档规则列表查询-根据规则名称、规则类型查询模糊关键字规则
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          dlpName: '自动化测试'
+          dlpType: '3'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试模糊关键字规则
+              type: in
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_id
+          - name: c_creater     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_creater
+    # 接口用例ID
+    dlpDocRule_selectDlpDocRules_07:
+      # 接口用例名称
+      name: 文档规则列表查询-查询自定义规则列表
+      # 接口用例描述
+      description: 查看自定义规则列表
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          c_rule_class: 2
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试
+              type: in
+    # 接口用例ID
+    datadictionary_selectDlpDocRules_01:
+      # 接口用例名称
+      name: 数据字典列表查询-无搜索条件
+      # 接口用例描述
+      description: 不输入查询条件，查看数据字典列表
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpDataDictionary
+        # 请求数据
+        data:
+          c_rule_type: '4'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[*].c_id
+    # 接口用例ID
+    datadictionary_selectDlpDocRules_02:
+      # 接口用例名称
+      name: 数据字典列表查询-根据规则名称查询
+      # 接口用例描述
+      description: 输入规则名称搜索条件，查看数据字典列表查询
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpDataDictionary
+        # 请求数据
+        data:
+          c_rule_type: '4'
+          dlpName: '自动化测试'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试
+              type: in
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[*].c_id
+    # 接口用例ID
+    datadictionary_selectDlpDocRules_03:
+      # 接口用例名称
+      name: 数据字典列表查询-根据规则来源查询
+      # 接口用例描述
+      description: 输入规则来源搜索条件，查看数据字典列表
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpDataDictionary
+        # 请求数据
+        data:
+          c_rule_type: '4'
+          c_rule_class: '2'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试
+              type: in
+    # 接口用例ID
+    datadictionary_selectDlpDocRules_04:
+      # 接口用例名称
+      name: 数据字典列表查询-根据规则名称、规则来源查询数据字典规则
+      # 接口用例描述
+      description: 输入规则名称、规则来源搜索条件，查看数据字典规则列表
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpDataDictionary
+        # 请求数据
+        data:
+          c_rule_type: '4'
+          c_rule_class: '2'
+          dlpName: '自动化测试'
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.resultList[0].c_rule_name
+              value: 自动化测试
+              type: in
+        # 提取变量
+        extract:
+          - name: c_id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_id
+          - name: c_creater     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.resultList[0].c_creater

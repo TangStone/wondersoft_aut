@@ -1,0 +1,47 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  standard:
+    format: "%(levelname)s[%(asctime)s][%(thread)d][%(filename)s %(module)s %(funcName)s %(lineno)s]：%(message)s"
+
+handlers:
+  log_file:
+    level: INFO
+    class: logging.handlers.RotatingFileHandler
+    filename: apitest.log
+    formatter: standard
+    maxBytes: 10485760
+    backupCount: 20
+    encoding: utf8
+
+  log_errfile:
+    level: ERROR
+    class: logging.handlers.RotatingFileHandler
+    filename: apitest_error.log
+    formatter: standard
+    maxBytes: 10485760
+    backupCount: 20
+    encoding: utf8
+
+  console:
+    level: INFO
+    class: logging.StreamHandler
+    formatter: standard
+    stream: ext://sys.stdout
+
+loggers:
+  apitest:
+    level: INFO
+    handlers:
+      - log_file
+      - log_errfile
+      - console
+    propagate: False
+
+root:
+  level: INFO
+  handlers:
+    - log_file
+    - log_errfile
+    - console

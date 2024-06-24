@@ -1,0 +1,56 @@
+# 接口ID
+useradmin_passwd_update:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 管理员修改密码
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: PUT
+      # 请求地址
+      address: /api/auth/v1/auth/${id}/password
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/portal-updatePassword?userId=${id}
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    useradmin_passwd_update_01:
+      # 接口用例名称
+      name: 自动化测试管理员用户修改密码成功
+      # 接口用例描述
+      description: 自动化测试管理员用户修改密码成功
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          userId: ${id}
+          password: 3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d
+          newPassword: 394f481895a1c5bef3da3d0685f41453385ef0aa
+      # 后置操作
+      postProcessors:
+#        sleep: 2
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select password from `bms-general-aa`.t_sys_admin tsa where id = '${id}'
+              result:
+                - path: $.password
+                  value: 394f481895a1c5bef3da3d0685f41453385ef0aa
+            - type: redis    # 数据库类型
+              db: 0          # 数据库
+              cmd: get bms-general-uba:user:${id}      # 操作命令
+              result:
+                - path: $.password       # 返回值路径
+                  value: 394f481895a1c5bef3da3d0685f41453385ef0aa   # 返回值

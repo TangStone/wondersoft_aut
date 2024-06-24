@@ -1,0 +1,99 @@
+# 接口ID
+dlpSeverityLevel_insertDlpSeverityLevel:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 严重性等级新增
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/dlpparam/v1/dlpSeverityLevel/insertDlpSeverityLevel
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-dlpparam/dlpSeverityLevel
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    dlpSeverityLevel_insertDlpSeverityLevel_01:
+      # 接口用例名称
+      name: 新增极低严重性
+      # 接口用例描述
+      description: 输入正确的严重性等级配置，新增严重性等级
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          c_name: 自动化测试严重性等级-极低
+          c_level: 1
+          c_note: 自动化测试严重性等级-极低
+          c_creater: ${userId}
+          c_updater: ${userId}
+          c_severity_class: "2"
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql
+            sql: update `bms-general-dlpparam`.t_dlp_severity_level set c_is_remove='1' where c_name like '自动化测试严重性等级-极低%'
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"statusCode": 0}
+    # 接口用例ID
+    dlpSeverityLevel_insertDlpSeverityLevel_02:
+      # 接口用例名称
+      name: 新增严重性等级-等级名称重复
+      # 接口用例描述
+      description: 输入正确的严重性等级配置，新增严重性等级
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          c_name: 极高
+          c_level: 12
+          c_note: 极高
+          c_creater: ${userId}
+          c_updater: ${userId}
+          c_severity_class: "2"
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'statusCode': -1, 'msg': '严重性等级或名称重复,请检查并重新添加'}
+    # 接口用例ID
+    dlpSeverityLevel_insertDlpSeverityLevel_03:
+      # 接口用例名称
+      name: 新增严重性等级-严重性等级重复
+      # 接口用例描述
+      description: 输入已有的严重性等级，新增严重性等级
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          c_name: 极极高
+          c_level: 11
+          c_note: 极极高
+          c_creater: ${userId}
+          c_updater: ${userId}
+          c_severity_class: "2"
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { 'statusCode': -1, 'msg': '严重性等级或名称重复,请检查并重新添加' }

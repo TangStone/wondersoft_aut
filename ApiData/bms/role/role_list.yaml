@@ -1,0 +1,83 @@
+# 接口ID
+role_list:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 管理员角色列表
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: GET
+      # 请求地址
+      address: /api/auth/v1/roles
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/roleConfig
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    role_list_01:
+      # 接口用例名称
+      name: 角色列表搜索-无搜索条件
+      # 接口用例描述
+      description: 不输入搜索条件，点击搜索，查看角色列表
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          filters: '{"roleName":""}'
+          pageNum: 1
+          pageSize: 20
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql
+            sql: select count(*) as count from `bms-general-aa`.t_sys_role tsr where `type` != 0
+            #sql取值
+            sqldata:
+              - jsonpath: $.count
+                name: totalCount
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"statusCode": 0,"msg": "success", "data": {"totalCount": "${totalCount}"}}
+    # 接口用例ID
+    role_list_02:
+      # 接口用例名称
+      name: 角色列表搜索-按角色名称条件
+      # 接口用例描述
+      description: 输入角色名称搜索条件，点击搜索，查看角色列表
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          pageNum: 1
+          pageSize: 20
+          filters: '{"roleName":"自动化测试角色"}'
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.list[0].roleName
+              value: 自动化测试角色
+              type: in
+        # 提取变量
+        extract:
+          - name: roleId     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].id

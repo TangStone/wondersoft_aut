@@ -1,0 +1,1 @@
+{'statusCode': 0, 'msg': 'success', 'data': {'totalCount': 1, 'list': [{'id': 40, 'modifyTime': '2024-06-24 09:12:50', 'userSourceId': '48', 'jobTime': '00 39 15 10 * ?', 'isIncrement': 1, 'threshold': 0, 'taskSavePeriod': 180, 'syncName': '自动化测试同步配置', 'syncType': '0', 'allowUpdate': True}]}}

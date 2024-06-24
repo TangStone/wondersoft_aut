@@ -1,0 +1,1 @@
+{"uuid": "7ae8c70c-0fa0-4f59-925c-5d4e1e11655a", "befores": [{"name": "pytestbdd_stepdef_when_输入用户名：{username}，密码：{password}，点击【立即登录】按钮", "status": "passed", "start": 1719192989628, "stop": 1719192989628}], "start": 1719192989628, "stop": 1719192992173}

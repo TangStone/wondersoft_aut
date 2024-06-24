@@ -1,0 +1,42 @@
+# 接口ID
+useradmin_passwd_reset:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 管理员密码重置
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: PUT
+      # 请求地址
+      address: /api/auth/v1/auth/${id}/password/reset
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/adminConfig
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    useradmin_passwd_reset_01:
+      # 接口用例名称
+      name: 自动化测试管理员用户重置密码成功
+      # 接口用例描述
+      description: 自动化测试管理员用户重置密码成功
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select password from `bms-general-aa`.t_sys_admin tsa where id = '${id}'
+              result:
+                - path: $.password
+                  value: 3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d

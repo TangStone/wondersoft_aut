@@ -21,7 +21,6 @@ from config.run_config import RunConfig
 from utils.data_utils.data_handle import DataHandle
 from utils.report_utils.allure_handle import allure_display
 
-
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):
     """

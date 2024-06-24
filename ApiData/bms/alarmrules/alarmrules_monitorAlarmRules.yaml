@@ -1,0 +1,175 @@
+# 接口ID
+alarmrules_monitorAlarmRules:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 查询监控报警规则
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: GET
+      # 请求地址
+      address: /api/auth/v1/monitor/monitorAlarmRules
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/sysManage/systemOperation/clusterList/index
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    alarmrules_monitorAlarmRules_01:
+      # 接口用例名称
+      name: 查询监控报警规则列表-无筛选条件
+      # 接口用例描述
+      description: 查询监控报警规则列表-无筛选条件
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'statusCode': 0, 'msg': 'success'}
+    # 接口用例ID
+    alarmrules_monitorAlarmRules_02:
+      # 接口用例名称
+      name: 查询监控报警规则列表-根据告警规则名称筛选
+      # 接口用例描述
+      description: 查询监控报警规则列表-根据告警规则名称筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          alarmName: 自动化测试
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.list[0].alarmName
+              value: 自动化测试
+              type: in
+    # 接口用例ID
+    alarmrules_monitorAlarmRules_03:
+      # 接口用例名称
+      name: 查询监控报警规则列表-根据告警类型筛选
+      # 接口用例描述
+      description: 查询监控报警规则列表-根据告警类型筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          alarmType: 1
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.list[0].alarmName
+              value: 自动化测试
+              type: in
+    # 接口用例ID
+    alarmrules_monitorAlarmRules_04:
+      # 接口用例名称
+      name: 查询监控报警规则列表-查询启用规则
+      # 接口用例描述
+      description: 查询监控报警规则列表-查询启用规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          isEnable: 1
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].id
+    # 接口用例ID
+    alarmrules_monitorAlarmRules_05:
+      # 接口用例名称
+      name: 查询监控报警规则列表-查询停用规则
+      # 接口用例描述
+      description: 查询监控报警规则列表-查询停用规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          isEnable: 0
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].id
+    # 接口用例ID
+    alarmrules_monitorAlarmRules_06:
+      # 接口用例名称
+      name: 查询监控报警规则列表-根据告警规则名称、告警类型、规则状态筛选
+      # 接口用例描述
+      description: 查询监控报警规则列表-根据告警规则名称、告警类型、规则状态筛选
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          alarmName: 自动化测试
+          alarmType: 1
+          isEnable: 0
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.list[0].alarmName
+              value: 自动化测试CPU
+              type: in
+        # 提取变量
+        extract:
+          - name: id     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].id
+          - name: id_list     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[*].id

@@ -1,0 +1,50 @@
+# 接口ID
+docFinger_selectFingerPrintLibFileList:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 查询文档指纹库文件列表
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/dlpparam/v1/docFinger/selectFingerPrintLibFileList
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-dlpparam/dlpFileFingerPrint
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    docFinger_selectFingerPrintLibFileList_01:
+      # 接口用例名称
+      name: 查询文档指纹库文件列表
+      # 接口用例描述
+      description: 查询文档指纹库文件列表
+      # 请求信息，包括data，file
+      request:
+        data:
+          fingerPrintId: ${fingerPrintId}
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql    #数据库类型：mysql
+            #sql语句，取返回的第一组数据
+            sql: select fingerPrintId from `bms-general-dlpparam`.t_dlp_doc_finger_print tddfp where fingerPrintName like '自动化测试指纹库-服务器导入-挂载%' and isRemoved = '0'
+            #sql取值
+            sqldata:
+              - name: fingerPrintId
+                jsonpath: $.fingerPrintId
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"statusCode": 0}

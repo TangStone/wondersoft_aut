@@ -1,0 +1,49 @@
+# 接口ID
+usersync_config_add:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 新增数据源配置
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: put
+      # 请求地址
+      address: /api/usersync/v1/config
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/userSync
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    usersync_config_add_01:
+      # 接口用例名称
+      name: 新增LDAP数据源成功
+      # 接口用例描述
+      description: 输入正确的LDAP数据源配置，新增成功
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          type: domain
+          name: 自动化测试70.235数据源
+          configs: "{\"name\":\"自动化测试70.235数据源\",\"host\":\"192.168.70.235\",\"port\":\"389\",\"username\":\"xiantest\\\\administrator\",\"password\":\"Ws-123456abcde\",\"base\":\"DC=xiantest,DC=com\",\"org\":\"ou=北京明朝万达\",\"isEncrypt\":false,\"userFilter\":\"\",\"groupFilter\":\"\",\"isIncrement\":false}"
+          relations: "{\"sourceUUID\":\"objectGUID\",\"groupLabel\":\"ou\",\"groupName\":\"name\",\"userLabel\":\"cn\",\"userName\":\"sAMAccountName\",\"userSid\":\"objectSid\"}"
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql
+            sql: update `bms-general-uba`.t_user_source tus set isRemoved = '1' where name like '自动化测试%' and isRemoved = '0'
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"statusCode": 0,"msg": "success"}

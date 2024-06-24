@@ -1,0 +1,64 @@
+# 接口ID
+dlpDocRule_deleteDlpDocRules:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 文档规则删除
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/dlpparam/v1/dlpDocRule/deleteDlpDocRules
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    dlpDocRule_deleteDlpDocRules_01:
+      # 接口用例名称
+      name: 删除自动化测试规则
+      # 接口用例描述
+      description: 删除自动化测试规则
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpFileDocRule
+        # 请求数据
+        data:
+          c_id: ${c_id}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }
+    # 接口用例ID
+    datadictionary_deleteDlpDocRules_01:
+      # 接口用例名称
+      name: 删除自动化测试数据字典规则
+      # 接口用例描述
+      description: 删除自动化测试数据字典规则
+      # 请求信息，包括data，file
+      request:
+        # 请求头
+        headers:
+          Referer: ${base_url}/sub-app-dlpparam/dlpDataDictionary
+        # 请求数据
+        data:
+          c_id: ${c_id}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }

@@ -1,0 +1,43 @@
+# 接口ID
+sysconfig_info:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 系统配置查询
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: GET
+      # 请求地址
+      address: /api/system/v1/system/getSysParamInfo
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/systemConfig
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    sysconfig_info_01:
+      # 接口用例名称
+      name: 系统配置查询
+      # 接口用例描述
+      description: 系统配置查询
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'中间件管理': {'REDIS参数':[{"paramType":"REDIS参数"}]}}
+        # 提取变量
+        extract:
+          - name: propKey     #变量名称
+            # jsonpath表达式
+            jsonpath: $.其他.系统参数[2].propKey
+          - name: propKey1     #变量名称
+            # jsonpath表达式
+            jsonpath: $.其他.系统参数[0].propKey

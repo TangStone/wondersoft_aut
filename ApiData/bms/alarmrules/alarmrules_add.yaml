@@ -1,0 +1,54 @@
+# 接口ID
+alarmrules_add:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 新增告警规则
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/monitor/monitorAlarmRules/add
+      # 请求头
+      headers:
+        Content-Type: application/json
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/sysManage/systemOperation/clusterList/index
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    alarmrules_add_01:
+      # 接口用例名称
+      name: 新增告警规则
+      # 接口用例描述
+      description: 输入正确的CPU告警规则配置，新增告警规则
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          alarmName: 自动化测试CPU告警
+          alarmDesc: CPU超过80%向自动化测试管理人员发送告警
+          alarmType: 1
+          alarmObject: CPU
+          thresholdRelation: 1
+          threshold: 80
+          durationTime: 5
+          durationUnit: 2
+          noticeType: 0
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql
+            sql: update `bms-general-aa`.t_monitor_alarm_rule set isRemoved = '1' where alarmName like '自动化测试CPU%' and isRemoved ='0'
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }

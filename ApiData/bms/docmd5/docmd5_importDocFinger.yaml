@@ -1,0 +1,96 @@
+# 接口ID
+docmd5_importDocFinger:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: MD5导入
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/dlpparam/v1/docFinger/importDocFinger
+      # 请求头
+      headers:
+        Content-Type: multipart/form-data
+        token: ${token}
+        Referer: ${base_url}/sub-app-dlpparam/dlpFileMd5
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    docmd5_importDocFinger_01:
+      # 接口用例名称
+      name: MD5导入不覆盖
+      # 接口用例描述
+      description: MD5导入不覆盖
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          fingerPrintType: "2"
+          creater: ${userId}
+          updater: ${userId}
+          fingerPrintName: 自动化测试MD5
+        file:
+          file: MD5-demo.json
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql    #数据库类型：mysql
+            #sql语句，取返回的第一组数据
+            sql: update `bms-general-dlpparam`.t_dlp_doc_finger_print tddfp set isRemoved = '1' where fingerPrintName like '自动化测试MD5%' and fingerPrintType = '2' and isRemoved = '0'
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {"statusCode": 0}
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select count(1) as cou from `bms-general-dlpparam`.t_dlp_doc_finger_print tddfp where fingerPrintName like '自动化测试MD5%' and fingerPrintType = '2' and isRemoved = '0'
+              result:
+                - path: $.cou
+                  value: 1
+        database:
+          - type: mysql    #数据库类型：mysql
+            #sql语句，取返回的第一组数据
+            sql: select * from `bms-general-dlpparam`.t_dlp_doc_finger_print tddfp where fingerPrintName like '自动化测试MD5%' and fingerPrintType = '2' and isRemoved = '0'
+            #sql取值
+            sqldata:
+              - jsonpath: $.fingerPrintId
+                name: fingerPrintId
+              - jsonpath: $.id
+                name: id
+              - jsonpath: $.fileContent
+                name: fileContent
+    # 接口用例ID
+    docmd5_importDocFinger_02:
+      # 接口用例名称
+      name: MD5导入覆盖
+      # 接口用例描述
+      description: MD5导入覆盖
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          fingerPrintType: "2"
+          creater: ${userId}
+          updater: ${userId}
+          fingerPrintId: ${fingerPrintId}
+          id: ${id}
+        file:
+          file: MD5-demo-update.json
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0 }

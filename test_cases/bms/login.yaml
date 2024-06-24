@@ -1,0 +1,19 @@
+# 登录
+# 用例id
+login:
+  # 一级模块
+  epic: 用户登录
+  # 二级模块
+  feature: 用户登录
+  # 三级模块
+  story: 用户登录
+  # 用例名称
+  name: 用户登录
+  # 用例描述
+  description: 用户登录
+  # 测试步骤
+  steps:
+    # 用户登录
+    - api_path: /bms/login/login.yaml        #接口路径
+      api: login                           #接口id
+      data: [login_02,login_03]                       #接口数据

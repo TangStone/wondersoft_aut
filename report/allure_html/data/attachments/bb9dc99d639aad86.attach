@@ -1,0 +1,62 @@
+
+校验失败：Locator expected to have text '参数配置正确'
+Actual value: 提示没有连接权限,账号或密码不正确！ 
+Call log:
+LocatorAssertions.to_have_text with timeout 5000ms
+  - waiting for locator("[role=alert]")
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+
+详细报错信息如下：
+Traceback (most recent call last):
+  File "E:\Wondersoft_AutoTest\pages\common_page.py", line 212, in assert_prompt_information
+    expect(self.page.locator(locator)).to_have_text(message)
+  File "E:\Wondersoft_AutoTest\.venv\lib\site-packages\playwright\sync_api\_generated.py", line 18929, in to_have_text
+    self._sync(
+  File "E:\Wondersoft_AutoTest\.venv\lib\site-packages\playwright\_impl\_sync_base.py", line 113, in _sync
+    return task.result()
+  File "E:\Wondersoft_AutoTest\.venv\lib\site-packages\playwright\_impl\_assertions.py", line 471, in to_have_text
+    await self._expect_impl(
+  File "E:\Wondersoft_AutoTest\.venv\lib\site-packages\playwright\_impl\_assertions.py", line 70, in _expect_impl
+    raise AssertionError(
+AssertionError: Locator expected to have text '参数配置正确'
+Actual value: 提示没有连接权限,账号或密码不正确！ 
+Call log:
+LocatorAssertions.to_have_text with timeout 5000ms
+  - waiting for locator("[role=alert]")
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+  -   locator resolved to <div role="alert" class="el-notification topZIndexTip…>…</div>
+  -   unexpected value "提示没有连接权限,账号或密码不正确！"
+
+

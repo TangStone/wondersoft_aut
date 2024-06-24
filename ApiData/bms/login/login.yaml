@@ -1,0 +1,126 @@
+# 接口ID
+login:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 登录
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: post
+      # 请求地址
+      address: /api/auth/v1/auth/login
+      # 请求头
+      headers:
+        Content-Type: application/json
+        Referer: ${base_url}/sub-app-unity/systemAdminLog
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    login_01:
+      # 接口用例名称
+      name: 登录成功（正确用户名、密码）
+      # 接口用例描述
+      description: 输入正确用户名密码，登录统一平台，获取token值
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          unityId: false   #是否启用验证码
+          username: admin  #用户名
+          gossip: $Enc(Ws-123456)  #密码
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'statusCode': 0, 'msg': 'success', 'data': {'realName': 'admin'}}
+        # 提取变量
+        extract:
+          - name: token     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.token
+            # 变量类型：全局变量-global、临时变量-temp（不填写默认为临时变量）
+            type: global
+          - name: userId    #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.userId
+            # 变量类型：全局变量-global、临时变量-temp（不填写默认为临时变量）
+            type: global
+          - name: realName    #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.realName
+            # 变量类型：全局变量-global、临时变量-temp（不填写默认为临时变量）
+            type: global
+    # 接口用例ID
+    login_02:
+      # 接口用例名称
+      name: 登录失败（正确用户名、错误密码）
+      # 接口用例描述
+      description: 输入正确用户名，错误密码，登录失败
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          unityId: false   #是否启用验证码
+          username: admin  #用户名
+          gossip: $Enc(123456)  #密码
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'statusCode': 1048835, 'msg': '用户名或密码错误'}
+    # 接口用例ID
+    login_03:
+      # 接口用例名称
+      name: 登录失败（错误用户名、正确密码）
+      # 接口用例描述
+      description: 输入错误用户名，正确密码，登录失败
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          unityId: false   #是否启用验证码
+          username: admin1  #用户名
+          gossip: $Enc(Ws-123456)  #密码
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'statusCode': 1048835, 'msg': '用户名或密码错误'}
+    # 接口用例ID
+    login_04:
+      # 接口用例名称
+      name: 自动化测试管理员登录
+      # 接口用例描述
+      description: 自动化测试管理员登录
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          unityId: false   #是否启用验证码
+          username: ${account}  #用户名
+          gossip: $Enc(111111)  #密码
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { 'statusCode': 0, 'msg': 'success', 'data': { 'realName': '${realName}' } }
+        # 提取变量
+        extract:
+          - name: token     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.token

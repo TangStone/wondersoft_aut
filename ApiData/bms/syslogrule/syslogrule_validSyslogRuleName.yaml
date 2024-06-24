@@ -1,0 +1,99 @@
+# 接口ID
+syslogrule_validSyslogRuleName:
+  # 接口基本信息
+  ApiInfo:
+    # 接口名称
+    api_name: 校验规则名称
+    # 基础URL:https://192.168.148.174:31000
+    base_url: ${base_url}
+    # 请求信息
+    request:
+      # 请求类型
+      method: POST
+      # 请求地址
+      address: /api/auth/v1/syslog/validSyslogRuleName
+      # 请求头
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+        token: ${token}
+        Referer: ${base_url}/sub-app-unity/syslogManage
+  # 接口用例，填写接口发送数据、前置操作、后置操作，发送请求时将接口基本信息与接口数据组合
+  ApiData:
+    # 接口用例ID
+    syslogrule_validSyslogRuleName_01:
+      # 接口用例名称
+      name: 校验syslog规则名称-新增规则时校验-规则名称不存在
+      # 接口用例描述
+      description: 校验syslog规则名称-新增规则时校验-规则名称不存在
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: 自动化测试syslog规则
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { 'result': 0,  'entityKey': 0 }
+    # 接口用例ID
+    syslogrule_validSyslogRuleName_02:
+      # 接口用例名称
+      name: 校验syslog规则名称-新增规则时校验-规则名称已存在
+      # 接口用例描述
+      description: 校验syslog规则名称-新增规则时校验-规则名称已存在
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: 自动化测试统一平台审计日志规则
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: {'result': -1, 'resultDesc': '规则名称不能重复，请重新输入规则名称', 'entityKey': 0}
+    # 接口用例ID
+    syslogrule_validSyslogRuleName_03:
+      # 接口用例名称
+      name: 校验syslog规则名称-修改规则时校验-规则名称未修改
+      # 接口用例描述
+      description: 校验syslog规则名称-修改规则时校验-规则名称未修改
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: ${ruleName}
+          id: ${id}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { 'result': 0,  'entityKey': 0 }
+    # 接口用例ID
+    syslogrule_validSyslogRuleName_04:
+      # 接口用例名称
+      name: 校验syslog规则名称-修改规则时校验-规则名称修改-规则名称不存在
+      # 接口用例描述
+      description: 校验syslog规则名称-修改规则时校验-规则名称修改-规则名称不存在
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          ruleName: 自动化测试syslog规则
+          id: ${id}
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { 'result': 0,  'entityKey': 0 }

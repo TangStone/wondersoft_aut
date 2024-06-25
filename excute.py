@@ -16,12 +16,11 @@ from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
 from config import *
 from common import basefunc
-from common import sendemail
+from utils.report_utils.sendemail import SendEmail
 from config.run_config import UI_LOG_LEVEL, RunConfig
 from config.path_config import LOG_DIR, ALLURE_RESULTS_DIR, ALLURE_HTML_DIR
 from config.env_config import ENV_VARS, BASE_VARS
 from config.global_vars import GLOBAL_VARS
-from utils.log_utils import log_handle
 from utils.report_utils.allure_handle import generate_allure_report
 
 
@@ -93,7 +92,7 @@ def run(**kwargs):
         # 发送邮件
         if basefunc.config_dict["email"]["sendemail"]:
             times = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
-            sendemail.SendEmail("report_" + times).send_main()
+            SendEmail("allure_html").send_main()
 
         ui_logger.info(
             f"------------------------------------{ENV_VARS[env_key]['project_name']} web自动化测试 END------------------------------------")

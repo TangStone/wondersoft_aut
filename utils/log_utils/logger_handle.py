@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+
+"""
+@author: tanglei
+@File: logger_handle.py
+@IDE: PyCharm
+@time: 2023-06-24 18:53
+@description: 日志设置
+"""
+
 import os
 from config.path_config import LOG_DIR
 from loguru import logger

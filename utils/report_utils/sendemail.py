@@ -8,13 +8,13 @@
 @description: 发送邮件
 """
 import smtplib, shutil
+from utils.report_utils.allure_handle import AllureReportData
 from utils.log_utils.logger_handle import api_logger
-from common import handleallure
 from common.basefunc import config_dict
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-from config import *
+from config.path_config import REPORT_DIR
 
 class SendEmail:
     """
@@ -24,7 +24,7 @@ class SendEmail:
     def __init__(self, report_name):
         self.report_name = report_name     # 报告名称
         self.report_path = REPORT_DIR + '/' + report_name  # allure报告路径
-        self.run_case_data = handleallure.AllureReportData(report_name).get_case_count()    # 获取用例运行数据
+        self.run_case_data = AllureReportData(report_name).get_case_count()    # 获取用例运行数据
         self.email_config = config_dict['email']   # 邮箱配置信息
 
     def send_main(self):

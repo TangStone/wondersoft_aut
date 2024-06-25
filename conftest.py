@@ -19,7 +19,7 @@ from _pytest.runner import runtestprotocol
 from config.global_vars import GLOBAL_VARS
 from config.run_config import RunConfig
 from utils.data_utils.data_handle import DataHandle
-from utils.report_utils.allure_handle import allure_display
+from utils.report_utils.allure_handle import ui_allure_display
 
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):
@@ -98,7 +98,7 @@ def pytest_bdd_before_scenario(request, feature, scenario):
     :return:
     """
     allure_par = {'feature_name': getattr(feature, "name", None), 'scenario_name': getattr(scenario, "name", None)}
-    allure_display(allure_par)
+    ui_allure_display(allure_par)
 
 
 def pytest_bdd_before_step(request, feature, scenario, step, step_func):

@@ -64,9 +64,9 @@ def pre_process():
     :return:
     """
     # 清空临时文件目录
-    clean_dir(ROOT_DIR + 'report/tmp')
+    clean_dir(ROOT_DIR + 'report/allure_results')
     # 清空报告
-    clean_dir(ROOT_DIR + 'report/report')
+    clean_dir(ROOT_DIR + 'report/allure_html')
     # 清空中间件文件
     handleyaml.YamlHandle(EXTRACT_DIR).clear_yaml()
     # # 获取用例数据
@@ -82,5 +82,5 @@ def post_process():
     # project_name = config_dict['project_name']
     baseurl = config_dict['base_url']
     environment = 'BaseURL=' + baseurl + '\n'
-    with open(ROOT_DIR + 'report/tmp/environment.properties', 'w', encoding='ascii', errors='ignore') as file_obj:
+    with open(ROOT_DIR + 'report/allure_results/environment.properties', 'w', encoding='ascii', errors='ignore') as file_obj:
         file_obj.write(environment)

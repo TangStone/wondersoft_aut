@@ -38,4 +38,4 @@ CERT_DIR = ROOT_DIR + 'certs'
 SCRIPT_DATA_DIR = ROOT_DIR + 'scripts/data'
 
 # 报告路径
-REPORT_DIR = ROOT_DIR + 'report/report'
+REPORT_DIR = ROOT_DIR + 'report'

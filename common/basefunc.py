@@ -11,7 +11,8 @@ import os
 from config import *
 from common import handleyaml
 
-config_dict = handleyaml.YamlHandle(CONFIG_DIR).read_yaml()
+#config_dict = handleyaml.YamlHandle(CONFIG_DIR).read_yaml()
+config_dict = {**ENV_VARS['test'],**BASE_VARS}
 
 def clean_dir(path):
     """清空目录下所有文件，保留文件夹"""
@@ -64,13 +65,13 @@ def pre_process():
     :return:
     """
     # 清空临时文件目录
-    clean_dir(ROOT_DIR + 'report/allure_results')
+    clean_dir(ALLURE_RESULTS_DIR)
     # 清空报告
-    clean_dir(ROOT_DIR + 'report/allure_html')
+    clean_dir(ALLURE_HTML_DIR)
     # 清空中间件文件
     handleyaml.YamlHandle(EXTRACT_DIR).clear_yaml()
     # # 获取用例数据
-    # casedata_path = [ ROOT_DIR + i for i in config_dict['casedata_path']]
+    # casedata_path = [ BASE_DIR + i for i in config_dict['casedata_path']]
     # readcase.ReadCase().read_case(casedata_path)
 
 def post_process():
@@ -82,5 +83,5 @@ def post_process():
     # project_name = config_dict['project_name']
     baseurl = config_dict['base_url']
     environment = 'BaseURL=' + baseurl + '\n'
-    with open(ROOT_DIR + 'report/allure_results/environment.properties', 'w', encoding='ascii', errors='ignore') as file_obj:
+    with open(ALLURE_RESULTS_DIR + '/environment.properties', 'w', encoding='ascii', errors='ignore') as file_obj:
         file_obj.write(environment)

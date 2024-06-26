@@ -23,17 +23,17 @@ class TestCases:
     # 执行基础初始化用例集
     @pytest.mark.parametrize('case, casedata', readcase.ReadCase().get_cases([CASE_DIR + '/base'], 'yaml'))
     def test_basecases(self, case, casedata):
-        api_allure_display.allure_display(casedata)
-        api_logger.info("==========执行用例START：%s==========", case)
+        api_allure_display(casedata)
+        api_logger.info("==========执行用例START：%s==========" % case)
         runcase.RunCase().excute_case(casedata)
-        api_logger.info("==========执行用例END：%s==========", case)
+        api_logger.info("==========执行用例END：%s==========" % case)
 
     # 执行业务用例集
     @pytest.mark.parametrize('case, casedata', readcase.ReadCase().get_cases([CASE_DIR + '/' + i for i in config_dict['casedata_path']] if config_dict['casedata_path'] else [CASE_DIR], 'yaml', [CASE_DIR + '/extract.yaml', CASE_DIR + '/base']))
     def test_businesscases(self, case, casedata):
-        api_allure_display.allure_display(casedata)
-        api_logger.info("==========执行用例START：%s==========", case)
+        api_allure_display(casedata)
+        api_logger.info("==========执行用例START：%s==========" % case)
         runcase.RunCase().excute_case(casedata)
-        api_logger.info("==========执行用例END：%s==========", case)
+        api_logger.info("==========执行用例END：%s==========" % case)
 
 

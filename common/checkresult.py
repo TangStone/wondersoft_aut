@@ -55,12 +55,12 @@ def assert_db(hope_res):
                                 if sql_value:
                                     allure.attach(name='实际返回值', body=str(sql_value[0]))
                                     assert str(value) == str(sql_value[0])
-                                    api_logger.info("数据库断言通过, 期望结果:%s, 实际结果:%s", value, sql_value[0])
+                                    api_logger.info("数据库断言通过, 期望结果:%s, 实际结果:%s" % (value, sql_value[0]) )
                                 else:
                                     allure.attach(name='实际返回值', body=str(sql_value))
                                     raise AssertionError("该条sql未查询出任何数据:" + str(db_sql))
                             except AssertionError:
-                                api_logger.error("数据库断言未通过, 期望返回值:%s, 实际返回值：%s", value, sql_value[0])
+                                api_logger.error("数据库断言未通过, 期望返回值:%s, 实际返回值：%s" % (value, sql_value[0]))
                                 raise
                 else:
                     raise Exception("断言的 sql 必须是查询的 sql")
@@ -83,12 +83,12 @@ def assert_db(hope_res):
                                 if cmd_value:
                                     allure.attach(name='实际返回值', body=str(cmd_value[0]))
                                     assert str(value) == str(cmd_value[0])
-                                    api_logger.info("redis断言通过, 期望结果:%s, 实际结果:%s", value, cmd_value[0])
+                                    api_logger.info("redis断言通过, 期望结果:%s, 实际结果:%s" % (value, cmd_value[0]))
                                 else:
                                     allure.attach(name='实际返回值', body=str(cmd_value))
                                     raise AssertionError("该命令未查询出任何数据:" + str(dbcheck_data['cmd']))
                             except AssertionError:
-                                api_logger.error("redis断言未通过, 期望返回值:%s, 实际返回值：%s", value, cmd_value[0])
+                                api_logger.error("redis断言未通过, 期望返回值:%s, 实际返回值：%s" % (value, cmd_value[0]))
                                 raise
                     else:  # 不存在 result 时，直接使用 value 校验
                         allure.attach(name="操作命令", body=str(dbcheck_data['cmd']))
@@ -109,12 +109,12 @@ def assert_db(hope_res):
                                 if kafka_value:
                                     allure.attach(name='实际返回值', body=str(kafka_value[0]))
                                     assert str(value) == str(kafka_value[0])
-                                    api_logger.info("kafka断言通过, 期望结果:%s, 实际结果:%s", value, kafka_value[0])
+                                    api_logger.info("kafka断言通过, 期望结果:%s, 实际结果:%s" % (value, kafka_value[0]))
                                 else:
                                     allure.attach(name='实际返回值', body=str(kafka_value))
                                     raise AssertionError("该topic未查询出任何数据:" + str(kafka_value))
                             except AssertionError:
-                                api_logger.error("kafka断言未通过, 期望返回值:%s, 实际返回值：%s", value, kafka_value[0])
+                                api_logger.error("kafka断言未通过, 期望返回值:%s, 实际返回值：%s" % (value, kafka_value[0]))
                                 raise
                     else: # 不存在 result 时，直接使用 value 校验
                         allure.attach(name="查询topic", body=str(dbcheck_data['topic']))
@@ -143,9 +143,9 @@ def assert_response(hope_res, real_res):
                 assert flag
             else:
                 assert str(hope_res) == str(real_res)
-            api_logger.info("返回结果断言通过, 期望返回值:%s, 实际返回值:%s", hope_res, real_res)
+            api_logger.info("返回结果断言通过, 期望返回值:%s, 实际返回值:%s" % (hope_res, real_res))
     except AssertionError:
-        api_logger.error("返回结果断言未通过, 期望返回值:%s, 实际返回值:%s", hope_res, real_res)
+        api_logger.error("返回结果断言未通过, 期望返回值:%s, 实际返回值:%s"% (hope_res, real_res))
         raise
 
 def assert_text(hope_res, real_res):
@@ -165,9 +165,9 @@ def assert_text(hope_res, real_res):
                             allure.attach(name="期望结果", body=str(h_res))
                             allure.attach(name='实际实际结果', body=str(r_res))
                             assert str(h_res["value"]) == str(r_res)
-                            api_logger.info("json断言通过, 期望结果'{0}', 实际结果'{1}'".format(h_res, r_res))
+                            api_logger.info("json断言通过, 期望结果:%s, 实际结果:%s" % (h_res, r_res))
                     except AssertionError:
-                        api_logger.error("json断言未通过, 期望结果'{0}', 实际结果'{1}'".format(h_res, r_res))
+                        api_logger.error("json断言未通过, 期望结果:%s, 实际结果:%s" % (h_res, r_res))
                         raise
                 elif h_res["type"] == "!=":
                     try:
@@ -175,9 +175,9 @@ def assert_text(hope_res, real_res):
                             allure.attach(name="json期望结果", body=str(h_res))
                             allure.attach(name='json实际实际结果', body=str(r_res))
                             assert str(h_res["value"]) != str(r_res)
-                            api_logger.info("json断言通过, 期望结果'{0}', 实际结果'{1}'".format(h_res, r_res))
+                            api_logger.info("json断言通过, 期望结果:%s, 实际结果:%s" % (h_res, r_res))
                     except AssertionError:
-                        api_logger.error("json断言未通过, 期望结果'{0}', 实际结果'{1}'".format(h_res, r_res))
+                        api_logger.error("json断言未通过,  期望结果:%s, 实际结果:%s" % (h_res, r_res))
                         raise
                 elif h_res["type"] == "in":
                     r_res = str(r_res)
@@ -186,9 +186,9 @@ def assert_text(hope_res, real_res):
                             allure.attach(name="期望结果", body=str(h_res))
                             allure.attach(name='实际实际结果', body=str(r_res))
                             assert str(h_res["value"]) in str(r_res)
-                            api_logger.info("json断言通过, 期望结果'{0}', 实际结果'{1}'".format(h_res, real_res))
+                            api_logger.info("json断言通过, 期望结果:%s, 实际结果:%s" % (h_res, real_res))
                     except AssertionError:
-                        api_logger.error("json断言未通过, 期望结果'{0}', 实际结果'{1}'".format(h_res, real_res))
+                        api_logger.error("json断言未通过, 期望结果:%s, 实际结果:%s" % (h_res, real_res))
                         raise
                 else:
                     raise TypeError("type方法错误")
@@ -212,7 +212,7 @@ def assert_code(hope_code, real_code):
             allure.attach(name="期望状态码", body=str(hope_code))
             allure.attach(name='实际状态码', body=str(real_code))
             assert real_code == hope_code
-            api_logger.info("code断言通过, 期望状态码:%s, 实际状态码:%s", hope_code, real_code)
+            api_logger.info("code断言通过, 期望状态码:%s, 实际状态码:%s" % (hope_code, real_code))
     except AssertionError:
-        api_logger.error("code断言未通过, 期望状态码:%s, 实际状态码:%s", hope_code, real_code)
+        api_logger.error("code断言未通过, 期望状态码:%s, 实际状态码:%s" % (hope_code, real_code))
         raise

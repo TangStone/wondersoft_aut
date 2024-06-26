@@ -35,7 +35,8 @@ class YamlHandle:
             #异常处理
             ex_type, ex_val, ex_stack = sys.exc_info()
             error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
-            api_logger.error("读取yaml文件【%s】异常：%s", self.path, error_info)
+            errmes = "-·-·读取yaml文件" + f"【{ self.path['name']}】" + "异常：" + f"{error_info} -------------------\n"
+            api_logger.error(errmes)
             raise
 
     def write_yaml(self):
@@ -99,6 +100,6 @@ def standard_yaml(casedata):
         error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
         flag = False
         msg = '规范Yaml测试用例异常：' + error_info
-        api_logger.error("规范Yaml测试用例异常：%s", error_info)
+        api_logger.error("规范Yaml测试用例异常：%s"% error_info)
     return flag, msg
 

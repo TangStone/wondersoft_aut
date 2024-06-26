@@ -42,7 +42,8 @@ class RunCase:
         :param casedata: 用例信息
         :return:
         """
-        api_logger.info('-·-·-·-·-·-·-·-·-·-执行用例 START：%s-·-·-·-·-·-·-·-·-·-', casedata['name'])
+        info = "'-·-·-·-·-·-·-·-·-·-执行用例 START:-·-·-·-·-·-·-·-·-·-" + f"{casedata['name']}\n"
+        api_logger.info(info)
         if 'steps' in casedata.keys():
             # 获取测试步骤中的接口用例列表
             get_apicase_list = readcase.ReadCase().get_apicase_list(casedata)
@@ -50,7 +51,7 @@ class RunCase:
             for apicase in get_apicase_list:
                 # 判断是否存在等待时间
                 if 'sleep' in apicase.keys():
-                    api_logger.info("========等待时间：%s秒", apicase['sleep'])
+                    api_logger.info("========等待时间：%s秒" % apicase['sleep'])
                     time.sleep(apicase['sleep'])
                 if 'script_path' in apicase.keys():  # 调用脚本
                     customscript.excute_custom_script(apicase)
@@ -63,7 +64,7 @@ class RunCase:
                     # 执行接口用例
                     with allure.step(api_casedata['name']):
                         self.excute_apicase(api, api_casedata)
-        api_logger.info('-·-·-·-·-·-·-·-·-·-执行用例 END：%s-·-·-·-·-·-·-·-·-·-', casedata['name'])
+        api_logger.info('-·-·-·-·-·-·-·-·-·-执行用例 END：%s-·-·-·-·-·-·-·-·-·-' % casedata['name'])
 
     def excute_apicase(self, api, api_casedata):
         """
@@ -72,7 +73,7 @@ class RunCase:
         :param api_casedata: 接口用例数据
         :return:
         """
-        api_logger.info('-·-·-·-·-·-·-·-·-·-执行接口 START：%s-·-·-·-·-·-·-·-·-·-', api_casedata['name'])
+        api_logger.info('-·-·-·-·-·-·-·-·-·-执行接口 START：%s-·-·-·-·-·-·-·-·-·-' % api_casedata['name'])
         # 校验用例格式
         flag, msg = handleyaml.standard_yaml(api_casedata)
         if flag:  # 用例格式无误
@@ -83,19 +84,19 @@ class RunCase:
             # 重组接口用例数据
             sign, api_casedata = regroupdata.RegroupData(api_casedata, self.temp_var_dict).regroup_case_data()
             if sign:  # 重组数据成功
-                api_logger.info("重组后的用例信息：%s", api_casedata)
+                api_logger.info("重组后的用例信息：%s" % api_casedata)
                 # 发送请求
                 recv_data, recv_code = send_request(api_casedata)
                 # 判断是否存在后置操作
                 if 'postProcessors' in api_casedata.keys():
                     self.apicase_processors(api_casedata['postProcessors'], recv_data, recv_code)
 
-                api_logger.info('-·-·-·-·-·-·-·-·-·-执行接口 END：%s-·-·-·-·-·-·-·-·-·-', api_casedata['name'])
+                api_logger.info('-·-·-·-·-·-·-·-·-·-执行接口 END：%s-·-·-·-·-·-·-·-·-·-' % api_casedata['name'])
                 return api_casedata, recv_data
             else:
                 raise Exception(api_casedata)
         else:
-            api_logger.error("用例格式错误：%s", msg)
+            api_logger.error("用例格式错误：%s" % msg)
             raise Exception("用例格式校验失败，" + msg)
 
     def apicase_processors(self, pro_data, recv_data=None, recv_code=None):
@@ -139,9 +140,9 @@ def send_request(casedata):
         method = request_data['method']
         headers = request_data['headers']
 
-        api_logger.info("请求地址：%s", url)
-        api_logger.info("请求方法：%s", method)
-        api_logger.info("请求头：%s", headers)
+        api_logger.info("请求地址：%s" % url)
+        api_logger.info("请求方法：%s"% method)
+        api_logger.info("请求头：%s"% headers)
 
         allure.attach(name="请求方法：", body=method)
         allure.attach(name="请求地址", body=url)
@@ -153,17 +154,17 @@ def send_request(casedata):
         # 判断是否存在请求参数
         if 'data' in request_data.keys():
             data = request_data['data']
-            api_logger.info("请求参数：%s", data)
+            api_logger.info("请求参数：%s"% data)
             allure.attach(name="请求参数", body=str(data))
         # 判断是否存在文件
         if 'file' in request_data.keys():
             file = request_data['file']
-            api_logger.info("上传文件：%s", file)
+            api_logger.info("上传文件：%s" % file)
             allure.attach(name="上传文件", body=str(file))
         # 判断是否存在证书
         if 'iscert' in casedata.keys() and casedata['iscert']:
             cert = tuple([os.path.join(CERT_DIR, i) for i in config_dict['cert']])
-            api_logger.info("证书：%s", cert)
+            api_logger.info("证书：%s" % cert)
             allure.attach(name="证书", body=str(cert))
 
         #发送请求
@@ -239,7 +240,7 @@ class ApiMethod:
             res = recv_result.json()
         except:
             res = recv_result.text
-        api_logger.info("请求接口结果： %s", str(res))
+        api_logger.info("请求接口结果： %s" % str(res))
         allure.attach(name="请求结果", body=str(res))
         return res, recv_result.status_code
 
@@ -250,7 +251,7 @@ class ApiMethod:
             res = recv_result.json()
         except:
             res = recv_result.text
-        api_logger.info("请求接口结果： %s", str(res))
+        api_logger.info("请求接口结果： %s" % str(res))
         allure.attach(name="请求结果", body=str(res))
 
         return res, recv_result.status_code
@@ -273,7 +274,7 @@ class ApiMethod:
             res = recv_result.json()
         except:
             res = recv_result.text
-        api_logger.info("请求接口结果： %s", str(res))
+        api_logger.info("请求接口结果： %s" % str(res))
         allure.attach(name="请求结果", body=str(res))
         return res, recv_result.status_code
 
@@ -287,6 +288,6 @@ class ApiMethod:
             res = recv_result.json()
         except:
             res = recv_result.text
-        api_logger.info("请求接口结果： %s", str(res))
+        api_logger.info("请求接口结果： %s" % str(res))
         allure.attach(name="请求结果", body=str(res))
         return res, recv_result.status_code

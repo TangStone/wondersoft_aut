@@ -11,6 +11,7 @@ import smtplib, shutil
 from utils.report_utils.allure_handle import AllureReportData
 from utils.log_utils.logger_handle import api_logger
 from common.basefunc import config_dict
+from config.env_config import BASE_VARS
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
@@ -35,13 +36,13 @@ class SendEmail:
         server = smtplib.SMTP(self.email_config['sendserver'], self.email_config['port'])
 
         msg = MIMEMultipart()
-        msg['Subject'] = config_dict['project_name'] + "接口自动化报告"
+        msg['Subject'] =  BASE_VARS['test']['project_name'] + "接口自动化报告"
         msg['From'] = sendAddress
         msg['To'] = self.email_config['receiver']
 
         content = f"""
         大家好:
-            {config_dict['project_name']}接口自动化用例执行完成，执行结果如下:
+            {BASE_VARS['test']['project_name']}接口自动化用例执行完成，执行结果如下:
 
                 开始时间: {self.run_case_data['start_time']}
                 结束时间: {self.run_case_data['end_time']}

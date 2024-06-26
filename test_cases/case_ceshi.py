@@ -11,7 +11,7 @@ from common.basefunc import config_dict
 from config import *
 from common.readcase import ReadCase
 from common.runcase import RunCase
-from common import loggerapi
+from utils.log_utils.logger_handle import api_logger,ui_logger
 from common import handleyaml
 from requests.packages import urllib3
 urllib3.disable_warnings()
@@ -43,7 +43,7 @@ def case_ceshi(casepath, case):
 
 
 if __name__ == '__main__':
-    loggerapi.MyLogs().setup_logging(ROOT_DIR)
+
     # 登录
     api_path = API_DIR + '/bms/login/login.yaml'  # 接口用例路径
     api = 'login'  # 接口用例

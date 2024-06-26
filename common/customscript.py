@@ -47,6 +47,6 @@ from scripts.{module} import {method}
 {method}({param_str})
     """
 
-    api_logger.info('执行自定义脚本：' + run_code)
+    api_logger.info('执行自定义脚本：' % run_code)
     exec(run_code)
     api_logger.info('-·-·-·-·-·-·-·-·-·-执行自定义脚本 END-·-·-·-·-·-·-·-·-·-')

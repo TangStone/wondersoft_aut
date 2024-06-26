@@ -71,7 +71,7 @@ class RegroupData:
         :param param_path: 取值参数路径
         :return:
         """
-        api_logger.info(f"参数取值，参数路径：{param_path}")
+        api_logger.info("参数取值，参数路径：%s" % param_path)
         getvaluedict_list = [self.temp_var_dict, self.global_var_dict, self.env_var_dict,
                              self.api_casedata['request']['data']]
         value = None
@@ -98,7 +98,7 @@ class RegroupData:
                     if pa_list[1] == 'str':
                         value = str(value)
                 elif pa_list[0] == 'update':  # 更新字典中的值
-                    api_logger.info("pa_list[1]:%s", pa_list[1])
+                    api_logger.info("pa_list[1]:%s" % pa_list[1])
                     update_dict = self.update_dict[pa_list[1]]
                     value = handledict.dict_update(value, update_dict)
                 else:

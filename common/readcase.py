@@ -114,7 +114,6 @@ class ReadCase:
         :param file_pathlist: yaml文件路径列表
         :return:
         """
-        api_logger.info(file_pathlist)
         case_list = []
         if file_pathlist:
             for file_path in file_pathlist:

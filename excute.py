@@ -8,20 +8,18 @@
 @description:
 """
 # 标准库导入
-import os
 import argparse
 # 第三方库导入
 import pytest, time
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 # 本地模块导入
-from config import *
 from common import basefunc
-from utils.report_utils.sendemail import SendEmail
-from config.run_config import UI_LOG_LEVEL, RunConfig
-from config.path_config import LOG_DIR, ALLURE_RESULTS_DIR, ALLURE_HTML_DIR
+from common.sendemail import SendEmail
+from config.run_config import RunConfig
+from config.path_config import ALLURE_RESULTS_DIR, ALLURE_HTML_DIR
 from config.env_config import ENV_VARS, BASE_VARS
 from config.global_vars import GLOBAL_VARS
-from utils.report_utils.allure_handle import generate_allure_report
+from common.allure_handle import generate_allure_report
 
 
 def run(**kwargs):
@@ -101,6 +99,7 @@ def run(**kwargs):
 
 
 if __name__ == '__main__':
+#    basefunc.clean_dir(LOG_DIR)
     # 定义命令行参数
     parser = argparse.ArgumentParser(description="框架主入口")
     parser.add_argument("-env", default="test", help="输入运行环境：test、dev、prod等")

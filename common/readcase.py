@@ -8,11 +8,8 @@
 @description: 处理用例数据
 """
 import collections
-from utils.log_utils.logger_handle import api_logger
-import copy
 
 from config import *
-from common import basefunc
 from common import handleyaml
 from common import handledict
 

@@ -7,11 +7,9 @@
 @time: 2023-07-14 15:24
 @description: 接口自测
 """
-from common.basefunc import config_dict
 from config import *
 from common.readcase import ReadCase
 from common.runcase import RunCase
-from utils.log_utils.logger_handle import api_logger,ui_logger
 from common import handleyaml
 from requests.packages import urllib3
 urllib3.disable_warnings()

@@ -4,8 +4,8 @@
 @author: tanglei
 @File: logger_handle.py
 @IDE: PyCharm
-@time: 2023-06-24 18:53
-@description: 日志设置
+@time: 2023-06-26 18:53
+@description: 日志配置
 """
 
 import os

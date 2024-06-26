@@ -8,8 +8,8 @@
 @description: 发送邮件
 """
 import smtplib, shutil
-from utils.report_utils.allure_handle import AllureReportData
-from utils.log_utils.logger_handle import api_logger
+from common.allure_handle import AllureReportData
+from common.logger_handle import api_logger
 from common.basefunc import config_dict
 from config.env_config import BASE_VARS
 from email.mime.multipart import MIMEMultipart

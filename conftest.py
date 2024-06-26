@@ -10,16 +10,14 @@
 # 标准库导入
 from typing import Dict
 # 第三方库导入
-import allure
 import pytest
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 from playwright.sync_api import BrowserType
-from _pytest.runner import runtestprotocol
 # 本地模块导入
 from config.global_vars import GLOBAL_VARS
 from config.run_config import RunConfig
-from utils.data_utils.data_handle import DataHandle
-from utils.report_utils.allure_handle import ui_allure_display
+from common.data_handle import DataHandle
+from common.allure_handle import ui_allure_display
 
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):

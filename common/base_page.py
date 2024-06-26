@@ -8,13 +8,13 @@
 @description: Playwright UI自动化基础操作封装
 """
 # 标准库导入
-import re, sys, os
+import re, os
 # 第三方库导入
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 from playwright.sync_api import Page, expect
 # 本地模块导入
 from config.path_config import FILES_DIR
-from utils.base_utils.exception_handle import ExceptionHandle
+from common.exception_handle import ExceptionHandle
 
 
 class BasePage:

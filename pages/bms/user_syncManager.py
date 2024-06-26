@@ -8,12 +8,10 @@
 @description: 用户推送页面操作封装
 """
 # 标准库导入
-import re
 # 第三方库导入
 import allure
-from utils.log_utils.logger_handle import api_logger,ui_logger
 # 本地模块导入
-from utils.ui_utils.base_page import BasePage
+from common.base_page import BasePage
 
 
 class UseSyncManagerPage(BasePage):

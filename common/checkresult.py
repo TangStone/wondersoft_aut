@@ -8,7 +8,7 @@
 @description: 结果校验
 """
 import allure,jsonpath, json
-from utils.log_utils.logger_handle import api_logger
+from common.logger_handle import api_logger
 from common import handledict
 from common import database
 

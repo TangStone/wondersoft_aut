@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 日志路径
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 
+
 # 报告路径
 REPORT_DIR = os.path.join(BASE_DIR, "report")
 # Allure报告，测试结果集目录
@@ -34,9 +35,6 @@ FILES_DIR = os.path.join(BASE_DIR, "files")
 
 # 获取主目录路径
 ROOT_DIR = os.path.realpath(__file__).split('config')[0].replace('\\', '/')
-
-# 获取配置文件路径
-CONFIG_DIR = ROOT_DIR + 'config/config.yml'
 
 # 中间件参数传递文件路径
 EXTRACT_DIR = ROOT_DIR + 'test_cases/extract.yaml'

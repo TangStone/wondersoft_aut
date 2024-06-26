@@ -13,9 +13,8 @@ import json
 from pytest_bdd import given, when, then, parsers
 from playwright.sync_api import Page
 import pytest
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 # 本地模块导入
-from config.global_vars import GLOBAL_VARS
 from pages.common_page import CommonPage
 from pages.login_page import LoginPage
 from config import *

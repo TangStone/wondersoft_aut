@@ -12,11 +12,11 @@ from typing import Union
 import re
 # 第三方库导入
 import allure
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 from playwright.sync_api import expect
 # 本地模块导入
-from utils.base_utils.exception_handle import ExceptionHandle
-from utils.ui_utils.base_page import BasePage
+from common.exception_handle import ExceptionHandle
+from common.base_page import BasePage
 
 
 class CommonPage(BasePage):

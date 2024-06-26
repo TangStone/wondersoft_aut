@@ -7,12 +7,12 @@
 @time: 2023-06-04 18:53
 @description: 执行用例
 """
-from utils.log_utils.logger_handle import api_logger
+from common.logger_handle import api_logger
 import pytest
 from config import *
 from common import readcase
 from common import runcase
-from utils.report_utils.allure_handle import api_allure_display
+from common.allure_handle import api_allure_display
 from common.basefunc import config_dict
 
 

@@ -9,7 +9,7 @@
 """
 import json
 import re, sys, datetime, uuid, random, string, jsonpath
-from utils.log_utils.logger_handle import api_logger
+from common.logger_handle import api_logger
 from faker import Faker
 from functools import reduce
 

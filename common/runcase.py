@@ -7,9 +7,8 @@
 @time: 2023-06-04 19:41
 @description:
 """
-import copy
-from utils.log_utils.logger_handle import api_logger
-import allure, sys, requests, random, json
+from common.logger_handle import api_logger
+import allure, requests, json
 import time
 
 from requests_toolbelt import MultipartEncoder
@@ -18,10 +17,7 @@ from config import *
 from common import readcase
 from common import handleyaml
 from common import regroupdata
-from common import exceptions
 from common import checkresult
-from common import teardowncase
-from common import relevancecase
 from common import extract
 from common import database
 from common import handledict

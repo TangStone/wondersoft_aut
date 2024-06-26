@@ -7,7 +7,6 @@
 @time: 2023-06-12 16:06
 @description: 数据库操作
 """
-from utils.log_utils.logger_handle import api_logger
 import jsonpath, redis
 import pymysql
 import pymysql.cursors

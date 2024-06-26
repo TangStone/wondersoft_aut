@@ -7,12 +7,26 @@
 @time: 2024-06-21 17:36
 @description: 基础处理函数
 """
-import os
 from config import *
 from common import handleyaml
+# 第三方库导入
+from common.logger_handle import ui_logger
 
 #config_dict = handleyaml.YamlHandle(CONFIG_DIR).read_yaml()
 config_dict = {**ENV_VARS['test'],**BASE_VARS}
+
+def eval_data(data):
+    """
+    执行一个字符串表达式，并返回其表达式的值
+    """
+    try:
+        if hasattr(eval(data), "__call__"):
+            return data
+        else:
+            return eval(data)
+    except Exception as e:
+        ui_logger.trace(f"{data} --> 该数据不能被eval\n报错：{e}")
+        return data
 
 def clean_dir(path):
     """清空目录下所有文件，保留文件夹"""

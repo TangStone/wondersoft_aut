@@ -7,9 +7,8 @@
 @time: 2023-06-21 16:00
 @description: yaml文件处理
 """
-import yaml, sys, traceback
-from utils.log_utils.logger_handle import api_logger
-from collections import OrderedDict
+import yaml, sys
+from common.logger_handle import api_logger
 from common import exceptions
 from common import handledict
 

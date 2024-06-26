@@ -7,7 +7,7 @@
 @time: 2023-09-15 11:40
 @description: 执行自定义脚本
 """
-from utils.log_utils.logger_handle import api_logger
+from common.logger_handle import api_logger
 
 from common import handleyaml
 from config import *

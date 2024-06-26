@@ -8,12 +8,12 @@
 @description: 数据处理
 """
 # 标准库导入
-import re, uuid, copy, json
+import re, uuid, copy
 # 第三方库导入
 from string import Template
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 # 本地模块导入
-from utils.base_utils.basefuc import eval_data
+from common.basefunc import eval_data
 
 
 class DataHandle:

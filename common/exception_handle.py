@@ -11,7 +11,7 @@ import re
 # 标准库导入
 import traceback
 # 第三方库导入
-from utils.log_utils.logger_handle import api_logger,ui_logger
+from common.logger_handle import ui_logger
 import allure
 
 

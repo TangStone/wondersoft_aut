@@ -143,3 +143,38 @@ user_group_add:
               result:
                 - path: $.count
                   value: 0
+
+    user_group_add_06:
+      # 接口用例名称
+      name: 新增用户组2-新增成功
+      # 接口用例描述
+      description: 在默认组下新增二级组织机构2
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          groupName: 自动化测试根组2
+          parentGroupId: '1'
+      # 前置操作
+      preProcessors:
+        # 数据库操作
+        database:
+          - type: mysql
+            sql: update `bms-general-uba`.t_group_info tgi set isRemoved = '1' where parentGroupId = '1' and groupName like '自动化测试根组2%' and isRemoved = '0'
+          - type: mysql
+            sql: update `bms-general-uba`.t_user_info tui set isRemoved = '1' where displayName like '自动化测试用户2%' and isRemoved = '0' and groupId in (select id from `bms-general-uba`.t_group_info tgi where parentGroupId = '1' and groupName like '自动化测试根组2%' and isRemoved = '0')
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # 数据库校验
+          dbcheck:
+            - type: mysql
+              sql: select * from `bms-general-uba`.t_group_info where groupName = '自动化测试根组2' and isRemoved = '0'
+              result:
+                - path: $.parentGroupId
+                  value: 1

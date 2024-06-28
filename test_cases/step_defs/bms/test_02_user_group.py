@@ -7,6 +7,7 @@
 @time: 2024-03-28 16:21
 @description: 用户及机构管理模块测试用例
 """
+from common import handleyaml
 from common.logger_handle import api_logger
 # 标准库导入
 from config import *
@@ -71,25 +72,9 @@ def step_search_users(page: Page, query_conditions):
 # def step_delete_group(page: Page, organ):
 #     UserGroupPage(page).delete_group(organ)
 
-@given(parsers.parse("登录-接口"))
-def step_login():
-    api_path = API_DIR + '/bms/login/login.yaml'  # 接口用例路径
-    api = 'login'  # 接口用例
-    api_caseid = 'login_01'  # 接口用例id
-    # 获取接口用例数据
-    api_casedata = ReadCase().get_api_casedata(api_path, api, api_caseid)
-    # 执行接口用例
-    RunCase().excute_apicase(api, api_casedata)
 
-@when(parsers.parse("添加用户组-接口"))
-def step_add_group():
-    api_path2 = API_DIR + '/bms/user/user_group_add.yaml'  # 接口用例路径
-    api2 = 'user_group_add'  # 接口用例
-    api_caseid2 = 'user_group_add_06'  # 接口用例id
-    # 获取接口用例数据
-    api_casedata2 = ReadCase().get_api_casedata(api_path2, api2, api_caseid2)
-    # 执行接口用例
-    RunCase().excute_apicase(api2, api_casedata2)
+
+
 
 
 

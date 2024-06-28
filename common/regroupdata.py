@@ -72,8 +72,11 @@ class RegroupData:
         :return:
         """
         api_logger.info("参数取值，参数路径：%s" % param_path)
-        getvaluedict_list = [self.temp_var_dict, self.global_var_dict, self.env_var_dict,
-                             self.api_casedata['request']['data']]
+        getvaluedict_list = [self.temp_var_dict, self.global_var_dict, self.env_var_dict]
+
+        if self.is_key_in_nested_dict(self.api_casedata, 'data'):
+            getvaluedict_list.append(self.api_casedata['request']['data'])
+
         value = None
         for i in getvaluedict_list:
             if i and self.is_key_in_nested_dict(i, param_path.split('.')[-1]):

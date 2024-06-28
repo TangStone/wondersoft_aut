@@ -74,3 +74,43 @@ user_querygroups:
           - name: groups     #变量名称
             # jsonpath表达式
             jsonpath: $.data[*].groupId
+
+    user_querygroups_ui:
+      # 接口用例名称
+      name: 搜索一级组织机构下特定用户组信息
+      # 接口用例描述
+      description: 搜索一级组织机构下特定用户组信息
+      # 请求信息，包括data，file
+      request:
+        # 请求地址
+        address: /api/user/v1/querygroups/0
+        # 请求数据
+        data:
+          groupName: 默认组
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data[0].groupName
+              value: 默认组
+              type: in
+        # 提取变量
+        extract:
+          - name: groupId     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data[0].groupId
+            type: global
+          - name: parentGroupId  #变量名称
+            # jsonpath表达式
+            jsonpath: $.data[0].parentGroupId
+          - name: groups     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data[*].groupId

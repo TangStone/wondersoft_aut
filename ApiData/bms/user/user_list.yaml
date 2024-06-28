@@ -105,3 +105,50 @@ user_list:
           - name: password     #变量名称
             # jsonpath表达式
             jsonpath: $.data.list[0].password
+
+    user_list_ui:
+      # 接口用例名称
+      name: 搜索自动化测试组织机构下的用户列表-根据姓名搜索
+      # 接口用例描述
+      description: 根据姓名搜索条件搜索自动化测试组织机构下的用户列表
+      # 请求信息，包括data，file
+      request:
+        # 请求数据
+        data:
+          filters: "{'displayName':'ui自动化测试用户'}"
+          page: 1
+          rows: 20
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
+          # jsonpath校验
+          jsonpath:
+            - path: $.data.list[0].userName
+              value: ui自动化测试用户
+              type: in
+        # 提取变量
+        extract:
+          - name: sids     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[*].sid
+          - name: sid     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].sid
+            type: global
+          - name: groupId     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].groupId
+          - name: userName     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].userName
+          - name: displayName     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].displayName
+          - name: password     #变量名称
+            # jsonpath表达式
+            jsonpath: $.data.list[0].password

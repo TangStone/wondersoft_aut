@@ -13,6 +13,8 @@ import json
 from pytest_bdd import given, when, then, parsers
 from playwright.sync_api import Page
 import pytest
+
+from common import handleyaml
 from common.logger_handle import ui_logger
 # 本地模块导入
 from pages.common_page import CommonPage
@@ -59,6 +61,16 @@ def step_assert_enter_page(page: Page, page_name):
 
 @when(parsers.parse("输入用户名：{username}，密码：{password}，点击【立即登录】按钮"))
 def step_input_username_password_and_login(page: Page, username, password) -> None:
+    handleyaml.YamlHandle(EXTRACT_DIR).clear_yaml()
+    def handle_response(response):
+        extract_value = {}
+        if '/login' in response.url:  # 根据具体的登录请求 URL 进行判断
+            response_body = response.json()
+            token = response_body['data']['token']  # 根据响应体结构获取 token
+            extract_value['token'] = token
+            handleyaml.YamlHandle(EXTRACT_DIR, extract_value).updata_yaml()
+    page.on('response', handle_response)
+
     LoginPage(page).login(username, password)
 
 
@@ -127,3 +139,8 @@ def step_assert_dialog_msg(page: Page, dialog_msg):
     CommonPage(page).assert_dialog_msg(dialog_msg)
 
 
+@when(parsers.parse("调用接口：{api},接口用例id：{api_caseid},接口用例路径：{api_path}"))
+def step_execute_api(api,api_caseid,api_path):
+    # 执行接口用例
+    api_path = API_DIR + api_path
+    RunCase().excute_apicase_by_ui(api_path, api,api_caseid)

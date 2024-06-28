@@ -13,6 +13,7 @@ import time
 
 from requests_toolbelt import MultipartEncoder
 
+from common.readcase import ReadCase
 from config import *
 from common import readcase
 from common import handleyaml
@@ -94,6 +95,12 @@ class RunCase:
         else:
             api_logger.error("用例格式错误：%s" % msg)
             raise Exception("用例格式校验失败，" + msg)
+
+    def excute_apicase_by_ui(self,api_path,api,api_caseid):
+
+        api_casedata = ReadCase().get_api_casedata(api_path, api, api_caseid)
+        # 执行接口用例
+        self.excute_apicase(api, api_casedata)
 
     def apicase_processors(self, pro_data, recv_data=None, recv_code=None):
         """

@@ -33,6 +33,20 @@ user_delete:
           code: 200
           # 返回值校验
           response: { "statusCode": 0,"msg": "success" }
+    # 接口用例ID
+    user_delete_ui:
+      # 接口用例名称
+      name: 删除ui添加用户
+      # 接口用例描述
+      description: 删除ui添加用户
+      # 后置操作
+      postProcessors:
+        # 断言
+        assert:
+          # 状态码校验
+          code: 200
+          # 返回值校验
+          response: { "statusCode": 0,"msg": "success" }
 # 接口ID
 user_delete_batch:
   # 接口基本信息

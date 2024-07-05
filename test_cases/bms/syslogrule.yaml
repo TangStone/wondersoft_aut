@@ -1,0 +1,241 @@
+# Syslog规则配置
+# 用例id
+getAssetTreeByMetadata:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 获取所有可用于syslog的元数据字段信息
+  # 用例描述
+  description: 获取所有可用于syslog的元数据字段信息
+  # 测试步骤
+  steps:
+    # 获取所有可用于syslog的元数据字段信息
+    - api_path: /bms/syslogrule/syslogrule_getAssetTreeByMetadata.yaml        #接口路径
+      api: syslogrule_getAssetTreeByMetadata                           #接口id
+      data: syslogrule_getAssetTreeByMetadata_01                       #接口数据
+# 用例id
+getAllSyslogMetadataFields:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 获取统一平台-审计日志syslog字段列表
+  # 用例描述
+  description: 获取统一平台-审计日志syslog字段列表
+  # 测试步骤
+  steps:
+    # 获取所有可用于syslog的元数据字段信息
+    - api_path: /bms/syslogrule/syslogrule_getAssetTreeByMetadata.yaml        #接口路径
+      api: syslogrule_getAssetTreeByMetadata                           #接口id
+      data: syslogrule_getAssetTreeByMetadata_01                       #接口数据
+    # 获取统一平台-审计日志syslog字段列表
+    - api_path: /bms/syslogrule/syslogrule_getAllSyslogMetadataFields.yaml        #接口路径
+      api: syslogrule_getAllSyslogMetadataFields                           #接口id
+      data: syslogrule_getAllSyslogMetadataFields_01                       #接口数据
+# 用例id
+addSyslogRule:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 添加统一平台审计日志syslog规则
+  # 用例描述
+  description: 添加统一平台审计日志syslog规则
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+# 用例id
+getHighQueryParam:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 获取syslog查询参数列表
+  # 用例描述
+  description: 获取syslog查询参数列表
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_getHighQueryParam.yaml        #接口路径
+      api: syslogrule_getHighQueryParam                          #接口id
+      data: syslogrule_getHighQueryParam_01                       #接口数据
+# 用例id
+querySyslogRuleList:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 查看syslog规则集合-不同筛选条件
+  # 用例描述
+  description: 查看syslog规则集合-不同筛选条件
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-不同筛选条件
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: [syslogrule_querySyslogRuleList_01,syslogrule_querySyslogRuleList_02,syslogrule_querySyslogRuleList_03,syslogrule_querySyslogRuleList_04,syslogrule_querySyslogRuleList_05,syslogrule_querySyslogRuleList_06,syslogrule_querySyslogRuleList_07,syslogrule_querySyslogRuleList_08,syslogrule_querySyslogRuleList_11]                       #接口数据
+# 用例id
+querySyslogRuleDetail:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 查看syslog规则详情
+  # 用例描述
+  description: 查看syslog规则详情
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-根据规则名称筛选
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: syslogrule_querySyslogRuleList_02                       #接口数据
+    # 查看syslog规则集合-根据规则名称筛选
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleDetail.yaml        #接口路径
+      api: syslogrule_querySyslogRuleDetail                          #接口id
+      data: syslogrule_querySyslogRuleDetail_01                       #接口数据
+# 用例id
+startOrStopSyslogRule:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 启用停用syslog规则
+  # 用例描述
+  description: 启用停用syslog规则
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-查询停用规则
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: syslogrule_querySyslogRuleList_10                       #接口数据
+    # 启用syslog规则-规则为停用状态
+    - api_path: /bms/syslogrule/syslogrule_startOrStopSyslogRule.yaml        #接口路径
+      api: syslogrule_startOrStopSyslogRule                          #接口id
+      data: syslogrule_startOrStopSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-查询启用规则
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: syslogrule_querySyslogRuleList_09                       #接口数据
+    # 启用syslog规则-规则为停用状态
+    - api_path: /bms/syslogrule/syslogrule_startOrStopSyslogRule.yaml        #接口路径
+      api: syslogrule_startOrStopSyslogRule                          #接口id
+      data: syslogrule_startOrStopSyslogRule_02                       #接口数据
+# 用例id
+updateSyslogRule:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 修改syslog信息
+  # 用例描述
+  description: 修改syslog信息
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-根据规则名称、状态筛选
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: syslogrule_querySyslogRuleList_12                       #接口数据
+    # 修改统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_updateSyslogRule.yaml        #接口路径
+      api: syslogrule_updateSyslogRule                          #接口id
+      data: syslogrule_updateSyslogRule_01                      #接口数据
+# 用例id
+validSyslogRuleName:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 新增、修改syslog规则名称校验
+  # 用例描述
+  description: 新增、修改syslog规则名称校验
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-根据规则名称、状态筛选
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: syslogrule_querySyslogRuleList_12                       #接口数据
+    # 新增规则-规则名称校验
+    - api_path: /bms/syslogrule/syslogrule_validSyslogRuleName.yaml        #接口路径
+      api: syslogrule_validSyslogRuleName                          #接口id
+      data: [syslogrule_validSyslogRuleName_01,syslogrule_validSyslogRuleName_02]                      #接口数据
+    # 修改规则-规则名称校验
+    - api_path: /bms/syslogrule/syslogrule_validSyslogRuleName.yaml        #接口路径
+      api: syslogrule_validSyslogRuleName                          #接口id
+      data: [ syslogrule_validSyslogRuleName_03,syslogrule_validSyslogRuleName_04]   #接口数据
+# 用例id
+deleteSyslogRule:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: Syslog规则配置
+  # 用例名称
+  name: 删除syslog信息
+  # 用例描述
+  description: 删除syslog信息
+  # 测试步骤
+  steps:
+    # 添加统一平台审计日志syslog规则
+    - api_path: /bms/syslogrule/syslogrule_addSyslogRule.yaml        #接口路径
+      api: syslogrule_addSyslogRule                          #接口id
+      data: syslogrule_addSyslogRule_01                       #接口数据
+    # 查看syslog规则集合-根据规则名称、状态筛选
+    - api_path: /bms/syslogrule/syslogrule_querySyslogRuleList.yaml        #接口路径
+      api: syslogrule_querySyslogRuleList                          #接口id
+      data: syslogrule_querySyslogRuleList_12                       #接口数据
+    # 删除syslog信息
+    - api_path: /bms/syslogrule/syslogrule_deleteSyslogRule.yaml        #接口路径
+      api: syslogrule_deleteSyslogRule                          #接口id
+      data: syslogrule_deleteSyslogRule_01                     #接口数据

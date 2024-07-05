@@ -1,0 +1,149 @@
+# 文件MD5
+# 用例id
+importDocFinger:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5导入-不覆盖
+  # 用例描述
+  description: MD5导入-不覆盖
+  # 测试步骤
+  steps:
+    # MD5导入-不覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_01                       #接口数据
+importDocFinger_cover:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5导入-覆盖
+  # 用例描述
+  description: MD5导入-覆盖
+  # 测试步骤
+  steps:
+    # MD5导入-不覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_01                       #接口数据
+    # MD5导入-覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_02                       #接口数据
+docFingerNameList:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5名称列表查询
+  # 用例描述
+  description: MD5名称列表查询
+  # 测试步骤
+  steps:
+    # MD5导入-不覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_01                       #接口数据
+    # MD5名称列表查询
+    - api_path: /bms/docmd5/docmd5_docFingerNameList.yaml        #接口路径
+      api: docmd5_docFingerNameList                           #接口id
+      data: docmd5_docFingerNameList_01                       #接口数据
+selectDocFingerList:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5列表查询
+  # 用例描述
+  description: MD5列表查询
+  # 测试步骤
+  steps:
+    # MD5导入-不覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_01                       #接口数据
+    # MD5列表查询-无筛选条件
+    - api_path: /bms/docmd5/docmd5_selectDocFingerList.yaml        #接口路径
+      api: docmd5_selectDocFingerList                           #接口id
+      data: docmd5_selectDocFingerList_01                       #接口数据
+    # MD5列表查询-根据文档MD5名称筛选
+    - api_path: /bms/docmd5/docmd5_selectDocFingerList.yaml        #接口路径
+      api: docmd5_selectDocFingerList                           #接口id
+      data: docmd5_selectDocFingerList_02                       #接口数据
+downloadMd5JsonModel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5模板下载
+  # 用例描述
+  description: MD5模板下载
+  # 测试步骤
+  steps:
+    # MD5模板下载
+    - api_path: /bms/docmd5/docmd5_downloadMd5JsonModel.yaml        #接口路径
+      api: docmd5_downloadMd5JsonModel                           #接口id
+      data: docmd5_downloadMd5JsonModel_01                       #接口数据
+exportJsonFile:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5导出-单个
+  # 用例描述
+  description: MD5导出-单个
+  # 测试步骤
+  steps:
+    # MD5导入-不覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_01                       #接口数据
+    # MD5导出-单个
+    - api_path: /bms/docmd5/docmd5_exportJsonFile.yaml        #接口路径
+      api: docmd5_exportJsonFile                           #接口id
+      data: docmd5_exportJsonFile_01                       #接口数据
+deleteDocFinger:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件MD5
+  # 用例名称
+  name: MD5删除
+  # 用例描述
+  description: MD5删除
+  # 测试步骤
+  steps:
+    # MD5导入-不覆盖
+    - api_path: /bms/docmd5/docmd5_importDocFinger.yaml        #接口路径
+      api: docmd5_importDocFinger                           #接口id
+      data: docmd5_importDocFinger_01                       #接口数据
+    # MD5列表查询-根据文档MD5名称筛选
+    - api_path: /bms/docmd5/docmd5_selectDocFingerList.yaml        #接口路径
+      api: docmd5_selectDocFingerList                           #接口id
+      data: docmd5_selectDocFingerList_02                       #接口数据
+    # MD5删除
+    - api_path: /bms/docmd5/docmd5_deleteDocFinger.yaml        #接口路径
+      api: docmd5_deleteDocFinger                           #接口id
+      data: docmd5_deleteDocFinger_01                       #接口数据

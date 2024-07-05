@@ -1,0 +1,143 @@
+# 管理员配置
+# 用例id
+useradminAdd:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 管理员配置
+  # 用例名称
+  name: 创建自动化测试超级管理员
+  # 用例描述
+  description: 创建自动化测试超级管理员，管辖范围为自己所属组
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 创建自动化测试超级管理员
+    - api_path: /bms/useradmin/useradmin_add.yaml        #接口路径
+      api: useradmin_add                           #接口id
+      data: useradmin_add_01                       #接口数据
+# 用例id
+useradminList:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 管理员配置
+  # 用例名称
+  name: 管理员列表查询
+  # 用例描述
+  description: 管理员列表查询
+  # 测试步骤
+  steps:
+    # 创建自动化测试超级管理员
+    - case_path: /bms/useradmin.yaml                             #用例路径
+      case: useradminAdd                                     #用例id
+    # 管理员列表查询
+    - api_path: /bms/useradmin/useradmin_list.yaml        #接口路径
+      api: useradmin_list                           #接口id
+      data: [useradmin_list_01,useradmin_list_02,useradmin_list_03,useradmin_list_04]                       #接口数据
+# 用例id
+useradminPasswdUpdate:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 管理员配置
+  # 用例名称
+  name: 自动化测试管理员用户修改密码成功
+  # 用例描述
+  description: 自动化测试管理员用户修改密码成功
+  # 测试步骤
+  steps:
+    # 创建自动化测试超级管理员
+    - case_path: /bms/useradmin.yaml                             #用例路径
+      case: useradminAdd                                     #用例id
+    # 管理员列表搜索-按登录名、角色名组合搜索
+    - api_path: /bms/useradmin/useradmin_list.yaml        #接口路径
+      api: useradmin_list                           #接口id
+      data: useradmin_list_04                       #接口数据
+    # 自动化测试超级管理员-登录
+    - api_path: /bms/login/login.yaml        #接口路径
+      api: login                           #接口id
+      data: login_04                       #接口数据
+    # 自动化测试超级管理员
+    - api_path: /bms/useradmin/useradmin_passwd_update.yaml        #接口路径
+      api: useradmin_passwd_update                           #接口id
+      data: useradmin_passwd_update_01                       #接口数据
+# 用例id
+useradminPasswdReset:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 管理员配置
+  # 用例名称
+  name: 自动化测试管理员用户重置密码成功
+  # 用例描述
+  description: 自动化测试管理员用户重置密码成功
+  # 测试步骤
+  steps:
+    # 自动化测试管理员用户修改密码成功
+    - case_path: /bms/useradmin.yaml                             #用例路径
+      case: useradminPasswdUpdate                                     #用例id
+    # 管理员重置密码
+    - api_path: /bms/useradmin/useradmin_passwd_reset.yaml        #接口路径
+      api: useradmin_passwd_reset                           #接口id
+      data: useradmin_passwd_reset_01                       #接口数据
+# 用例id
+useradminUpdate:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 管理员配置
+  # 用例名称
+  name: 修改自动化测试超级管理员为系统管理员
+  # 用例描述
+  description: 修改自动化测试超级管理员为系统管理员
+  # 测试步骤
+  steps:
+    # 创建自动化测试超级管理员
+    - case_path: /bms/useradmin.yaml                             #用例路径
+      case: useradminAdd                                     #用例id
+#    # 管理员列表搜索-按登录名、角色名组合搜索
+#    - api_path: /bms/useradmin/useradmin_list.yaml        #接口路径
+#      api: useradmin_list                           #接口id
+#      data: useradmin_list_04                       #接口数据
+    # 修改自动化测试超级管理员为系统管理员
+    - api_path: /bms/useradmin/useradmin_update.yaml        #接口路径
+      api: useradmin_update                           #接口id
+      data: useradmin_update_01                       #接口数据
+# 用例id
+useradminDelete:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 管理员配置
+  # 用例名称
+  name: 删除自动化测试管理员
+  # 用例描述
+  description: 删除自动化测试管理员
+  # 测试步骤
+  steps:
+    # 创建自动化测试超级管理员
+    - case_path: /bms/useradmin.yaml                             #用例路径
+      case: useradminAdd                                     #用例id
+    # 管理员列表搜索-按登录名、角色名组合搜索
+    - api_path: /bms/useradmin/useradmin_list.yaml        #接口路径
+      api: useradmin_list                           #接口id
+      data: useradmin_list_04                       #接口数据
+    # 管理员删除
+    - api_path: /bms/useradmin/useradmin_delete.yaml        #接口路径
+      api: useradmin_delete                           #接口id
+      data: useradmin_delete_01                       #接口数据

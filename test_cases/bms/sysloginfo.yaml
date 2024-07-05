@@ -1,0 +1,81 @@
+# 管理员审计
+# 用例id
+getAllComboBoxData:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 管理员审计
+  # 用例名称
+  name: 管理员审计-获取初始化查询条件
+  # 用例描述
+  description: 管理员审计-获取初始化查询条件
+  # 测试步骤
+  steps:
+    # 管理员审计-获取初始化查询条件
+    - api_path: /bms/sysloginfo/sysloginfo_getAllComboBoxData.yaml        #接口路径
+      api: sysloginfo_getAllComboBoxData                           #接口id
+      data: sysloginfo_getAllComboBoxData_01                       #接口数据
+getQueryParamList:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 管理员审计
+  # 用例名称
+  name: 管理员审计-获取查询条件
+  # 用例描述
+  description: 管理员审计-获取查询条件
+  # 测试步骤
+  steps:
+    # 管理员审计-获取查询条件
+    - api_path: /bms/sysloginfo/sysloginfo_getQueryParamList.yaml        #接口路径
+      api: sysloginfo_getQueryParamList                           #接口id
+      data: sysloginfo_getQueryParamList_01                       #接口数据
+getModuleByParams:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 管理员审计
+  # 用例名称
+  name: 管理员日志模块查询
+  # 用例描述
+  description: 管理员日志模块查询
+  # 测试步骤
+  steps:
+    # 管理员审计-获取查询条件
+    - api_path: /bms/sysloginfo/sysloginfo_getQueryParamList.yaml        #接口路径
+      api: sysloginfo_getQueryParamList                           #接口id
+      data: sysloginfo_getQueryParamList_01                       #接口数据
+    # 管理员审计-根据系统标识联动查询一级模块
+    - api_path: /bms/sysloginfo/sysloginfo_getModuleByParams.yaml #接口路径
+      api: sysloginfo_getModuleByParams                           #接口id
+      data: sysloginfo_getModuleByParams_01                       #接口数据
+    # 管理员审计-根据一级模块联动查询二级模块
+    - api_path: /bms/sysloginfo/sysloginfo_getModuleByParams.yaml #接口路径
+      api: sysloginfo_getModuleByParams                           #接口id
+      data: sysloginfo_getModuleByParams_02                       #接口数据
+getAllDlpEventLogListByParam:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 管理员审计
+  # 用例名称
+  name: 管理员日志查看
+  # 用例描述
+  description: 管理员日志查看
+  # 测试步骤
+  steps:
+    # 管理员审计-获取查询条件
+    - case_path: /bms/sysloginfo.yaml                             #用例路径
+      case: getModuleByParams                                     #用例id
+    # 管理员日志查看
+    - api_path: /bms/sysloginfo/sysloginfo_getAllDlpEventLogListByParam.yaml #接口路径
+      api: sysloginfo_getAllDlpEventLogListByParam                           #接口id
+      data: [sysloginfo_getAllDlpEventLogListByParam_01,sysloginfo_getAllDlpEventLogListByParam_02,sysloginfo_getAllDlpEventLogListByParam_03,sysloginfo_getAllDlpEventLogListByParam_04,sysloginfo_getAllDlpEventLogListByParam_05,sysloginfo_getAllDlpEventLogListByParam_06]                       #接口数据

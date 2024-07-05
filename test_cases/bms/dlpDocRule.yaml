@@ -1,0 +1,325 @@
+# 关键字/正则
+# 用例id
+insertDlpDocRules_keywords:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 新增关键字规则
+  # 用例描述
+  description: 新增关键字规则
+  # 测试步骤
+  steps:
+    # 新增关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_01                       #接口数据
+# 用例id
+insertDlpDocRules_regular:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 新增正则规则
+  # 用例描述
+  description: 新增正则规则
+  # 测试步骤
+  steps:
+    # 新增正则规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_02                       #接口数据
+# 用例id
+insertDlpDocRules_fuzzy_keywords:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 新增模糊关键字规则
+  # 用例描述
+  description: 新增模糊关键字规则
+  # 测试步骤
+  steps:
+    # 新增模糊关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_03                       #接口数据
+# 用例id
+selectDlpDocRules:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 文档规则列表查询
+  # 用例描述
+  description: 文档规则列表查询
+  # 测试步骤
+  steps:
+    # 文档规则列表查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: [dlpDocRule_selectDlpDocRules_01,dlpDocRule_selectDlpDocRules_02,dlpDocRule_selectDlpDocRules_03,dlpDocRule_selectDlpDocRules_04,dlpDocRule_selectDlpDocRules_05,dlpDocRule_selectDlpDocRules_06,dlpDocRule_selectDlpDocRules_07]                       #接口数据
+# 用例id
+updateDlpDocRules_keywords:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 修改关键字规则
+  # 用例描述
+  description: 输入正确的关键字规则配置，修改关键字规则
+  # 测试步骤
+  steps:
+    # 新增关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_01                       #接口数据
+    # 文档规则列表查询-根据规则名称、规则类型查询关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_04                       #接口数据
+    # 修改关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_updateDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_updateDlpDocRules                           #接口id
+      data: dlpDocRule_updateDlpDocRules_01                       #接口数据
+# 用例id
+updateDlpDocRules_regular:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 修改正则表达式规则
+  # 用例描述
+  description: 输入正确的正则表达式规则配置，修改正则表达式规则
+  # 测试步骤
+  steps:
+    # 新增正则规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_02                       #接口数据
+    # 文档规则列表查询-根据规则名称、规则类型查询正则表达式规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_05                       #接口数据
+    # 修改正则表达式规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_updateDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_updateDlpDocRules                           #接口id
+      data: dlpDocRule_updateDlpDocRules_02                       #接口数据
+# 用例id
+updateDlpDocRules_fuzzy_keywords:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 修改模糊关键字规则
+  # 用例描述
+  description: 输入正确的模糊关键字规则配置，修改模糊关键字规则
+  # 测试步骤
+  steps:
+    # 新增模糊关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_03                       #接口数据
+    # 文档规则列表查询-根据规则名称、规则类型查询模糊关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_06                       #接口数据
+    # 修改模糊关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_updateDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_updateDlpDocRules                           #接口id
+      data: dlpDocRule_updateDlpDocRules_03                       #接口数据
+# 用例id
+getDlpDocStrategy:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 查询自定义关键字规则策略
+  # 用例描述
+  description: 查询自定义关键字规则策略
+  # 测试步骤
+  steps:
+    # 新增关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_01                       #接口数据
+    # 文档规则列表查询-根据规则名称、规则类型查询关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_04                       #接口数据
+    # 查询自定义关键字规则策略
+    - api_path: /bms/dlpDocRule/dlpDocRule_getDlpDocStrategy.yaml        #接口路径
+      api: dlpDocRule_getDlpDocStrategy                           #接口id
+      data: dlpDocRule_getDlpDocStrategy_01                       #接口数据
+# 用例id
+checkExportDocRule:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 文档规则导出数据核查
+  # 用例描述
+  description: 文档规则导出数据核查
+  # 测试步骤
+  steps:
+    # 新增关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_01                       #接口数据
+    # 文档规则列表查询-根据规则名称查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_02                       #接口数据
+    # 导出自动化测试规则核查
+    - api_path: /bms/dlpDocRule/dlpDocRule_checkExportDocRule.yaml        #接口路径
+      api: dlpDocRule_checkExportDocRule                           #接口id
+      data: dlpDocRule_checkExportDocRule_01                       #接口数据
+    # 文档规则列表查询-无搜索条件
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_01                       #接口数据
+    # 导出规则,包含内置规则核查
+    - api_path: /bms/dlpDocRule/dlpDocRule_checkExportDocRule.yaml        #接口路径
+      api: dlpDocRule_checkExportDocRule                           #接口id
+      data: dlpDocRule_checkExportDocRule_02                       #接口数据
+# 用例id
+exportDocRuleExcel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 导出自动化测试规则
+  # 用例描述
+  description: 导出自动化测试规则
+  # 测试步骤
+  steps:
+    # 新增关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_01                       #接口数据
+    # 文档规则列表查询-根据规则名称查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_02                       #接口数据
+    # 导出自动化测试规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_exportDocRuleExcel.yaml        #接口路径
+      api: dlpDocRule_exportDocRuleExcel                           #接口id
+      data: dlpDocRule_exportDocRuleExcel_01                       #接口数据
+# 用例id
+importDocRuleSheet:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 导入自动化测试关键字规则
+  # 用例描述
+  description: 导入自动化测试关键字规则
+  # 测试步骤
+  steps:
+    # 导入自动化测试关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_importDocRuleSheet.yaml        #接口路径
+      api: dlpDocRule_importDocRuleSheet                           #接口id
+      data: dlpDocRule_importDocRuleSheet_01                       #接口数据
+# 用例id
+downloadDocRuleModel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 文档规则模板下载
+  # 用例描述
+  description: 文档规则模板下载
+  # 测试步骤
+  steps:
+    # 文档规则模板下载
+    - api_path: /bms/dlpDocRule/dlpDocRule_downloadDocRuleModel.yaml        #接口路径
+      api: dlpDocRule_downloadDocRuleModel                           #接口id
+      data: dlpDocRule_downloadDocRuleModel_01                       #接口数据
+# 用例id
+checkDuplicateRegular:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 校验正则表达式是否重复
+  # 用例描述
+  description: 校验正则表达式是否重复
+  # 测试步骤
+  steps:
+    # 校验正则表达式是否重复-不重复
+    - api_path: /bms/dlpDocRule/dlpDocRule_checkDuplicateRegular.yaml        #接口路径
+      api: dlpDocRule_checkDuplicateRegular                           #接口id
+      data: dlpDocRule_checkDuplicateRegular_01                       #接口数据
+    # 新增正则规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_02                       #接口数据
+    # 校验正则表达式是否重复-重复
+    - api_path: /bms/dlpDocRule/dlpDocRule_checkDuplicateRegular.yaml        #接口路径
+      api: dlpDocRule_checkDuplicateRegular                           #接口id
+      data: dlpDocRule_checkDuplicateRegular_02                       #接口数据
+# 用例id
+deleteDlpDocRules:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 关键字/正则
+  # 用例名称
+  name: 删除自动化测试规则
+  # 用例描述
+  description: 删除自动化测试规则
+  # 测试步骤
+  steps:
+    # 新增关键字规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: dlpDocRule_insertDlpDocRules_01                       #接口数据
+    # 文档规则列表查询-根据规则名称查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: dlpDocRule_selectDlpDocRules_02                       #接口数据
+    # 删除自动化测试规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_deleteDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_deleteDlpDocRules                           #接口id
+      data: dlpDocRule_deleteDlpDocRules_01                       #接口数据

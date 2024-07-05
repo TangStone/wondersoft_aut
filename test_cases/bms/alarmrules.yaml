@@ -1,0 +1,123 @@
+# 告警信息
+# 用例id
+monitorAlarmRules_add:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 告警规则
+  # 用例名称
+  name: 新增告警规则
+  # 用例描述
+  description: 新增告警规则
+  # 测试步骤
+  steps:
+    # 新增告警规则
+    - api_path: /bms/alarmrules/alarmrules_add.yaml        #接口路径
+      api: alarmrules_add                           #接口id
+      data: alarmrules_add_01                       #接口数据
+monitorAlarmRules_isEnable:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 告警规则
+  # 用例名称
+  name: 启用停用规则
+  # 用例描述
+  description: 启用停用规则
+  # 测试步骤
+  steps:
+    # 新增告警规则
+    - api_path: /bms/alarmrules/alarmrules_add.yaml        #接口路径
+      api: alarmrules_add                           #接口id
+      data: alarmrules_add_01                       #接口数据
+    # 查看停用告警规则
+    - api_path: /bms/alarmrules/alarmrules_monitorAlarmRules.yaml        #接口路径
+      api: alarmrules_monitorAlarmRules                           #接口id
+      data: alarmrules_monitorAlarmRules_05                       #接口数据
+    # 启用告警规则
+    - api_path: /bms/alarmrules/alarmrules_isEnable.yaml        #接口路径
+      api: alarmrules_isEnable                           #接口id
+      data: alarmrules_isEnable_01                       #接口数据
+    # 查看启用告警规则
+    - api_path: /bms/alarmrules/alarmrules_monitorAlarmRules.yaml        #接口路径
+      api: alarmrules_monitorAlarmRules                           #接口id
+      data: alarmrules_monitorAlarmRules_04                       #接口数据
+    # 停用告警规则
+    - api_path: /bms/alarmrules/alarmrules_isEnable.yaml        #接口路径
+      api: alarmrules_isEnable                           #接口id
+      data: alarmrules_isEnable_02                       #接口数据
+monitorAlarmRules_edit:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 告警规则
+  # 用例名称
+  name: 修改告警规则
+  # 用例描述
+  description: 修改告警规则
+  # 测试步骤
+  steps:
+    # 新增告警规则
+    - api_path: /bms/alarmrules/alarmrules_add.yaml        #接口路径
+      api: alarmrules_add                           #接口id
+      data: alarmrules_add_01                       #接口数据
+    # 查询监控报警规则列表-根据告警规则名称、告警类型、规则状态筛选
+    - api_path: /bms/alarmrules/alarmrules_monitorAlarmRules.yaml        #接口路径
+      api: alarmrules_monitorAlarmRules                           #接口id
+      data: alarmrules_monitorAlarmRules_06                       #接口数据
+    # 修改CPU告警规则
+    - api_path: /bms/alarmrules/alarmrules_edit.yaml        #接口路径
+      api: alarmrules_edit                           #接口id
+      data: alarmrules_edit_01                       #接口数据
+monitorAlarmRules_search:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 告警规则
+  # 用例名称
+  name: 查询监控报警规则
+  # 用例描述
+  description: 查询监控报警规则
+  # 测试步骤
+  steps:
+    # 新增告警规则
+    - api_path: /bms/alarmrules/alarmrules_add.yaml        #接口路径
+      api: alarmrules_add                           #接口id
+      data: alarmrules_add_01                       #接口数据
+    # 查询监控报警规则列表-不同筛选条件
+    - api_path: /bms/alarmrules/alarmrules_monitorAlarmRules.yaml        #接口路径
+      api: alarmrules_monitorAlarmRules                           #接口id
+      data: [alarmrules_monitorAlarmRules_01,alarmrules_monitorAlarmRules_02,alarmrules_monitorAlarmRules_03]                       #接口数据
+monitorAlarmRules_del:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 告警规则
+  # 用例名称
+  name: 删除告警规则
+  # 用例描述
+  description: 删除告警规则
+  # 测试步骤
+  steps:
+    # 新增告警规则
+    - api_path: /bms/alarmrules/alarmrules_add.yaml        #接口路径
+      api: alarmrules_add                           #接口id
+      data: alarmrules_add_01                       #接口数据
+    # 查询监控报警规则列表-根据告警规则名称、告警类型、规则状态筛选
+    - api_path: /bms/alarmrules/alarmrules_monitorAlarmRules.yaml        #接口路径
+      api: alarmrules_monitorAlarmRules                           #接口id
+      data: alarmrules_monitorAlarmRules_06                       #接口数据
+    # 删除告警规则
+    - api_path: /bms/alarmrules/alarmrules_del.yaml        #接口路径
+      api: alarmrules_del                           #接口id
+      data: alarmrules_del_01                       #接口数据

@@ -1,0 +1,37 @@
+# 服务监控
+# 用例id
+servers:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 服务监控
+  # 用例名称
+  name: 查询服务器列表
+  # 用例描述
+  description: 查询服务器列表
+  # 测试步骤
+  steps:
+    # 查询服务器列表
+    - api_path: /bms/servermonitor/servermonitor_servers.yaml        #接口路径
+      api: servermonitor_servers                           #接口id
+      data: servermonitor_servers_01                       #接口数据
+# 用例id
+listEndpoint:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 服务监控
+  # 用例名称
+  name: 查询集群列表
+  # 用例描述
+  description: 查询集群列表
+  # 测试步骤
+  steps:
+    # 查询服务器列表
+    - api_path: /bms/servermonitor/servermonitor_listEndpoint.yaml        #接口路径
+      api: servermonitor_listEndpoint                           #接口id
+      data: servermonitor_listEndpoint_01                       #接口数据

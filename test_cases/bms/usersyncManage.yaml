@@ -1,0 +1,41 @@
+# 用户推送
+# 用例id
+list:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户推送
+  # 用例名称
+  name: 同步用户列表状态查询
+  # 用例描述
+  description: 同步用户列表状态查询
+  # 测试步骤
+  steps:
+    # 同步用户列表状态查询
+    - api_path: /bms/usersyncManage/usersyncManage_list.yaml        #接口路径
+      api: usersyncManage_list                           #接口id
+      data: usersyncManage_list_01                       #接口数据
+# 用例id
+push:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户推送
+  # 用例名称
+  name: 用户推送
+  # 用例描述
+  description: 用户推送
+  # 测试步骤
+  steps:
+    # 同步用户列表状态查询
+    - api_path: /bms/usersyncManage/usersyncManage_list.yaml        #接口路径
+      api: usersyncManage_list                           #接口id
+      data: usersyncManage_list_01                       #接口数据
+    # 用户推送
+    - api_path: /bms/usersyncManage/usersyncManage_push.yaml        #接口路径
+      api: usersyncManage_push                           #接口id
+      data: usersyncManage_push_01                       #接口数据

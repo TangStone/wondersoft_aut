@@ -1,0 +1,144 @@
+# 角色配置
+# 用例id
+roleAdd:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 新增角色
+  # 用例描述
+  description: 新增角色
+  # 测试步骤
+  steps:
+    # 新增角色
+    - api_path: /bms/role/role_add.yaml        #接口路径
+      api: role_add                           #接口id
+      data: role_add_01                       #接口数据
+# 用例id
+roleList:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 角色列表搜索-无搜索条件
+  # 用例描述
+  description: 不输入搜索条件，点击搜索，查看角色列表
+  # 测试步骤
+  steps:
+    # 新增角色
+    - api_path: /bms/role/role_add.yaml        #接口路径
+      api: role_add                           #接口id
+      data: role_add_01                       #接口数据
+    # 不输入搜索条件，点击搜索，查看角色列表
+    - api_path: /bms/role/role_list.yaml        #接口路径
+      api: role_list                           #接口id
+      data: role_list_01                       #接口数据
+# 用例id
+roleList_querybyname:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 角色列表搜索-按角色名称条件
+  # 用例描述
+  description: 输入角色名称搜索条件，点击搜索，查看角色列表
+  # 测试步骤
+  steps:
+    # 新增角色
+    - api_path: /bms/role/role_add.yaml        #接口路径
+      api: role_add                           #接口id
+      data: role_add_01                       #接口数据
+    # 输入角色名称搜索条件，点击搜索，查看角色列表
+    - api_path: /bms/role/role_list.yaml        #接口路径
+      api: role_list                           #接口id
+      data: role_list_02                       #接口数据
+# 用例id
+roleDetail:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 自动化测试角色详情查看
+  # 用例描述
+  description: 自动化测试角色详情查看
+  # 测试步骤
+  steps:
+    # 新增角色,输入角色名称搜索条件，点击搜索，查看角色列表
+    - case_path: /bms/role.yaml                             #用例路径
+      case: roleList_querybyname                                     #用例id
+    # 自动化测试角色详情查看
+    - api_path: /bms/role/role_detail.yaml        #接口路径
+      api: role_detail                           #接口id
+      data: role_detail_01                       #接口数据
+# 用例id
+rolemenuAndOperations:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 角色待选菜单列表
+  # 用例描述
+  description: 角色待选菜单列表
+  # 测试步骤
+  steps:
+    # 角色待选菜单列表
+    - api_path: /bms/role/role_menuAndOperations.yaml        #接口路径
+      api: role_menuAndOperations                           #接口id
+      data: role_menuAndOperations_01                       #接口数据
+# 用例id
+roleUpdate:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 修改角色成功
+  # 用例描述
+  description: 修改角色成功
+  # 测试步骤
+  steps:
+    # 新增角色,输入角色名称搜索条件，点击搜索，查看角色列表
+    - case_path: /bms/role.yaml                             #用例路径
+      case: roleDetail                                     #用例id
+    # 修改角色成功
+    - api_path: /bms/role/role_update.yaml        #接口路径
+      api: role_update                           #接口id
+      data: role_update_01                       #接口数据
+# 用例id
+roleDelete:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 权限管理
+  # 三级模块
+  story: 角色配置
+  # 用例名称
+  name: 自动化测试角色删除
+  # 用例描述
+  description: 自动化测试角色删除
+  # 测试步骤
+  steps:
+    # 新增角色,输入角色名称搜索条件，点击搜索，查看角色列表
+    - case_path: /bms/role.yaml                             #用例路径
+      case: roleList_querybyname                                     #用例id
+    # 自动化测试角色删除
+    - api_path: /bms/role/role_delete.yaml        #接口路径
+      api: role_delete                           #接口id
+      data: role_delete_01                       #接口数据

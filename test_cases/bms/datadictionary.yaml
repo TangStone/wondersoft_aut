@@ -1,0 +1,211 @@
+# 数据字典
+# 用例id
+insertDlpDocRules:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 新增数据字典
+  # 用例描述
+  description: 输入正确的数据字典配置，新增数据字典规则
+  # 测试步骤
+  steps:
+    # 新增数据字典
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: datadictionary_insertDlpDocRules_01                       #接口数据
+# 用例id
+selectDlpDocRules:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 数据字典列表查询
+  # 用例描述
+  description: 数据字典列表查询
+  # 测试步骤
+  steps:
+    # 数据字典列表查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                           #接口id
+      data: [datadictionary_selectDlpDocRules_01,datadictionary_selectDlpDocRules_02,datadictionary_selectDlpDocRules_03,datadictionary_selectDlpDocRules_04]                       #接口数据
+# 用例id
+updateDlpDocRules:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 修改数据字典规则
+  # 用例描述
+  description: 修改数据字典规则
+  # 测试步骤
+  steps:
+    # 新增数据字典
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: datadictionary_insertDlpDocRules_01                       #接口数据
+    # 数据字典列表查询-根据规则名称、规则来源查询数据字典规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                               #接口id
+      data: datadictionary_selectDlpDocRules_04                       #接口数据
+    # 修改数据字典规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_updateDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_updateDlpDocRules                           #接口id
+      data: datadictionary_updateDlpDocRules_01                       #接口数据
+# 用例id
+getDlpDocStrategy:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 查询自定义数据字典规则策略
+  # 用例描述
+  description: 查询自定义数据字典规则策略
+  # 测试步骤
+  steps:
+    # 新增数据字典
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: datadictionary_insertDlpDocRules_01                       #接口数据
+    # 数据字典列表查询-根据规则名称、规则来源查询数据字典规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                               #接口id
+      data: datadictionary_selectDlpDocRules_04                       #接口数据
+    # 查询自定义数据字典规则策略
+    - api_path: /bms/dlpDocRule/dlpDocRule_getDlpDocStrategy.yaml        #接口路径
+      api: dlpDocRule_getDlpDocStrategy                           #接口id
+      data: datadictionary_getDlpDocStrategy_01                       #接口数据
+# 用例id
+checkExportDocRule:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 导出数据字典规则核查
+  # 用例描述
+  description: 导出数据字典规则核查
+  # 测试步骤
+  steps:
+    # 新增数据字典
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: datadictionary_insertDlpDocRules_01                       #接口数据
+    # 数据字典列表查询-根据规则名称查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                               #接口id
+      data: datadictionary_selectDlpDocRules_02                       #接口数据
+    # 导出自动化测试数据字典规则核查
+    - api_path: /bms/dlpDocRule/dlpDocRule_checkExportDocRule.yaml        #接口路径
+      api: dlpDocRule_checkExportDocRule                           #接口id
+      data: datadictionary_checkExportDocRule_01                       #接口数据
+    # 数据字典列表查询-无搜索条件
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                               #接口id
+      data: datadictionary_selectDlpDocRules_01                      #接口数据
+    # 导出数据字典规则,包含内置数据字典规则核查
+    - api_path: /bms/dlpDocRule/dlpDocRule_checkExportDocRule.yaml        #接口路径
+      api: dlpDocRule_checkExportDocRule                           #接口id
+      data: datadictionary_checkExportDocRule_02                       #接口数据
+# 用例id
+exportDocRuleExcel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 导出数据字典规则
+  # 用例描述
+  description: 导出数据字典规则
+  # 测试步骤
+  steps:
+    # 新增数据字典
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: datadictionary_insertDlpDocRules_01                       #接口数据
+    # 数据字典列表查询-根据规则名称查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                               #接口id
+      data: datadictionary_selectDlpDocRules_02                       #接口数据
+    # 导出自动化测试数据字典规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_exportDocRuleExcel.yaml        #接口路径
+      api: dlpDocRule_exportDocRuleExcel                               #接口id
+      data: datadictionary_exportDocRuleExcel_01                       #接口数据
+# 用例id
+downloadDataDictionaryModel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 数据字典模板下载
+  # 用例描述
+  description: 数据字典模板下载
+  # 测试步骤
+  steps:
+    # 数据字典模板下载
+    - api_path: /bms/datadictionary/datadictionary_downloadDataDictionaryModel.yaml        #接口路径
+      api: datadictionary_downloadDataDictionaryModel                           #接口id
+      data: datadictionary_downloadDataDictionaryModel_01                       #接口数据
+# 用例id
+analysisDicExcel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 数据字典excel解析
+  # 用例描述
+  description: 数据字典excel解析
+  # 测试步骤
+  steps:
+    # 数据字典模板下载
+    - api_path: /bms/datadictionary/datadictionary_analysisDicExcel.yaml        #接口路径
+      api: datadictionary_analysisDicExcel                           #接口id
+      data: datadictionary_analysisDicExcel_01                       #接口数据
+# 用例id
+deleteDlpDocRules:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 数据字典
+  # 用例名称
+  name: 删除自动化测试数据字典规则
+  # 用例描述
+  description: 删除自动化测试数据字典规则
+  # 测试步骤
+  steps:
+    # 新增数据字典
+    - api_path: /bms/dlpDocRule/dlpDocRule_insertDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_insertDlpDocRules                           #接口id
+      data: datadictionary_insertDlpDocRules_01                       #接口数据
+    # 数据字典列表查询-根据规则名称查询
+    - api_path: /bms/dlpDocRule/dlpDocRule_selectDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_selectDlpDocRules                               #接口id
+      data: datadictionary_selectDlpDocRules_02                       #接口数据
+    # 删除自动化测试数据字典规则
+    - api_path: /bms/dlpDocRule/dlpDocRule_deleteDlpDocRules.yaml        #接口路径
+      api: dlpDocRule_deleteDlpDocRules                               #接口id
+      data: datadictionary_deleteDlpDocRules_01                       #接口数据

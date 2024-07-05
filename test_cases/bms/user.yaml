@@ -1,0 +1,460 @@
+# 用户与机构管理
+# 用例id
+queryAreaList:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 地域列表查询
+  # 用例描述
+  description: 地域列表查询
+  # 测试步骤
+  steps:
+    # 地域列表查询
+    - api_path: /bms/user/user_queryAreaList.yaml        #接口路径
+      api: user_queryAreaList                           #接口id
+      data: user_queryAreaList_01                       #接口数据
+# 用例id
+groupAdd:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 新增用户组-成功
+  # 用例描述
+  description: 新增用户组-成功
+  # 测试步骤
+  steps:
+    # 新增用户组-成功
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_01                       #接口数据
+# 用例id
+groupAdd_required_check:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 新增用户组-必填字段校验
+  # 用例描述
+  description: 缺少父用户组id字段，接口请求失败，提示信息正确
+  # 测试步骤
+  steps:
+    # 新增用户组-必填字段校验
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_02                       #接口数据
+# 用例id
+groupAdd_dupname_check:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 新增用户组-重名校验
+  # 用例描述
+  description: 新增用户组，用户组名称已存在，新增失败，提示信息正确
+  # 测试步骤
+  steps:
+    # 新增用户组-重名校验
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_03                       #接口数据
+# 用例id
+groupAdd_len_check:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 新增用户组-长度校验
+  # 用例描述
+  description: 新增用户组，用户组名称超长，新增失败，提示信息正确
+  # 测试步骤
+  steps:
+    # 新增用户组-长度校验
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_04                       #接口数据
+# 用例id
+groupAdd_Spechar_check:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 新增用户组-特殊字符校验
+  # 用例描述
+  description: 新增用户组，用户组名称存在特殊字符，新增失败，提示信息正确
+  # 测试步骤
+  steps:
+    # 新增用户组-特殊字符校验
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_04                       #接口数据
+# 用例id
+querygroups:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 用户组列表搜索-搜索一级组织机构下用户组列表
+  # 用例描述
+  description: 用户组列表搜索-搜索一级组织机构下用户组列表
+  # 测试步骤
+  steps:
+    # 新增用户组-成功
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_01                       #接口数据
+    # 搜索一级组织机构下用户组列表
+    - api_path: /bms/user/user_querygroups.yaml        #接口路径
+      api: user_querygroups                           #接口id
+      data: user_querygroups_01                       #接口数据
+    # 搜索一级组织机构下特定用户组信息
+    - api_path: /bms/user/user_querygroups.yaml        #接口路径
+      api: user_querygroups                           #接口id
+      data: user_querygroups_02                       #接口数据
+# 用例id
+querygroups_bygroupName:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 用户组列表搜索-搜索一级组织机构下特定用户组信息
+  # 用例描述
+  description: 用户组列表搜索-搜索一级组织机构下特定用户组信息
+  # 测试步骤
+  steps:
+    # 新增用户组-成功
+    - api_path: /bms/user/user_group_add.yaml        #接口路径
+      api: user_group_add                           #接口id
+      data: user_group_add_01                       #接口数据
+    # 搜索一级组织机构下特定用户组信息
+    - api_path: /bms/user/user_querygroups.yaml        #接口路径
+      api: user_querygroups                           #接口id
+      data: user_querygroups_02                       #接口数据
+# 用例id
+groupUpdate:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 修改用户组名称成功
+  # 用例描述
+  description: 修改用户组名称成功
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 修改用户组名称成功
+    - api_path: /bms/user/user_group_update.yaml        #接口路径
+      api: user_group_update                           #接口id
+      data: user_group_update_01                       #接口数据
+group_searchbyid:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 根据用户组ID精确查询用户组
+  # 用例描述
+  description: 根据用户组ID精确查询用户组
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 根据用户组ID精确查询用户组
+    - api_path: /bms/user/user_group_searchbyid.yaml        #接口路径
+      api: user_group_searchbyid                           #接口id
+      data: user_group_searchbyid_01                       #接口数据
+groups_view:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 查看一级组织机构下用户组列表
+  # 用例描述
+  description: 查看一级组织机构下用户组列表
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 根据用户组ID精确查询用户组
+    - api_path: /bms/user/user_groups_view.yaml        #接口路径
+      api: user_groups_view                           #接口id
+      data: user_groups_view_01                       #接口数据
+# 用例id
+group_delete:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 删除自动化测试用户组
+  # 用例描述
+  description: 删除自动化测试用户组
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 删除自动化测试用户组
+    - api_path: /bms/user/user_group_delete.yaml        #接口路径
+      api: user_group_delete                           #接口id
+      data: user_group_delete_01                       #接口数据
+# 用例id
+group_delete_batch:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 批量删除自动化测试用户组
+  # 用例描述
+  description: 批量删除自动化测试用户组
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 批量删除自动化测试用户组
+    - api_path: /bms/user/user_group_delete.yaml        #接口路径
+      api: user_group_delete_batch                           #接口id
+      data: user_group_delete_batch_01                       #接口数据
+userAdd:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 自建用户组新增普通职员用户成功
+  # 用例描述
+  description: 在自动化测试组下新增用户，职位为普通用户
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 自建用户组新增普通职员用户成功
+    - api_path: /bms/user/user_add.yaml        #接口路径
+      api: user_add                           #接口id
+      data: user_add_01                       #接口数据
+userAdd_nogroup:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 新增用户-所属用户组不存在
+  # 用例描述
+  description: 在自动化测试组下新增用户，所属用户组不存在
+  # 测试步骤
+  steps:
+    # 用户组列表搜索-搜索一级组织机构下特定用户组信息
+    - case_path: /bms/user.yaml                             #用例路径
+      case: querygroups_bygroupName                                     #用例id
+    # 自建用户组新增普通职员用户成功
+    - api_path: /bms/user/user_add.yaml        #接口路径
+      api: user_add                           #接口id
+      data: user_add_02                       #接口数据
+userList:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 用户列表搜索
+  # 用例描述
+  description: 用户列表搜索
+  # 测试步骤
+  steps:
+    # 新增用户
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userAdd                                     #用例id
+    # 用户列表搜索
+    - api_path: /bms/user/user_list.yaml        #接口路径
+      api: user_list                           #接口id
+      data: [user_list_01,user_list_02]                       #接口数据
+userList_searchbyname:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 用户列表搜索
+  # 用例描述
+  description: 用户列表搜索
+  # 测试步骤
+  steps:
+    # 新增用户
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userAdd                                     #用例id
+    # 用户列表搜索
+    - api_path: /bms/user/user_list.yaml        #接口路径
+      api: user_list                           #接口id
+      data: user_list_03                       #接口数据
+exportUserinfo:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 导出自动化测试用户数据
+  # 用例描述
+  description: 导出自动化测试用户数据
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 导出自动化测试用户数据
+    - api_path: /bms/user/user_exportUserinfo.yaml        #接口路径
+      api: user_exportUserinfo                           #接口id
+      data: user_exportUserinfo_01                       #接口数据
+user_searchbyid:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 获取用户信息
+  # 用例描述
+  description: 获取用户信息
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 获取用户信息
+    - api_path: /bms/user/user_searchbyid.yaml        #接口路径
+      api: user_searchbyid                           #接口id
+      data: user_searchbyid_01                       #接口数据
+user_update:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 修改用户姓名成功
+  # 用例描述
+  description: 修改用户姓名成功
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 修改用户姓名成功
+    - api_path: /bms/user/user_update.yaml        #接口路径
+      api: user_update                           #接口id
+      data: user_update_01                       #接口数据
+user_passwd_reset:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 自动化测试用户重置密码成功
+  # 用例描述
+  description: 自动化测试用户重置密码成功
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 修改用户姓名成功
+    - api_path: /bms/user/user_passwd_reset.yaml        #接口路径
+      api: user_passwd_reset                           #接口id
+      data: user_passwd_reset_01                       #接口数据
+user_delete:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 删除自动化测试用户
+  # 用例描述
+  description: 删除自动化测试用户
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 修改用户姓名成功
+    - api_path: /bms/user/user_delete.yaml        #接口路径
+      api: user_delete                           #接口id
+      data: user_delete_01                       #接口数据
+user_delete_batch:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 用户与机构管理
+  # 用例名称
+  name: 批量删除自动化测试用户
+  # 用例描述
+  description: 批量删除自动化测试用户
+  # 测试步骤
+  steps:
+    # 新增用户,搜索自动化测试组织机构下的用户列表-根据姓名搜索
+    - case_path: /bms/user.yaml                             #用例路径
+      case: userList_searchbyname                                     #用例id
+    # 修改用户姓名成功
+    - api_path: /bms/user/user_delete.yaml        #接口路径
+      api: user_delete_batch                           #接口id
+      data: user_delete_batch_01                       #接口数据

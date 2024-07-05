@@ -1,0 +1,377 @@
+# 用户同步
+# 用例id
+config_add:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 新增LDAP数据源成功
+  # 用例描述
+  description: 新增LDAP数据源成功
+  # 测试步骤
+  steps:
+    # 新增LDAP数据源成功
+    - api_path: /bms/usersync/usersync_config_add.yaml        #接口路径
+      api: usersync_config_add                           #接口id
+      data: usersync_config_add_01                       #接口数据
+# 用例id
+configs:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 数据源列表搜索-无搜索条件
+  # 用例描述
+  description: 数据源列表搜索-无搜索条件
+  # 测试步骤
+  steps:
+    # 新增LDAP数据源成功
+    - api_path: /bms/usersync/usersync_config_add.yaml        #接口路径
+      api: usersync_config_add                           #接口id
+      data: usersync_config_add_01                       #接口数据
+    # 数据源列表搜索-无搜索条件
+    - api_path: /bms/usersync/usersync_configs.yaml        #接口路径
+      api: usersync_configs                           #接口id
+      data: usersync_configs_01                       #接口数据
+# 用例id
+configs_searchbyname:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 数据源列表搜索-按数据源名称搜索
+  # 用例描述
+  description: 数据源列表搜索-按数据源名称搜索
+  # 测试步骤
+  steps:
+    # 新增LDAP数据源成功
+    - api_path: /bms/usersync/usersync_config_add.yaml        #接口路径
+      api: usersync_config_add                           #接口id
+      data: usersync_config_add_01                       #接口数据
+    # 数据源列表搜索-按数据源名称搜索
+    - api_path: /bms/usersync/usersync_configs.yaml        #接口路径
+      api: usersync_configs                           #接口id
+      data: usersync_configs_02                       #接口数据
+# 用例id
+config_update:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 修改LDAP数据源名称成功
+  # 用例描述
+  description: 修改LDAP数据源名称成功
+  # 测试步骤
+  steps:
+    # 数据源列表搜索-按数据源名称搜索
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: configs_searchbyname                                     #用例id
+    # 修改LDAP数据源名称成功
+    - api_path: /bms/usersync/usersync_config_update.yaml        #接口路径
+      api: usersync_config_update                           #接口id
+      data: usersync_config_update_01                       #接口数据
+# 用例id
+config_test:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 测试数据源配置
+  # 用例描述
+  description: 测试数据源配置
+  # 测试步骤
+  steps:
+    # 测试数据源配置
+    - api_path: /bms/usersync/usersync_config_test.yaml        #接口路径
+      api: usersync_config_test                           #接口id
+      data: usersync_config_test_01                       #接口数据
+# 用例id
+config_searchbyconfigId:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 根据id查看数据源配置成功
+  # 用例描述
+  description: 输入正确的数据源id，查看数据源配置
+  # 测试步骤
+  steps:
+    # 管理员审计-获取查询条件
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: configs_searchbyname                                     #用例id
+    # 根据id查看数据源配置成功
+    - api_path: /bms/usersync/usersync_config_searchbyconfigId.yaml        #接口路径
+      api: usersync_config_searchbyconfigId                           #接口id
+      data: usersync_config_searchbyconfigId_01                       #接口数据
+# 用例id
+syncConfig_add:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 新增同步配置成功
+  # 用例描述
+  description: 输入正确的同步配置项，新增成功
+  # 测试步骤
+  steps:
+    # 数据源列表搜索-按数据源名称搜索
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: configs_searchbyname                                     #用例id
+    # 新增同步配置成功
+    - api_path: /bms/usersync/usersync_syncConfig.yaml        #接口路径
+      api: usersync_syncConfig                           #接口id
+      data: usersync_syncConfig_add_01                       #接口数据
+# 用例id
+syncConfig_list:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 同步配置列表搜索-无搜索条件
+  # 用例描述
+  description: 不输入搜索条件，点击搜索，查看数据源列表
+  # 测试步骤
+  steps:
+    # 新增同步配置成功
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: syncConfig_add                                     #用例id
+    # 同步配置列表搜索-无搜索条件
+    - api_path: /bms/usersync/usersync_syncConfig_list.yaml        #接口路径
+      api: usersync_syncConfig_list                           #接口id
+      data: usersync_syncConfig_list_01                       #接口数据
+# 用例id
+syncConfig_list_searchbysyncName:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 同步配置列表搜索-按同步配置名称搜索
+  # 用例描述
+  description: 输入同步配置名称，点击搜索，查看同步配置列表
+  # 测试步骤
+  steps:
+    # 新增同步配置成功
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: syncConfig_add                                     #用例id
+    # 输入同步配置名称，点击搜索，查看同步配置列表
+    - api_path: /bms/usersync/usersync_syncConfig_list.yaml        #接口路径
+      api: usersync_syncConfig_list                           #接口id
+      data: usersync_syncConfig_list_02                       #接口数据
+# 用例id
+syncConfig_update:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 修改同步配置名称成功
+  # 用例描述
+  description: 修改同步配置名称成功
+  # 测试步骤
+  steps:
+    # 同步配置列表搜索-按同步配置名称搜索
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: syncConfig_list_searchbysyncName                                     #用例id
+    # 修改同步配置名称成功
+    - api_path: /bms/usersync/usersync_syncConfig.yaml        #接口路径
+      api: usersync_syncConfig                           #接口id
+      data: usersync_syncConfig_update_01                       #接口数据
+# 用例id
+syncConfig_alllist:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 查询所有同步配置
+  # 用例描述
+  description: 查询所有同步配置
+  # 测试步骤
+  steps:
+    # 查询所有同步配置
+    - api_path: /bms/usersync/usersync_syncConfig_alllist.yaml        #接口路径
+      api: usersync_syncConfig_alllist                           #接口id
+      data: usersync_syncConfig_alllist_01                       #接口数据
+# 用例id
+sync:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: LADP域立即同步
+  # 用例描述
+  description: 同步LADP数据源
+  # 测试步骤
+  steps:
+    # 同步配置列表搜索-按同步配置名称搜索
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: syncConfig_list_searchbysyncName                                     #用例id
+    # LADP域立即同步
+    - api_path: /bms/usersync/usersync_sync.yaml        #接口路径
+      api: usersync_sync                           #接口id
+      data: usersync_sync_01                       #接口数据
+# 用例id
+syncConfig_delete:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 删除单个同步配置
+  # 用例描述
+  description: 删除单个同步配置
+  # 测试步骤
+  steps:
+    # 同步配置列表搜索-按同步配置名称搜索
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: syncConfig_list_searchbysyncName                                     #用例id
+    # 删除单个同步配置
+    - api_path: /bms/usersync/usersync_syncConfig_delete.yaml        #接口路径
+      api: usersync_syncConfig_delete                           #接口id
+      data: usersync_syncConfig_delete_01                       #接口数据
+# 用例id
+config_delete:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 删除数据源配置
+  # 用例描述
+  description: 删除数据源配置
+  # 测试步骤
+  steps:
+    # 数据源列表搜索-按数据源名称搜索
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: configs_searchbyname                                     #用例id
+    # LADP域立即同步
+    - api_path: /bms/usersync/usersync_config_delete.yaml        #接口路径
+      api: usersync_config_delete                           #接口id
+      data: usersync_config_delete_01                       #接口数据
+# 用例id
+tasks:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 查询同步任务列表
+  # 用例描述
+  description: 查询同步任务列表
+  # 测试步骤
+  steps:
+    # LADP域立即同步
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: sync                                     #用例id
+    # 查询同步任务列表
+    - api_path: /bms/usersync/usersync_tasks.yaml        #接口路径
+      api: usersync_tasks                           #接口id
+      data: [usersync_tasks_01,usersync_tasks_02]                       #接口数据
+# 用例id
+task_statistics:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 查询近7次的同步状态
+  # 用例描述
+  description: 查询近7次的同步状态
+  # 测试步骤
+  steps:
+    # 查询近7次的同步状态
+    - api_path: /bms/usersync/usersync_task_statistics.yaml        #接口路径
+      api: usersync_task_statistics                           #接口id
+      data: usersync_task_statistics_01                       #接口数据
+# 用例id
+task_log:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 查询最新同步任务日志
+  # 用例描述
+  description: 查询最新同步任务日志
+  # 测试步骤
+  steps:
+    # LADP域立即同步
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: sync                                     #用例id
+    # 同步任务列表搜索-按时间范围搜索
+    - api_path: /bms/usersync/usersync_tasks.yaml        #接口路径
+      api: usersync_tasks                           #接口id
+      data: usersync_tasks_02                       #接口数据
+    # 查询最新同步任务日志
+    - api_path: /bms/usersync/usersync_task_log.yaml        #接口路径
+      api: usersync_task_log                           #接口id
+      data: usersync_task_log_01                       #接口数据
+# 用例id
+query_groupId:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 用户同步管理
+  # 三级模块
+  story: 用户同步
+  # 用例名称
+  name: 获取同步根组id
+  # 用例描述
+  description: 获取同步根组id
+  # 测试步骤
+  steps:
+    # LADP域立即同步
+    - case_path: /bms/usersync.yaml                             #用例路径
+      case: sync                                     #用例id
+    # 同步任务列表搜索-按时间范围搜索
+    - api_path: /bms/usersync/usersync_tasks.yaml        #接口路径
+      api: usersync_tasks                           #接口id
+      data: usersync_tasks_02                       #接口数据
+    # 获取同步根组id
+    - api_path: /bms/usersync/usersync_query_groupId.yaml        #接口路径
+      api: usersync_query_groupId                           #接口id
+      data: usersync_query_groupId_01                       #接口数据

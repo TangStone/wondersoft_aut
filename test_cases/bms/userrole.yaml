@@ -1,0 +1,92 @@
+# 职位管理
+# 用例id
+roleAdd:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 职位管理
+  # 用例名称
+  name: 新增职位成功
+  # 用例描述
+  description: 新增职位成功
+  # 测试步骤
+  steps:
+    # 新增职位成功
+    - api_path: /bms/userrole/userrole_add.yaml        #接口路径
+      api: userrole_add                           #接口id
+      data: userrole_add_01                       #接口数据
+# 用例id
+roleList:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 职位管理
+  # 用例名称
+  name: 职位列表搜索
+  # 用例描述
+  description: 职位列表搜索
+  # 测试步骤
+  steps:
+    # 新增职位成功
+    - api_path: /bms/userrole/userrole_add.yaml        #接口路径
+      api: userrole_add                           #接口id
+      data: userrole_add_01                       #接口数据
+    # 职位列表搜索
+    - api_path: /bms/userrole/userrole_list.yaml        #接口路径
+      api: userrole_list                           #接口id
+      data: [userrole_list_01,userrole_list_02]                       #接口数据
+# 用例id
+roleUpdate:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 职位管理
+  # 用例名称
+  name: 修改职位成功
+  # 用例描述
+  description: 修改职位成功
+  # 测试步骤
+  steps:
+    # 新增职位成功
+    - api_path: /bms/userrole/userrole_add.yaml        #接口路径
+      api: userrole_add                           #接口id
+      data: userrole_add_01                       #接口数据
+    # 职位列表搜索-按职位名称条件
+    - api_path: /bms/userrole/userrole_list.yaml        #接口路径
+      api: userrole_list                           #接口id
+      data: userrole_list_02                       #接口数据
+    # 修改职位成功
+    - api_path: /bms/userrole/userrole_update.yaml        #接口路径
+      api: userrole_update                           #接口id
+      data: userrole_update_01                       #接口数据
+roleDelete:
+  # 一级模块
+  epic: 用户管理
+  # 二级模块
+  feature: 基础数据管理
+  # 三级模块
+  story: 职位管理
+  # 用例名称
+  name: 删除职位成功
+  # 用例描述
+  description: 删除职位成功
+  # 测试步骤
+  steps:
+    # 新增职位成功
+    - api_path: /bms/userrole/userrole_add.yaml        #接口路径
+      api: userrole_add                           #接口id
+      data: userrole_add_01                       #接口数据
+    # 职位列表搜索-按职位名称条件
+    - api_path: /bms/userrole/userrole_list.yaml        #接口路径
+      api: userrole_list                           #接口id
+      data: userrole_list_02                       #接口数据
+    # 删除职位成功
+    - api_path: /bms/userrole/userrole_delete.yaml        #接口路径
+      api: userrole_delete                           #接口id
+      data: userrole_delete_01                       #接口数据

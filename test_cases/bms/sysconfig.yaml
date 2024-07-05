@@ -1,0 +1,125 @@
+# 系统参数管理
+# 用例id
+getSysParamInfo:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统参数管理
+  # 用例名称
+  name: 系统配置查询
+  # 用例描述
+  description: 系统配置查询
+  # 测试步骤
+  steps:
+    # 系统配置查询
+    - api_path: /bms/sysconfig/sysconfig_info.yaml        #接口路径
+      api: sysconfig_info                           #接口id
+      data: sysconfig_info_01                       #接口数据
+# 用例id
+getValueByPropKey_exist:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统参数管理
+  # 用例名称
+  name: 根据propKey获取对应的propValue-存在的propKey
+  # 用例描述
+  description: 根据propKey获取对应的propValue-存在的propKey
+  # 测试步骤
+  steps:
+    # 系统配置查询
+    - api_path: /bms/sysconfig/sysconfig_info.yaml        #接口路径
+      api: sysconfig_info                           #接口id
+      data: sysconfig_info_01                       #接口数据
+    # 根据propKey获取对应的propValue-存在的propKey
+    - api_path: /bms/sysconfig/sysconfig_getValueByPropKey.yaml        #接口路径
+      api: sysconfig_getValueByPropKey                           #接口id
+      data: sysconfig_getValueByPropKey_01                       #接口数据
+# 用例id
+getValueByPropKey_absent:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统参数管理
+  # 用例名称
+  name: 根据propKey获取对应的propValue-不存在的propKey
+  # 用例描述
+  description: 根据propKey获取对应的propValue-不存在的propKey
+  # 测试步骤
+  steps:
+    # 系统配置查询
+    - api_path: /bms/sysconfig/sysconfig_info.yaml        #接口路径
+      api: sysconfig_info                           #接口id
+      data: sysconfig_info_01                       #接口数据
+    # 根据propKey获取对应的propValue-不存在的propKey
+    - api_path: /bms/sysconfig/sysconfig_getValueByPropKey.yaml        #接口路径
+      api: sysconfig_getValueByPropKey                           #接口id
+      data: sysconfig_getValueByPropKey_02                       #接口数据
+# 用例id
+updateInfoByPropKey_fail:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统参数管理
+  # 用例名称
+  name: 系统配置修改-修改账号锁定时间-修改值为非数字格式
+  # 用例描述
+  description: 系统配置修改-修改账号锁定时间-修改值为非数字格式-修改失败
+  # 测试步骤
+  steps:
+    # 系统配置查询
+    - api_path: /bms/sysconfig/sysconfig_info.yaml        #接口路径
+      api: sysconfig_info                           #接口id
+      data: sysconfig_info_01                       #接口数据
+    # 系统配置修改-修改账号锁定时间-修改值为非数字格式
+    - api_path: /bms/sysconfig/sysconfig_update.yaml        #接口路径
+      api: sysconfig_update                           #接口id
+      data: sysconfig_update_02                       #接口数据
+# 用例id
+updateInfoByPropKey_PropKey_absent:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统参数管理
+  # 用例名称
+  name: 系统配置修改-参数不存在
+  # 用例描述
+  description: 系统配置修改-参数不存在
+  # 测试步骤
+  steps:
+    # 系统配置修改-参数不存在
+    - api_path: /bms/sysconfig/sysconfig_update.yaml        #接口路径
+      api: sysconfig_update                           #接口id
+      data: sysconfig_update_03                       #接口数据
+# 用例id
+updateInfoByPropKey_success:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统参数管理
+  # 用例名称
+  name: 系统配置修改-修改账号锁定时间-修改成功
+  # 用例描述
+  description: 系统配置修改-修改账号锁定时间-修改成功
+  # 测试步骤
+  steps:
+    # 系统配置查询
+    - api_path: /bms/sysconfig/sysconfig_info.yaml        #接口路径
+      api: sysconfig_info                           #接口id
+      data: sysconfig_info_01                       #接口数据
+    # 系统配置修改-修改账号锁定时间-修改成功
+    - api_path: /bms/sysconfig/sysconfig_update.yaml        #接口路径
+      api: sysconfig_update                           #接口id
+      data: sysconfig_update_01                       #接口数据

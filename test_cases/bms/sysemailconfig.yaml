@@ -1,0 +1,37 @@
+# 系统邮箱配置
+# 用例id
+getSysEmailParamInfo:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 三级模块
+  story: 系统邮箱配置
+  # 用例名称
+  name: 系统邮箱配置查询
+  # 用例描述
+  description: 系统邮箱配置查询
+  # 测试步骤
+  steps:
+    # 系统邮箱配置查询
+    - api_path: /bms/sysemailconfig/sysemailconfig_getparaminfo.yaml        #接口路径
+      api: sysemailconfig_getparaminfo                           #接口id
+      data: sysemailconfig_getparaminfo_01                       #接口数据
+# 用例id
+verifyMailData:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 参数管理
+  # 用例名称
+  story: 系统邮箱配置
+  # 用例名称
+  name: 系统邮箱验证
+  # 用例描述
+  description: 系统邮箱验证
+  # 测试步骤
+  steps:
+    # 系统邮箱验证
+    - api_path: /bms/sysemailconfig/sysemailconfig_verify.yaml        #接口路径
+      api: sysemailconfig_verify                           #接口id
+      data: sysemailconfig_verify_01                       #接口数据

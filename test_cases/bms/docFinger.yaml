@@ -1,0 +1,267 @@
+# 文件指纹
+# 用例id
+getFileTypeTree:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 指纹库新增界面的文件类型查询
+  # 用例描述
+  description: 指纹库新增界面的文件类型查询
+  # 测试步骤
+  steps:
+    # 获取全部文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_01                       #接口数据
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+# 用例id
+addFingerPrintLib_importfromserver:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 新增指纹库-服务器导入-挂载
+  # 用例描述
+  description: 新增指纹库-服务器导入-挂载
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-服务器导入-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_01                       #接口数据
+# 用例id
+addFingerPrintLib_upload:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 新增指纹库-本地上传-挂载
+  # 用例描述
+  description: 新增指纹库-本地上传-挂载
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-本地上传-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_02                       #接口数据
+# 用例id
+selectFingerPrintLibList:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 文档指纹库列表查询
+  # 用例描述
+  description: 文档指纹库列表查询
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-本地上传-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_02                       #接口数据
+    # 文档指纹库列表查询
+    - api_path: /bms/docFinger/docFinger_selectFingerPrintLibList.yaml        #接口路径
+      api: docFinger_selectFingerPrintLibList                           #接口id
+      data: [docFinger_selectFingerPrintLibList_01,docFinger_selectFingerPrintLibList_02,docFinger_selectFingerPrintLibList_03,docFinger_selectFingerPrintLibList_04]                      #接口数据
+# 用例id
+updateFingerPrintLib_importfromserver:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 更新指纹库-服务器导入-挂载
+  # 用例描述
+  description: 更新指纹库-服务器导入-挂载
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-服务器导入-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_01                       #接口数据
+    # 更新指纹库-服务器导入-挂载
+    - api_path: /bms/docFinger/docFinger_updateFingerPrintLib.yaml        #接口路径
+      api: docFinger_updateFingerPrintLib                           #接口id
+      data: docFinger_updateFingerPrintLib_01                       #接口数据
+      sleep: 10   #等待时间
+# 用例id
+updateFingerPrintLib_upload:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 修改指纹库-本地上传-挂载
+  # 用例描述
+  description: 修改指纹库-本地上传-挂载
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-本地上传-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_02                       #接口数据
+    # 修改指纹库-本地上传-挂载
+    - api_path: /bms/docFinger/docFinger_updateFingerPrintLib.yaml        #接口路径
+      api: docFinger_updateFingerPrintLib                           #接口id
+      data: docFinger_updateFingerPrintLib_02                       #接口数据
+      sleep: 10   #等待时间
+# 用例id
+recalculateFingerPrint:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 重新计算指纹
+  # 用例描述
+  description: 重新计算指纹
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-本地上传-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_02                       #接口数据
+    # 重新计算指纹
+    - api_path: /bms/docFinger/docFinger_recalculateFingerPrint.yaml        #接口路径
+      api: docFinger_recalculateFingerPrint                           #接口id
+      data: docFinger_recalculateFingerPrint_01                       #接口数据
+      sleep: 10   #等待时间
+# 用例id
+connectTest:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 测试连通性-FTP协议
+  # 用例描述
+  description: 测试连通性-FTP协议
+  # 测试步骤
+  steps:
+    # 测试连通性-FTP协议
+    - api_path: /bms/docFinger/docFinger_connectTest.yaml        #接口路径
+      api: docFinger_connectTest                           #接口id
+      data: docFinger_connectTest_01                       #接口数据
+# 用例id
+getDirectory:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 查找远程服务器文件路径-FTP协议
+  # 用例描述
+  description: 查找远程服务器文件路径-FTP协议
+  # 测试步骤
+  steps:
+    # 测试连通性-FTP协议
+    - api_path: /bms/docFinger/docFinger_getDirectory.yaml        #接口路径
+      api: docFinger_getDirectory                           #接口id
+      data: docFinger_getDirectory_01                       #接口数据
+# 用例id
+selectFingerPrintLibFileList:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 查询文档指纹库文件列表
+  # 用例描述
+  description: 查询文档指纹库文件列表
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-服务器导入-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_01                       #接口数据
+    # 查询文档指纹库文件列表
+    - api_path: /bms/docFinger/docFinger_selectFingerPrintLibFileList.yaml        #接口路径
+      api: docFinger_selectFingerPrintLibFileList                           #接口id
+      data: docFinger_selectFingerPrintLibFileList_01                       #接口数据
+# 用例id
+deleteFingerPrintLib:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 基础规则
+  # 三级模块
+  story: 文件指纹
+  # 用例名称
+  name: 删除文档指纹库
+  # 用例描述
+  description: 删除文档指纹库
+  # 测试步骤
+  steps:
+    # 获取json文件类型
+    - api_path: /bms/docFinger/docFinger_getFileTypeTree.yaml        #接口路径
+      api: docFinger_getFileTypeTree                           #接口id
+      data: docFinger_getFileTypeTree_02                       #接口数据
+    # 新增指纹库-服务器导入-挂载
+    - api_path: /bms/docFinger/docFinger_addFingerPrintLib.yaml        #接口路径
+      api: docFinger_addFingerPrintLib                           #接口id
+      data: docFinger_addFingerPrintLib_01                       #接口数据
+    # 文档指纹库列表查询
+    - api_path: /bms/docFinger/docFinger_selectFingerPrintLibList.yaml        #接口路径
+      api: docFinger_selectFingerPrintLibList                           #接口id
+      data: [docFinger_selectFingerPrintLibList_01]                      #接口数据
+    # 删除文档指纹库
+    - api_path: /bms/docFinger/docFinger_deleteFingerPrintLib.yaml        #接口路径
+      api: docFinger_deleteFingerPrintLib                           #接口id
+      data: docFinger_deleteFingerPrintLib_01                       #接口数据
+

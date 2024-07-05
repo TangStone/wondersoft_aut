@@ -1,0 +1,175 @@
+# 日志备份配置
+# 用例id
+queryDatabases:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 查询数据库列表
+  # 用例描述
+  description: 查询数据库列表
+  # 测试步骤
+  steps:
+    # 查询数据库列表
+    - api_path: /bms/logbackup/logbackup_queryDatabases.yaml        #接口路径
+      api: logbackup_queryDatabases                           #接口id
+      data: logbackup_queryDatabases_01                       #接口数据
+# 用例id
+addBackupConfig:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 新增终端日志备份
+  # 用例描述
+  description: 新增终端日志备份
+  # 测试步骤
+  steps:
+    # 新增终端日志备份
+    - api_path: /bms/logbackup/logbackup_addBackupConfig.yaml        #接口路径
+      api: logbackup_addBackupConfig                           #接口id
+      data: logbackup_addBackupConfig_01                       #接口数据
+# 用例id
+queryAllBackupConfig_nocondition:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 查询所有备份配置-无筛选条件
+  # 用例描述
+  description: 查询所有备份配置-无筛选条件
+  # 测试步骤
+  steps:
+    # 查询所有备份配置-无筛选条件
+    - api_path: /bms/logbackup/logbackup_queryAllBackupConfig.yaml        #接口路径
+      api: logbackup_queryAllBackupConfig                           #接口id
+      data: logbackup_queryAllBackupConfig_01                       #接口数据
+# 用例id
+queryAllBackupConfig_querybytime:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 查询所有备份配置-按照时间段筛选
+  # 用例描述
+  description: 查询所有备份配置-按照时间段筛选
+  # 测试步骤
+  steps:
+    # 查询所有备份配置-按照时间段筛选
+    - api_path: /bms/logbackup/logbackup_queryAllBackupConfig.yaml        #接口路径
+      api: logbackup_queryAllBackupConfig                           #接口id
+      data: logbackup_queryAllBackupConfig_02                       #接口数据
+# 用例id
+queryBackupInfoByNameDatabase_nocondition:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 查询数据库所有备份信息-无筛选条件
+  # 用例描述
+  description: 查询数据库所有备份信息-无筛选条件
+  # 测试步骤
+  steps:
+    # 查询数据库所有备份信息-无筛选条件
+    - api_path: /bms/logbackup/logbackup_queryBackupInfoByNameDatabase.yaml        #接口路径
+      api: logbackup_queryBackupInfoByNameDatabase                           #接口id
+      data: logbackup_queryBackupInfoByNameDatabase_01                       #接口数据
+# 用例id
+queryBackupInfoByNameDatabase_querybytime:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 查询数据库所有备份信息-按时间筛选
+  # 用例描述
+  description: 查询数据库所有备份信息-按时间筛选
+  # 测试步骤
+  steps:
+    # 查询数据库所有备份信息-按时间筛选
+    - api_path: /bms/logbackup/logbackup_queryBackupInfoByNameDatabase.yaml        #接口路径
+      api: logbackup_queryBackupInfoByNameDatabase                           #接口id
+      data: logbackup_queryBackupInfoByNameDatabase_02                       #接口数据
+# 用例id
+queryBackupConfigByNameDatabase:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 按name_database查询备份
+  # 用例描述
+  description: 按name_database查询备份
+  # 测试步骤
+  steps:
+    # 按name_database查询备份
+    - api_path: /bms/logbackup/logbackup_queryBackupConfigByNameDatabase.yaml        #接口路径
+      api: logbackup_queryBackupConfigByNameDatabase                           #接口id
+      data: logbackup_queryBackupConfigByNameDatabase_01                       #接口数据
+# 用例id
+modBackupConfig:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 修改备份配置
+  # 用例描述
+  description: 修改备份配置
+  # 测试步骤
+  steps:
+    # 新增终端日志备份
+    - api_path: /bms/logbackup/logbackup_addBackupConfig.yaml        #接口路径
+      api: logbackup_addBackupConfig                           #接口id
+      data: logbackup_addBackupConfig_01                       #接口数据
+    # 修改备份配置
+    - api_path: /bms/logbackup/logbackup_modBackupConfig.yaml        #接口路径
+      api: logbackup_modBackupConfig                           #接口id
+      data: logbackup_modBackupConfig_01                       #接口数据
+# 用例id
+delBackupConfig:
+  # 一级模块
+  epic: 系统管理
+  # 二级模块
+  feature: 运维管理
+  # 三级模块
+  story: 日志备份配置
+  # 用例名称
+  name: 删除备份配置
+  # 用例描述
+  description: 删除备份配置
+  # 测试步骤
+  steps:
+    # 新增终端日志备份
+    - api_path: /bms/logbackup/logbackup_addBackupConfig.yaml        #接口路径
+      api: logbackup_addBackupConfig                           #接口id
+      data: logbackup_addBackupConfig_01                       #接口数据
+    # 按name_database查询备份
+    - api_path: /bms/logbackup/logbackup_queryBackupConfigByNameDatabase.yaml        #接口路径
+      api: logbackup_queryBackupConfigByNameDatabase                           #接口id
+      data: logbackup_queryBackupConfigByNameDatabase_01                       #接口数据
+    # 删除备份配置
+    - api_path: /bms/logbackup/logbackup_delBackupConfig.yaml        #接口路径
+      api: logbackup_delBackupConfig                           #接口id
+      data: logbackup_delBackupConfig_01                       #接口数据

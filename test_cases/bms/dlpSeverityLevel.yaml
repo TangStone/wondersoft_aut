@@ -1,0 +1,133 @@
+# 严重性等级管理
+# 用例id
+insertDlpSeverityLevel_success:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 敏感级别
+  # 三级模块
+  story: 严重性等级管理
+  # 用例名称
+  name: 新增严重性等级-新增成功
+  # 用例描述
+  description: 新增严重性等级-新增成功
+  # 测试步骤
+  steps:
+    # 新增严重性等级-新增成功
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_insertDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_insertDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_insertDlpSeverityLevel_01                       #接口数据
+# 用例id
+insertDlpSeverityLevel_nameRepeat:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 敏感级别
+  # 三级模块
+  story: 严重性等级管理
+  # 用例名称
+  name: 新增严重性等级-严重性等级名称重复
+  # 用例描述
+  description: 新增严重性等级-严重性等级名称重复
+  # 测试步骤
+  steps:
+    # 新增严重性等级-严重性等级名称重复
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_insertDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_insertDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_insertDlpSeverityLevel_02                       #接口数据
+# 用例id
+insertDlpSeverityLevel_levelRepeat:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 敏感级别
+  # 三级模块
+  story: 严重性等级管理
+  # 用例名称
+  name: 新增严重性等级-严重性等级重复
+  # 用例描述
+  description: 新增严重性等级-严重性等级重复
+  # 测试步骤
+  steps:
+    # 新增严重性等级-严重性等级重复
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_insertDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_insertDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_insertDlpSeverityLevel_03                       #接口数据
+# 用例id
+selectDlpSeverityLevelList:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 敏感级别
+  # 三级模块
+  story: 严重性等级管理
+  # 用例名称
+  name: 严重性等级列表查询
+  # 用例描述
+  description: 严重性等级列表查询
+  # 测试步骤
+  steps:
+    # 新增严重性等级-新增成功
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_insertDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_insertDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_insertDlpSeverityLevel_01                       #接口数据
+    # 严重性等级列表查询-无筛选条件
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_selectDlpSeverityLevelList.yaml        #接口路径
+      api: dlpSeverityLevel_selectDlpSeverityLevelList                           #接口id
+      data: dlpSeverityLevel_selectDlpSeverityLevelList_01                       #接口数据
+    # 严重性等级列表查询-筛选条件：严重性等级名称
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_selectDlpSeverityLevelList.yaml        #接口路径
+      api: dlpSeverityLevel_selectDlpSeverityLevelList                           #接口id
+      data: dlpSeverityLevel_selectDlpSeverityLevelList_02                       #接口数据
+# 用例id
+updateDlpSeverityLevel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 敏感级别
+  # 三级模块
+  story: 严重性等级管理
+  # 用例名称
+  name: 严重性等级修改
+  # 用例描述
+  description: 严重性等级修改
+  # 测试步骤
+  steps:
+    # 新增严重性等级-新增成功
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_insertDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_insertDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_insertDlpSeverityLevel_01                       #接口数据
+    # 严重性等级列表查询-筛选条件：严重性等级名称
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_selectDlpSeverityLevelList.yaml        #接口路径
+      api: dlpSeverityLevel_selectDlpSeverityLevelList                           #接口id
+      data: dlpSeverityLevel_selectDlpSeverityLevelList_02                       #接口数据
+    # 严重性等级修改
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_updateDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_updateDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_updateDlpSeverityLevel_01                       #接口数据
+# 用例id
+deleteDlpSeverityLevel:
+  # 一级模块
+  epic: 规则管理
+  # 二级模块
+  feature: 敏感级别
+  # 三级模块
+  story: 严重性等级管理
+  # 用例名称
+  name: 删除自定义严重性等级
+  # 用例描述
+  description: 删除自定义严重性等级
+  # 测试步骤
+  steps:
+    # 新增严重性等级-新增成功
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_insertDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_insertDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_insertDlpSeverityLevel_01                       #接口数据
+    # 严重性等级列表查询-筛选条件：严重性等级名称
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_selectDlpSeverityLevelList.yaml        #接口路径
+      api: dlpSeverityLevel_selectDlpSeverityLevelList                           #接口id
+      data: dlpSeverityLevel_selectDlpSeverityLevelList_02                       #接口数据
+    # 删除自定义严重性等级
+    - api_path: /bms/dlpSeverityLevel/dlpSeverityLevel_deleteDlpSeverityLevel.yaml        #接口路径
+      api: dlpSeverityLevel_deleteDlpSeverityLevel                           #接口id
+      data: dlpSeverityLevel_deleteDlpSeverityLevel_01                       #接口数据

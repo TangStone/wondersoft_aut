@@ -9,7 +9,7 @@
 """
 import yaml, sys
 from common.logger_handle import api_logger
-from common import exceptions
+from common.exception_handle import ExceptionHandle
 from common import handledict
 
 class YamlHandle:
@@ -33,7 +33,7 @@ class YamlHandle:
         except:
             #异常处理
             ex_type, ex_val, ex_stack = sys.exc_info()
-            error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
+            error_info = ExceptionHandle.get_error_info(ex_type, ex_val, ex_stack)
             errmes = "-·-·读取yaml文件" + f"【{ self.path['name']}】" + "异常：" + f"{error_info} -------------------\n"
             api_logger.error(errmes)
             raise
@@ -96,7 +96,7 @@ def standard_yaml(casedata):
             api_logger.error("用例编写有误，一级关键字必须包含：name，base_url，request，postProcessors")
     except:
         ex_type, ex_val, ex_stack = sys.exc_info()
-        error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
+        error_info = ExceptionHandle.get_error_info(ex_type, ex_val, ex_stack)
         flag = False
         msg = '规范Yaml测试用例异常：' + error_info
         api_logger.error("规范Yaml测试用例异常：%s"% error_info)

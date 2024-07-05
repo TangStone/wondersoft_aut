@@ -7,14 +7,17 @@
 @time: 2024-03-28 16:21
 @description: 用户及机构管理模块测试用例
 """
+import time
+
 from common import handleyaml
-from common.logger_handle import api_logger
+from common.logger_handle import api_logger, ui_logger
 # 标准库导入
 from config import *
 from common.readcase import ReadCase
 from common.runcase import RunCase
 
 import json
+from urllib.parse import unquote
 # 第三方库导入
 from pytest_bdd import scenarios, given, when, then, parsers
 from playwright.sync_api import Page
@@ -23,7 +26,7 @@ from sttable import parse_str_table
 # 本地模块导入
 from pages.bms.user_group_page import UserGroupPage
 
-scenarios("./bms/user_group.feature")
+scenarios("./bms/example_of_integrating_API_and_UI.feature")
 
 
 @given(parsers.parse("在{parent_group_name}下新增组织机构：{group_name}，点击确定"))
@@ -66,11 +69,8 @@ def step_assert_user_list_display(page: Page, user_list_totle, data_volume_displ
 @when(parsers.parse("根据查询条件进行用户列表查询：\n{query_conditions}"))
 def step_search_users(page: Page, query_conditions):
     UserGroupPage(page).search_users(json.loads(query_conditions))
+    page.wait_for_timeout(1000)
 
-
-# @when(parsers.parse("删除用户组：{organ}"))
-# def step_delete_group(page: Page, organ):
-#     UserGroupPage(page).delete_group(organ)
 
 
 

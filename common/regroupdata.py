@@ -14,7 +14,7 @@ from faker import Faker
 from functools import reduce
 
 from config import *
-from common import exceptions
+from common.exception_handle import ExceptionHandle
 from common import encryption
 from common import handleyaml
 from common import handledict
@@ -311,7 +311,7 @@ class RegroupData:
         except:
             # 异常处理
             ex_type, ex_val, ex_stack = sys.exc_info()
-            error_info = exceptions.get_error_info(ex_type, ex_val, ex_stack)
+            error_info = ExceptionHandle.get_error_info(ex_type, ex_val, ex_stack)
             rawDict = "重组用例数据异常" + str(error_info)
             sign = 'error'
         return sign, rawDict

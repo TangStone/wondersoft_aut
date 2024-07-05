@@ -11,6 +11,8 @@ from config import *
 from common import handleyaml
 # 第三方库导入
 from common.logger_handle import ui_logger
+import jsonpath
+from urllib.parse import unquote
 
 #config_dict = handleyaml.YamlHandle(CONFIG_DIR).read_yaml()
 config_dict = {**ENV_VARS['test'],**BASE_VARS}
@@ -99,3 +101,37 @@ def post_process():
     environment = 'BaseURL=' + baseurl + '\n'
     with open(ALLURE_RESULTS_DIR + '/environment.properties', 'w', encoding='ascii', errors='ignore') as file_obj:
         file_obj.write(environment)
+
+
+def create_handle_response(url, var_list, jsonpath_list):
+    """
+       监听url操作,参数var_list和jsonpath_list具有强关联性，一一对应
+       :param url: 需要监听的url
+       :param var_list: 自定义的全局变量列表，eg [displayNmae,sid]
+       :param jsonpath_list:需要传递给全局变量的jsonpath，eg [$.data.list[0].displayName,$.data.list[0].sid]
+       :return: 注册监听的函数名
+    """
+    initial_values = {}  # 外部字典来保存初始值
+    def handle_response(response):
+        if url in unquote(response.url):  # 根据具体的登录请求 URL 进行判断
+            try:
+                content_type = response.headers.get("content-type", "")
+                ui_logger.info("Content-Type: %s" % content_type)
+                # 检查响应的内容类型是否为 JSON
+                if "application/json" in content_type:
+                    try:
+                        response_body = response.json()
+                    except Exception as e:
+                        ui_logger.error("Failed to parse JSON response: %s" % e)
+                        ui_logger.error("Response text: %s" % response.text())
+                    for var, json_path in zip(var_list, jsonpath_list):
+                        if var not in initial_values:
+                            # 只在第一次遇到该变量时进行赋值
+                            initial_values[var] = jsonpath.jsonpath(response_body, json_path)[0]
+                            extract_value = {var: initial_values[var]}
+                            handleyaml.YamlHandle(EXTRACT_DIR, extract_value).updata_yaml()
+                else:
+                    ui_logger.error("Response is not in JSON format")
+            except Exception as e:
+                ui_logger.error("Error handling response: %s" % e)
+    return handle_response

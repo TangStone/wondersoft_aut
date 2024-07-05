@@ -84,6 +84,7 @@ def page(context):
     page = context.new_page()
     page.set_default_timeout(RunConfig.timeout)   # 设置全局页面超时时间
     yield page
+    page.wait_for_timeout(1000)
     page.close()
 
 

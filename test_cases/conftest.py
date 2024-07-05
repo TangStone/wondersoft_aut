@@ -8,13 +8,17 @@
 @description:
 """
 import json
-
+import time
+from urllib.parse import unquote
+import jsonpath
 # 第三方库导入
 from pytest_bdd import given, when, then, parsers
 from playwright.sync_api import Page
 import pytest
+from sttable import parse_str_table
 
 from common import handleyaml
+from common.basefunc import create_handle_response
 from common.logger_handle import ui_logger
 # 本地模块导入
 from pages.common_page import CommonPage
@@ -138,9 +142,27 @@ def step_assert_click_norequest(page: Page, button):
 def step_assert_dialog_msg(page: Page, dialog_msg):
     CommonPage(page).assert_dialog_msg(dialog_msg)
 
-
-@when(parsers.parse("调用接口：{api},接口用例id：{api_caseid},接口用例路径：{api_path}"))
-def step_execute_api(api,api_caseid,api_path):
+@when(parsers.parse("使用接口：\n{api_info}"))
+def step_execute_api(page: Page,api_info):
     # 执行接口用例
-    api_path = API_DIR + api_path
-    RunCase().excute_apicase_by_ui(api_path, api,api_caseid)
+    page.wait_for_timeout(1000)
+    sync_config_params = parse_str_table(api_info)
+    for sync_config_param in sync_config_params.rows:
+        api_path = sync_config_param.get("接口用例路径")
+        api = sync_config_param.get("调用接口")
+        api_caseid = sync_config_param.get("接口用例id")
+        api_path = API_DIR + api_path
+        RunCase().excute_apicase_by_ui(api_path, api,api_caseid)
+
+
+
+@given(parsers.parse("监听：\n{listen_info}"))
+def step_listen(page: Page,listen_info):
+    sync_config_params = parse_str_table(listen_info)
+    for sync_config_param in sync_config_params.rows:
+        url = sync_config_param.get("url")
+        var_list = [var.strip() for var in sync_config_param.get("vars").split(',')]
+        jsonpath_list = [json_path.strip() for json_path in sync_config_param.get("json_paths").split(',')]
+        handle_response = create_handle_response(url,var_list,jsonpath_list)
+        page.on('response', handle_response)
+

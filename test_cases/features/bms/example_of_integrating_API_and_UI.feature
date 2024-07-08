@@ -1,4 +1,4 @@
-# Created by gaojie at 2024-03-28
+# Created by tanglei at 2024-07-05
 Feature: 用户及机构管理模块
   用户管理 -> 基础数据管理 -> 用户与机构管理模块 相关功能测试用例
 
@@ -10,7 +10,7 @@ Feature: 用户及机构管理模块
 
 
 
-  Scenario: 手动新增用户
+  Scenario: 手动新增用户并接口删除用户
     Given 点击按钮：新增
     When 输入新增用户信息：
       | 账号   | 认证方式 | 姓名   | 所属机构 | 职位    |
